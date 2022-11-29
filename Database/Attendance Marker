@@ -1,0 +1,34 @@
+CREATE DATABASE Attendance_Marker;
+
+CREATE TABLE `attendance_marker`.`courses` (
+`Course_id` INT NOT NULL ,
+ `Course_name` VARCHAR(50) NOT NULL , 
+ `Course_Duration` VARCHAR(15) NOT NULL ,
+  `Course_Startdate` VARCHAR(30) NOT NULL , 
+  `Course_Enddate` VARCHAR(30) NOT NULL ,
+  `No_Of_Enrolled` INT(100) NOT NULL , 
+  `Attendance_Required_Percentage` VARCHAR(3) NOT NULL DEFAULT '95%' , 
+  `Course_Taker` VARCHAR(100) NOT NULL ,
+   `Student_Enrolled` JSON NOT NULL 
+   ) ENGINE = InnoDB;
+
+CREATE TABLE `attendance_marker`.`students` (
+    `Full Name` VARCHAR(50) NOT NULL , 
+    `Email` VARCHAR(50) NOT NULL , 
+    `Password` VARCHAR(25) NOT NULL , 
+    `Enrolled_Date` VARCHAR(20) NOT NULL , 
+    `Courses_Enrolled` JSON NOT NULL,
+    `Image` VARCHAR(100) NOT NULL
+    ) 
+    ENGINE = InnoDB;
+
+CREATE TABLE `attendance_marker`.`teacher` (
+    `Full Name` VARCHAR(50) NOT NULL , 
+    `Email` VARCHAR(50) NOT NULL , 
+    `Password` VARCHAR(25) NOT NULL , 
+    `No_of_courses_taken` INT(20) NOT NULL , 
+    `Created_Date` VARCHAR(20) NOT NULL , 
+    `Courses_Teaching` JSON NOT NULL ,
+   `Image` VARCHAR(100) NOT NULL
+    ) 
+    ENGINE = InnoDB;
