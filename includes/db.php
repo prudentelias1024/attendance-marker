@@ -5,7 +5,7 @@ class DB
 
     public function connectToDB(){
     $conn = new mysqli('localhost','root','','attendance_marker');
-    if ($conn->connect_error) {
+    if (!$conn->connect_error) {
         echo 'Connection Successful';
     } else {
         die("Connection Failed:". $conn->connect_error);
@@ -13,18 +13,30 @@ class DB
     return $conn;
     }
    
-    public function createStudent($full_name,$photo,$email,$password,$registered_date){
+    public function createEmployee($oracle_no,$full_name,$photo,$email,$password,$designation, $location, $grade){
         $this->connectToDB();
-        $password = md5($password);
-        $registered_date = date("F d, Y  h:i:s");
-        $sql = "INSERT INTO students(fullname, email, photo, pass, registered_date) VALUES('$full_name', '$email', '$photo', '$password', '$registered_date')";
+        $password = md5($password);;
+        $sql = "INSERT INTO employee(Oracle_no, name, Image, Email, Password, Designation, Location, Grade) VALUES('$oracle_no','$full_name',  '$photo', '$email', '$password', '$designation', '$location', '$grade')";
         if ($this->connectToDB()->query($sql)) {
             echo 'New Student Created';
+            return true;
         } else {
             echo "Error:".$sql.$this->connectToDB()->error;
+            return false;
         }
     }
 
+    public function selectUser($email){
+        $this->connectToDB();
+        $sql = "SELECT email, password FROM employee WHERE email='$email'";
+        $result = $this->connectToDB()->query($sql);
+        if ($result->num_rows > 0) {
+            while ($row  = $result->fetch_assoc()) {
+               return $row['password'];
+            }
+        }
+        
+    }
 
 }
 
