@@ -27,13 +27,26 @@ class DB
 
 
 
-    public function getUser($email){
+    public function getUserPassword($email){
         $this->connectToDB();
         $sql = "SELECT password FROM employee WHERE email ='$email' ";
         $result =  $this->connectToDB()->query($sql);
         if ($result->num_rows > 0) {
             while($rows = $result->fetch_assoc()){
                 return $rows['password'];
+            }
+        } else {
+            return 'User Not Found';
+        }
+
+    }
+    public function getUser($email){
+        $this->connectToDB();
+        $sql = "SELECT * FROM employee WHERE email ='$email' ";
+        $result =  $this->connectToDB()->query($sql);
+        if ($result->num_rows > 0) {
+            while($rows = $result->fetch_assoc()){
+                return array($rows["Oracle_no"],$rows["Name"],$rows["Image"],$rows["Email"], $rows["Designation"],$rows["Location"], $rows["Grade"]);
             }
         } else {
             return 'User Not Found';

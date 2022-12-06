@@ -5,7 +5,7 @@ if (isset($_POST['login'])) {
     $password = $_POST['password'];
     include './includes/db.php';
     $db = new DB;
-   $result = $db->getUser(($email));
+   $result = $db->getUserPassword(($email));
   
   
    if ($result == "User Not Found") {
@@ -13,7 +13,19 @@ if (isset($_POST['login'])) {
    include './login.php';
 } 
 if ($result !=="User Not Found"  && password_verify($password,$result)) {
-    header("Location: dashboard.php");
+    $user = $db->getUser($email);
+    session_start();
+    $_SESSION["oracle_no"] = $user[0];
+    $_SESSION["name"] = $user[1];
+    $_SESSION["image"] = $user[2];
+    $_SESSION["email"] = $user[3];
+    $_SESSION["designation"] = $user[4];
+    $_SESSION["location"] = $user[5];
+    $_SESSION["grade"] = $user[6];
+       
+     
+    header("Location: Dashboard/dashboard.php");
+    
     
 }
 if ($result !=="User Not Found"  && !password_verify($password,$result)) {

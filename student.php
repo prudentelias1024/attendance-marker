@@ -10,7 +10,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <title> Attendance Marker </title>
   <?php
-    include './includes/links.php'
+    include '../includes/links.php'
 
     ?>
 </head>
