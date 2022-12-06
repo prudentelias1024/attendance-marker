@@ -8,14 +8,14 @@ class DB
     if ($conn->connect_error) {
         die("Connection Failed:". $conn->connect_error);
     } else {
-        echo 'Connection Successful';
+     
     }
     return $conn;
     }
    
     public function createStudent($oracle_no, $full_name,$image,$email,$password,$designation,$location,$grade){
         $this->connectToDB();
-        $password = md5($password);
+
     
         $sql = "INSERT INTO employee(Oracle_no, Name, Image, Email, Password, Designation,Location, grade) VALUES('$oracle_no','$full_name','$image', '$email', '$password', '$designation', '$location','$grade')";
         if ($this->connectToDB()->query($sql)) {

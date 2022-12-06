@@ -6,10 +6,20 @@ if (isset($_POST['login'])) {
     include './includes/db.php';
     $db = new DB;
    $result = $db->getUser(($email));
-   echo $result;
+  
+  
    if ($result == "User Not Found") {
-   array_push($error_messages, "Email Is Not Correct");
-    include './login.php';
+   array_push($error_messages, "User Not Found");
+   include './login.php';
+} 
+if ($result !=="User Not Found"  && password_verify($password,$result)) {
+    header("Location: dashboard.php");
+    
+}
+if ($result !=="User Not Found"  && !password_verify($password,$result)) {
+       array_push($error_messages, "Password is not correct");
+         include './login.php';
+     
    }
 }
 ?>

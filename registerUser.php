@@ -77,12 +77,14 @@ if (isset($_POST['register'])) {
 
       if (!empty($error_messages)) {
         include './register.php';
-        //  header("Location: register.php");  
+         header("Location: register.php");  
       } else {
         include './includes/db.php';
         $db = new DB;
-        $password = md5($password);
-        $db->createStudent($oracle_no,$fullname,$new_name,$email,$password,$designation,$location,$grade);
+        $h_password = password_hash($password,PASSWORD_DEFAULT);
+       echo $h_password;
+        $db->createStudent($oracle_no,$fullname,$new_name,$email,$h_password,$designation,$location,$grade);
+        echo $h_password;
         header("Location: login.php");
          session_destroy();
       }
