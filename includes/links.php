@@ -9,5 +9,6 @@
           <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Lora">
           <script src="https://cdn.tailwindcss.com"></script>
-     
+                
           <link href='https://fonts.googleapis.com/css?family=Satisfy' rel="stylesheet">
+          <link href='https://fonts.googleapis.com/css?family=Work-Sans' rel="stylesheet">

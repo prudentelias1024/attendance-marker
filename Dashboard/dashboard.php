@@ -18,7 +18,7 @@
   session_start();
     include '../includes/links.php';
     if (empty($_SESSION['name'])) {
-     header('Location: login.php');
+     header('Location: ../login.php');
     }
    include 'dashboardNav.php';
     
