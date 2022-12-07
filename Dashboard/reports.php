@@ -8,7 +8,7 @@
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="manifest" href="/site.webmanifest">
   <script src="https://cdn.tailwindcss.com"></script>
-  <title> Attendance Marker </title>
+  <title> Reports </title>
 </head>
   <body>
     <div class="reports flex flex-col ">
