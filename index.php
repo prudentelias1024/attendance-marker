@@ -10,13 +10,16 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <title> Attendance Marker </title>
   <?php
-    include './includes/links.php'
-
+    include './includes/links.php';
+    session_start();
+      if (empty($_SESSION)) {
+       header('Location: ../login.php');
+      } else{
+        header("Location: ./Dashboard/dashboard.php");
+      }
+      ?>
+    
     ?>
 </head>
-<body>
- <?php
-   include './includes/nav.php';
-  ?>
-</body>
+
 </html>
