@@ -8,7 +8,7 @@
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="manifest" href="/site.webmanifest">
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="../circular_progress.css" >
+  <link rel="stylesheet" href="../circular_progress.css" />
   <title> Attendance Marker </title>
 </head>
   <body>
@@ -44,7 +44,6 @@
       <div class="flex flex-col mt-6 -ml-12">
 
        <p class="font-[Mulish] font-semibold text-[#b8b8b8]">Participants</p> <br> 
-       
 
        <div class="participants flex flex-row -mt-8">
         <img src="../uploads/Alaba Bukola.jpg" alt="" class="rounded-full  w-10  h-10 object-cover ">
@@ -72,9 +71,8 @@
               </div>
           </div>
   </div>
+
   </div>
-
-
         </div>
         
   <div class="flex flex-row mt-12 justify-between -ml-20 -mb-12">
@@ -88,6 +86,9 @@
 
     </div>
   </div>
+  
+  <button id="enrol" class=" bg-[#512bd4] mt-14 w-full text-white py-3 rounded-md -mb-12">Enrol</button>
+
 </div>
 <div class="course border w-fit flex flex-col   px-20 h-fit   py-12 rounded-md ">
      
@@ -149,6 +150,8 @@
 
     </div>
   </div>
+  <button id="enrol" class=" bg-[#512bd4] mt-14 w-full text-white py-3 rounded-md -mb-12">Enrol</button>
+
 </div>
 <div class="course border w-fit flex flex-col   px-20 h-fit   py-12 rounded-md ">
      
