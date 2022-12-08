@@ -13,7 +13,7 @@
     include './includes/links.php';
     session_start();
       if (empty($_SESSION)) {
-       header('Location: ../login.php');
+       header('Location: ./login.php');
       } else{
         header("Location: ./Dashboard/dashboard.php");
       }
