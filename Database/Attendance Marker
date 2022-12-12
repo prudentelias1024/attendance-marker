@@ -1,34 +1,11 @@
 CREATE DATABASE Attendance_Marker;
 
-CREATE TABLE `attendance_marker`.`courses` (
-`Course_id` INT NOT NULL ,
- `Course_name` VARCHAR(50) NOT NULL , 
- `Course_Duration` VARCHAR(15) NOT NULL ,
-  `Course_Startdate` VARCHAR(30) NOT NULL , 
-  `Course_Enddate` VARCHAR(30) NOT NULL ,
-  `No_Of_Enrolled` INT(100) NOT NULL , 
-  `Attendance_Required_Percentage` VARCHAR(3) NOT NULL DEFAULT '95%' , 
-  `Course_Taker` VARCHAR(100) NOT NULL ,
-   `Student_Enrolled` JSON NOT NULL 
-   ) ENGINE = InnoDB;
+CREATE TABLE `attendance_marker`.`employee` (`Oracle_no` VARCHAR(6) NOT NULL , `Name` VARCHAR(75) NOT NULL , `Image` VARCHAR(50) NOT NULL , `Email` VARCHAR(60) NOT NULL , `Password` VARCHAR(60) NOT NULL , `Designation` VARCHAR(30) NOT NULL , `Location` TEXT NOT NULL , `Grade` INT(2) NOT NULL , `Training_Code` VARCHAR(7) NOT NULL ) ENGINE = InnoDB;   
 
-CREATE TABLE `attendance_marker`.`students` (
-    `Full Name` VARCHAR(50) NOT NULL , 
-    `Email` VARCHAR(50) NOT NULL , 
-    `Password` VARCHAR(25) NOT NULL , 
-    `Enrolled_Date` VARCHAR(20) NOT NULL , 
-    `Courses_Enrolled` JSON NOT NULL,
-    `Image` VARCHAR(100) NOT NULL
-    ) 
-    ENGINE = InnoDB;
+CREATE TABLE `attendance_marker`.`trainings` (`Course_Coordinator` VARCHAR(50) NOT NULL , `Training_Code` VARCHAR(6) NOT NULL , `Training_Location` VARCHAR(50) NOT NULL , `Training_Duration` VARCHAR(10) NOT NULL , `Training_Time` VARCHAR(25) NOT NULL , `Training_Startdate` VARCHAR(25) NOT NULL , `Training_Enddate` VARCHAR(25) NOT NULL ) ENGINE = InnoDB;
 
-CREATE TABLE `attendance_marker`.`teacher` (
-    `Full Name` VARCHAR(50) NOT NULL , 
-    `Email` VARCHAR(50) NOT NULL , 
-    `Password` VARCHAR(25) NOT NULL , 
-    `No_of_courses_taken` INT(20) NOT NULL , 
-    `Created_Date` VARCHAR(20) NOT NULL , 
-    `Courses_Teaching` JSON NOT NULL ,
-   `Image` VARCHAR(100) NOT NULL
-    ) 
-    ENGINE = InnoDB;
+ALTER TABLE `employee` ADD `Role` VARCHAR(10) NOT NULL AFTER `Grade`;
+
+CREATE TABLE `attendance_marker`.`enrolled` (`Oracle_no` VARCHAR(6) NOT NULL , `Name` VARCHAR(60) NOT NULL , `Training_Code` VARCHAR(6) NOT NULL , `Training_Cordinator` VARCHAR(50) NOT NULL ) ENGINE = InnoDB;
+ALTER TABLE `employee` CHANGE `Role` `Role` VARCHAR(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'Member';
+ALTER TABLE `trainings` ADD `No_Of_Classes` INT(2) NOT NULL AFTER `Training_Enddate`, ADD `Schedule` VARCHAR(10) NOT NULL DEFAULT 'Weekly' AFTER `No_Of_Classes`;

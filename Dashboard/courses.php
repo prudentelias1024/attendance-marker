@@ -46,10 +46,10 @@
        <p class="font-[Mulish] font-semibold text-[#b8b8b8]">Participants</p> <br> 
 
        <div class="participants flex flex-row -mt-8">
-        <img src="../uploads/Alaba Bukola.jpg" alt="" class="rounded-full  w-10  h-10 object-cover ">
-        <img src="../uploads/Alaba Bukola.jpg" alt="" class="rounded-full  w-10  h-10 object-cover -ml-6">
-        <img src="../uploads/Alaba Bukola.jpg" alt="" class="rounded-full  w-10  h-10 object-cover -ml-6 ">
-        <img src="../uploads/Alaba Bukola.jpg" alt="" class="rounded-full  w-10  h-10 object-cover -ml-6 ">
+        <img src="../mock.jpg" alt="" class="rounded-full  w-10  h-10 object-cover ">
+        <img src="../mock.jpg" alt="" class="rounded-full  w-10  h-10 object-cover -ml-6">
+        <img src="../mock.jpg" alt="" class="rounded-full  w-10  h-10 object-cover -ml-6 ">
+        <img src="../mock.jpg" alt="" class="rounded-full  w-10  h-10 object-cover -ml-6 ">
        </div>
       </div>    
 
@@ -87,7 +87,7 @@
     </div>
   </div>
   
-  <button id="enrol" class=" bg-[#512bd4] mt-14 w-full text-white py-3 rounded-md -mb-12">Enrol</button>
+  <button id="enrol" class=" bg-[#512bd4] mt-14 w- text-white py-3 rounded-md -mb-12">Enrol</button>
 
 </div>
 <div class="course border w-fit flex flex-col   px-20 h-fit   py-12 rounded-md ">
@@ -109,10 +109,10 @@
        
 
        <div class="participants flex flex-row -mt-8">
-        <img src="../uploads/Alaba Bukola.jpg" alt="" class="rounded-full  w-10  h-10 object-cover ">
-        <img src="../uploads/Alaba Bukola.jpg" alt="" class="rounded-full  w-10  h-10 object-cover -ml-6">
-        <img src="../uploads/Alaba Bukola.jpg" alt="" class="rounded-full  w-10  h-10 object-cover -ml-6 ">
-        <img src="../uploads/Alaba Bukola.jpg" alt="" class="rounded-full  w-10  h-10 object-cover -ml-6 ">
+        <img src="../mock.jpg" alt="" class="rounded-full  w-10  h-10 object-cover ">
+        <img src="../mock.jpg" alt="" class="rounded-full  w-10  h-10 object-cover -ml-6">
+        <img src="../mock.jpg" alt="" class="rounded-full  w-10  h-10 object-cover -ml-6 ">
+        <img src="../mock.jpg" alt="" class="rounded-full  w-10  h-10 object-cover -ml-6 ">
        </div>
       </div>    
 
@@ -150,7 +150,8 @@
 
     </div>
   </div>
-  <button id="enrol" class=" bg-[#512bd4] mt-14 w-full text-white py-3 rounded-md -mb-12">Enrol</button>
+ 
+  <button id="enrol" class=" bg-[#512bd4] mt-14 w- text-white py-3 rounded-md -mb-9">Enrol</button>
 
 </div>
 <div class="course border w-fit flex flex-col   px-20 h-fit   py-12 rounded-md ">
@@ -172,10 +173,10 @@
        
 
        <div class="participants flex flex-row -mt-8">
-        <img src="../uploads/Alaba Bukola.jpg" alt="" class="rounded-full  w-10  h-10 object-cover ">
-        <img src="../uploads/Alaba Bukola.jpg" alt="" class="rounded-full  w-10  h-10 object-cover -ml-6">
-        <img src="../uploads/Alaba Bukola.jpg" alt="" class="rounded-full  w-10  h-10 object-cover -ml-6 ">
-        <img src="../uploads/Alaba Bukola.jpg" alt="" class="rounded-full  w-10  h-10 object-cover -ml-6 ">
+        <img src="../mock.jpg" alt="" class="rounded-full  w-10  h-10 object-cover ">
+        <img src="../mock.jpg" alt="" class="rounded-full  w-10  h-10 object-cover -ml-6">
+        <img src="../mock.jpg" alt="" class="rounded-full  w-10  h-10 object-cover -ml-6 ">
+        <img src="../mock.jpg" alt="" class="rounded-full  w-10  h-10 object-cover -ml-6 ">
        </div>
       </div>    
 
@@ -213,6 +214,9 @@
 
     </div>
   </div>
+  
+  <button id="enrol" class=" bg-[#512bd4] mt-14 w- text-white py-3 rounded-md -mb-9">Enrol</button>
+
 </div>
 <div class="course border w-fit flex flex-col   px-20 h-fit   py-12 rounded-md ">
      
@@ -233,10 +237,10 @@
        
 
        <div class="participants flex flex-row -mt-8">
-        <img src="../uploads/Alaba Bukola.jpg" alt="" class="rounded-full  w-10  h-10 object-cover ">
-        <img src="../uploads/Alaba Bukola.jpg" alt="" class="rounded-full  w-10  h-10 object-cover -ml-6">
-        <img src="../uploads/Alaba Bukola.jpg" alt="" class="rounded-full  w-10  h-10 object-cover -ml-6 ">
-        <img src="../uploads/Alaba Bukola.jpg" alt="" class="rounded-full  w-10  h-10 object-cover -ml-6 ">
+        <img src="../mock.jpg" alt="" class="rounded-full  w-10  h-10 object-cover ">
+        <img src="../mock.jpg" alt="" class="rounded-full  w-10  h-10 object-cover -ml-6">
+        <img src="../mock.jpg" alt="" class="rounded-full  w-10  h-10 object-cover -ml-6 ">
+        <img src="../mock.jpg" alt="" class="rounded-full  w-10  h-10 object-cover -ml-6 ">
        </div>
       </div>    
 
@@ -274,6 +278,9 @@
 
     </div>
   </div>
+  
+  <button id="enrol" class=" bg-[#512bd4] mt-14 w- text-white py-3 rounded-md -mb-9">Enrol</button>
+
 </div>
 <div class="course border w-fit flex flex-col   px-20 h-fit   py-12 rounded-md ">
      
@@ -294,10 +301,10 @@
        
 
        <div class="participants flex flex-row -mt-8">
-        <img src="../uploads/Alaba Bukola.jpg" alt="" class="rounded-full  w-10  h-10 object-cover ">
-        <img src="../uploads/Alaba Bukola.jpg" alt="" class="rounded-full  w-10  h-10 object-cover -ml-6">
-        <img src="../uploads/Alaba Bukola.jpg" alt="" class="rounded-full  w-10  h-10 object-cover -ml-6 ">
-        <img src="../uploads/Alaba Bukola.jpg" alt="" class="rounded-full  w-10  h-10 object-cover -ml-6 ">
+        <img src="../mock.jpg" alt="" class="rounded-full  w-10  h-10 object-cover ">
+        <img src="../mock.jpg" alt="" class="rounded-full  w-10  h-10 object-cover -ml-6">
+        <img src="../mock.jpg" alt="" class="rounded-full  w-10  h-10 object-cover -ml-6 ">
+        <img src="../mock.jpg" alt="" class="rounded-full  w-10  h-10 object-cover -ml-6 ">
        </div>
       </div>    
 
@@ -335,6 +342,9 @@
 
     </div>
   </div>
+  
+  <button id="enrol" class=" bg-[#512bd4] mt-14 w- text-white py-3 rounded-md -mb-9">Enrol</button>
+
 </div>
 <div class="course border w-fit flex flex-col   px-20 h-fit   py-12 rounded-md ">
      
@@ -355,10 +365,10 @@
        
 
        <div class="participants flex flex-row -mt-8">
-        <img src="../uploads/Alaba Bukola.jpg" alt="" class="rounded-full  w-10  h-10 object-cover ">
-        <img src="../uploads/Alaba Bukola.jpg" alt="" class="rounded-full  w-10  h-10 object-cover -ml-6">
-        <img src="../uploads/Alaba Bukola.jpg" alt="" class="rounded-full  w-10  h-10 object-cover -ml-6 ">
-        <img src="../uploads/Alaba Bukola.jpg" alt="" class="rounded-full  w-10  h-10 object-cover -ml-6 ">
+        <img src="../mock.jpg" alt="" class="rounded-full  w-10  h-10 object-cover ">
+        <img src="../mock.jpg" alt="" class="rounded-full  w-10  h-10 object-cover -ml-6">
+        <img src="../mock.jpg" alt="" class="rounded-full  w-10  h-10 object-cover -ml-6 ">
+        <img src="../mock.jpg" alt="" class="rounded-full  w-10  h-10 object-cover -ml-6 ">
        </div>
       </div>    
 
@@ -396,6 +406,9 @@
 
     </div>
   </div>
+  
+  <button id="enrol" class=" bg-[#512bd4] mt-14 w- text-white py-3 rounded-md -mb-9">Enrol</button>
+
 </div>
     </div>
 <body>

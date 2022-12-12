@@ -68,7 +68,7 @@ if (isset($_POST['register'])) {
       array_push($error_messages, 'Upload An Image');
     }
     
-      if ($image_type == 'jpg' || $image_type == 'png' || $image_type == 'jpeg') {
+      if ($image_type == 'jpg' || $image_type == 'png' || $image_type == 'jpeg' || $image_type == 'jfif') {
         move_uploaded_file($image_to_upload,$new_name);
       } else {
            array_push($error_messages, 'Upload An Image In Jpg,Png and Jpeg Formats');

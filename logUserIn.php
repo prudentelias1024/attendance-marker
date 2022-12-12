@@ -22,6 +22,7 @@ if ($result !=="User Not Found"  && password_verify($password,$result)) {
     $_SESSION["designation"] = $user[4];
     $_SESSION["location"] = $user[5];
     $_SESSION["grade"] = $user[6];
+    $_SESSION["role"] = $user[7];
        
      
     header("Location: Dashboard/dashboard.php");

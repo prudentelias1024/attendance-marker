@@ -8,6 +8,7 @@
 <?php echo  $_SESSION['oracle_no']; ?></p>
     <p class="font-[Mulish] -mt-3 mb-6  ml-24 font-extrabold justify-center text-xs">
   <?php echo  $_SESSION['designation']; ?></p>
+  
 
   <ul class="gap-8 flex flex-col -ml-24">
     <a href="courses.php" class="font-[Mulish]  font-extrabold text-xl text-white no-underline text-center place-self-center ml-12">
@@ -20,11 +21,23 @@
           <i class="fa-solid fa-chart-simple"></i> Statistics 
         </li>
         </a>
+
         <a href="reports.php" class="font-[Mulish] font-extrabold text-xl text-white no-underline text-center place-self-center ml-12">
             <li class="-ml-5 block hover:bg-[#623cec] py-4 px-28">
           <i class="fa-solid fa-note-sticky"></i> Reports    
         </li>
         </a>
+        
+        <?php
+          if ($_SESSION['role'] != 'Member') {
+                echo '        <a href="students_assessments.php" class="font-[Mulish] font-extrabold text-xl text-white no-underline text-center place-self-center ml-12">
+                <li class="-ml-5 block hover:bg-[#623cec] py-4 px-28">
+              <i class="fa-solid fa-pen"></i> Students Assessment    
+            </li>
+            </a>
+    ';
+          }
+        ?>
         <a href="../logout.php" class="font-[Mulish] font-extrabold text-xl text-white no-underline text-center place-self-center ml-12">
             <li class="mb-0 -ml-5 block hover:bg-[#623cec] py-4 px-28">
           <i class="fa-solid fa-right-from-bracket"></i>Logout 

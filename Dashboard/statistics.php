@@ -102,8 +102,8 @@ bg-gradient-to-r from-violet-500 to-fuchsia-500 rounded-lg w-fit  ">
         </div>
       <div class="flex flex-row mt-6 -ml-12">
 
-          <p class="font-[Mulish] font-medium">Course Title:  </p>  
-          <p class="title font-[Montserrat] font-extrabold ml-2">Artificial Intelligence</p>
+ </p>  
+          <p class="title font-[Montserrat] font-extrabold ml-2 text-2xl">Artificial Intelligence</p>
       </div>
 
       <div class="flex flex-row mt-6 -ml-12">   
@@ -121,8 +121,8 @@ bg-gradient-to-r from-violet-500 to-fuchsia-500 rounded-lg w-fit  ">
         </div>
       <div class="flex flex-row mt-6 -ml-12">
 
-          <p class="font-[Mulish] font-medium">Course Title:  </p>  
-          <p class="title font-[Montserrat] font-extrabold ml-2">Artificial Intelligence</p>
+ </p>  
+          <p class="title font-[Montserrat] font-extrabold ml-2 text-2xl">Artificial Intelligence</p>
       </div>
 
 
@@ -140,8 +140,8 @@ bg-gradient-to-r from-violet-500 to-fuchsia-500 rounded-lg w-fit  ">
         </div>
       <div class="flex flex-row mt-6 -ml-12">
 
-          <p class="font-[Mulish] font-medium">Course Title:  </p>  
-          <p class="title font-[Montserrat] font-extrabold ml-2">Artificial Intelligence</p>
+ </p>  
+          <p class="title font-[Montserrat] font-extrabold ml-2 text-2xl">Artificial Intelligence</p>
       </div>
 
       <div class="flex flex-row mt-6 -ml-12">   
@@ -159,8 +159,8 @@ bg-gradient-to-r from-violet-500 to-fuchsia-500 rounded-lg w-fit  ">
         </div>
       <div class="flex flex-row mt-6 -ml-12">
 
-          <p class="font-[Mulish] font-medium">Course Title:  </p>  
-          <p class="title font-[Montserrat] font-extrabold ml-2">Artificial Intelligence</p>
+ </p>  
+          <p class="title font-[Montserrat] font-extrabold ml-2 text-2xl">Artificial Intelligence</p>
       </div>
 
       <div class="flex flex-row mt-6 -ml-12">   
@@ -177,8 +177,8 @@ bg-gradient-to-r from-violet-500 to-fuchsia-500 rounded-lg w-fit  ">
         </div>
       <div class="flex flex-row mt-6 -ml-12">
 
-          <p class="font-[Mulish] font-medium">Course Title:  </p>  
-          <p class="title font-[Montserrat] font-extrabold ml-2">Artificial Intelligence</p>
+ </p>  
+          <p class="title font-[Montserrat] font-extrabold ml-2 text-2xl">Artificial Intelligence</p>
       </div>
 
       <div class="flex flex-row mt-6 -ml-12">   
@@ -195,8 +195,8 @@ bg-gradient-to-r from-violet-500 to-fuchsia-500 rounded-lg w-fit  ">
         </div>
       <div class="flex flex-row mt-6 -ml-12">
 
-          <p class="font-[Mulish] font-medium">Course Title:  </p>  
-          <p class="title font-[Montserrat] font-extrabold ml-2">Artificial Intelligence</p>
+ </p>  
+          <p class="title font-[Montserrat] font-extrabold ml-2 text-2xl">Artificial Intelligence</p>
       </div>
 
       <div class="flex flex-row mt-6 -ml-12">   

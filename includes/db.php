@@ -46,7 +46,7 @@ class DB
         $result =  $this->connectToDB()->query($sql);
         if ($result->num_rows > 0) {
             while($rows = $result->fetch_assoc()){
-                return array($rows["Oracle_no"],$rows["Name"],$rows["Image"],$rows["Email"], $rows["Designation"],$rows["Location"], $rows["Grade"]);
+                return array($rows["Oracle_no"],$rows["Name"],$rows["Image"],$rows["Email"], $rows["Designation"],$rows["Location"], $rows["Grade"], $rows["Role"]);
             }
         } else {
             return 'User Not Found';
