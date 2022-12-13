@@ -6,3 +6,10 @@ if (isset($_POST['t_code'])) {
     $coordinator = $_POST['t_coordinator'];
 
     include '../includes/db.php';
+    $db = new Db;
+     $courses = $db->enrol($oracle_no,$name,$course_to_enrol,$coordinator);
+}
+
+
+
+?>
