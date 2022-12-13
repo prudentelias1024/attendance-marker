@@ -25,10 +25,39 @@
     
     ?>
   <div class="course_list grid grid-cols-3 gap-10 ml-10 mt-16 mr-8">
+  <button class="course text-[#512bd4]   w-fit flex flex-col  px-44 h-fit   py-52 ">
+  <i class="fa-solid fa-plus text-4xl"></i>
+  <p class="font-extrabold font-[Mulish] text-2xl -indent-10 mt-3  ">Add Training</p>
+  </button>
+  <!-- Button trigger modal -->
+<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+  Launch demo modal
+</button> -->
+
+<!-- Modal
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div> -->
  <?php
   include '../includes/db.php';
   $db = new Db;
-   $courses = $db->getCourses();
+   $courses = $db->getCoordinatingCourses($_SESSION['name']);
   foreach ($courses as  $course) {
     echo '<div class="course border w-fit flex flex-col   px-20 h-fit   py-16 rounded-md ">
      
@@ -80,7 +109,7 @@
 <div class="flex flex-row mt-12 justify-between -ml-20 -mb-12">
   <div class="flex flex-row gap-2 ml-6">
     <i class="fa-solid fa-user text-[#b8b8b8] mt-1"></i>
-  <p class="font-[Mulish] text-[#adadad] font-bold">'.$course['Course_Coordinator'].'</p>
+  <p class="font-[Mulish] text-[#adadad] font-bold"> You</p>
 </div>
 <div class="flex flex-row relative left-16 gap-1">
   <i class="fa-solid fa-list text-[#adadad] mt-1 "></i>
@@ -88,11 +117,7 @@
 
   </div>
 </div>
-<form action="./enrol.php" method="post" class="w-full">
-<button type="submit" id="enrol"style="width: inherit;" class=" bg-[#512bd4] mt-14 text-white py-3 rounded-md -mb-12">Enrol</button>
-<input type="hidden" name="t_code" value="'.$course['Training_Code'].'"/>
-<input type="hidden" name="t_coordinator" value="'.$course['Course_Coordinator'].'"/>
-</form>
+
 </div>
 ';
   } 
@@ -103,5 +128,6 @@
 </div>
 
     </div>
-  </body>
+<body>
+</body>
 </html>
