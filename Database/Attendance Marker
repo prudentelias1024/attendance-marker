@@ -11,3 +11,5 @@ ALTER TABLE `employee` CHANGE `Role` `Role` VARCHAR(10) CHARACTER SET utf8mb4 CO
 ALTER TABLE `trainings` ADD `No_Of_Classes` INT(2) NOT NULL AFTER `Training_Enddate`, ADD `Schedule` VARCHAR(10) NOT NULL DEFAULT 'Weekly' AFTER `No_Of_Classes`;
 INSERT INTO `trainings` (`Course_Coordinator`, `Training_title`, `Training_Code`, `Training_Location`, `Training_Duration`, `Training_Time`, `Training_Startdate`, `Training_Enddate`, `No_Of_Classes`, `Schedule`) VALUES ('James Cardiff', 'System Analysis And Design', 'T0001', 'Marina', '1 Month', '3:00pm', '', '', '4', 'Weekly');
 INSERT INTO `trainings` (`Course_Coordinator`, `Training_title`, `Training_Code`, `Training_Location`, `Training_Duration`, `Training_Time`, `Training_Startdate`, `Training_Enddate`, `No_Of_Classes`, `Schedule`) VALUES ('James Cardiff', 'Data Analysis And Visualization', 'T0002', 'Marina', '1 Month', '7:00pm', '', '', '4', 'Weekly');
+ALTER TABLE `enrolled` ADD `Training_Title` VARCHAR(60) NOT NULL AFTER `Name`;
+ALTER TABLE `enrolled` CHANGE `Training_Cordinator` `Training_Coordinator` VARCHAR(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL;

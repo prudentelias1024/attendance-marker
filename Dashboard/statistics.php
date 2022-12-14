@@ -95,118 +95,43 @@ bg-gradient-to-r from-violet-500 to-fuchsia-500 rounded-lg w-fit  ">
 <div class="flex flex-col mt-10">
    <p class="font-[Mulish] font-semibold text-3xl mt-8 ml-36">Courses</p>
    <div class="courses grid grid-cols-3 ml-36 gap-12">
-
-   <div class="course border w-fit  px-24    py-12 rounded-md ">
-       <div class="progress border w-[150%] -ml-12" style="height: 10px;">
-        <div class="progress-bar bg-info " role="progressbar" style="width: 75%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-        </div>
-      <div class="flex flex-row mt-6 -ml-12">
-
- </p>  
-          <p class="title font-[Montserrat] font-extrabold ml-2 text-2xl">Artificial Intelligence</p>
-      </div>
-
-      <div class="flex flex-row mt-6 -ml-12">   
-      <p class="font-[Mulish]">Training Code:</p> <p class="code font-[Montserrat] font-extrabold ml-2">T0001</p>
-      </div>
-
-      <div class="flex flex-row mt-6 -ml-12">
-
-       <p class="font-[Mulish]">Training Coordinator:</p> <p class="code font-[Montserrat] font-extrabold ml-2">Dr. Wusu Senapon</p>
-      </div>    
+ <?php 
+    include '../includes/db.php';
+    $db = new DB;
+    $enrolled_courses = $db->getEnrolledCourse($_SESSION['oracle_no']);
+    
+   if($enrolled_courses !== null){
+    foreach ($enrolled_courses as $key => $course) {
+      echo '   <div class="course border w-fit  px-24    py-12 rounded-md ">
+      <div class="progress border w-[130%] -ml-12" style="height: 10px;">
+       <div class="progress-bar bg-info " role="progressbar" style="width: 75%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
        </div>
-   <div class="course border w-fit  px-24    py-12 rounded-md ">
-       <div class="progress border w-[150%] -ml-12" style="height: 10px;">
-        <div class="progress-bar bg-info " role="progressbar" style="width: 75%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-        </div>
-      <div class="flex flex-row mt-6 -ml-12">
+     <div class="flex flex-row mt-6 -ml-12">
+  
 
- </p>  
-          <p class="title font-[Montserrat] font-extrabold ml-2 text-2xl">Artificial Intelligence</p>
-      </div>
-
-
-      <div class="flex flex-row mt-6 -ml-12">   
-      <p class="font-[Mulish]">Training Code:</p> <p class="code font-[Montserrat] font-extrabold ml-2">T0001</p>
-      </div>
-      <div class="flex flex-row mt-6 -ml-12">
-
-       <p class="font-[Mulish]">Training Coordinator:</p> <p class="code font-[Montserrat] font-extrabold ml-2">Dr. Wusu Senapon</p>
-      </div>    
+         <p class="title font-[Montserrat] font-extrabold ml-2 text-2xl">'.$course['Training_Title'].'</p>
+     </div>
+  
+     <div class="flex flex-row mt-6 -ml-12">   
+     <p class="font-[Mulish]">Training Code:</p> <p class="code font-[Montserrat] font-extrabold ml-2">'.$course['Training_Code'].'</p>
+     </div>
+     <div class="flex flex-row mt-6 -ml-12">
+  
+      <p class="font-[Mulish]">Training Coordinator:</p> <p class="code font-[Montserrat] font-extrabold ml-2">'.$course['Training_Cordinator'].'</p>
+     </div> 
+     </div>   ';
+    }
+   } else {
+    echo '<p class="font-[Mulish] text-xl text-gray-600 mt-8 ml-3">You haven\'t enrolled for any training yet </p>  ';
+   }
+   
+?>
+   
+   
+   
        </div>
-   <div class="course border w-fit  px-24    py-12 rounded-md ">
-       <div class="progress border w-[150%] -ml-12" style="height: 10px;">
-        <div class="progress-bar bg-info " role="progressbar" style="width: 75%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-        </div>
-      <div class="flex flex-row mt-6 -ml-12">
-
- </p>  
-          <p class="title font-[Montserrat] font-extrabold ml-2 text-2xl">Artificial Intelligence</p>
-      </div>
-
-      <div class="flex flex-row mt-6 -ml-12">   
-      <p class="font-[Mulish]">Training Code:</p> <p class="code font-[Montserrat] font-extrabold ml-2">T0001</p>
-      </div>
-      <div class="flex flex-row mt-6 -ml-12">
-
-       <p class="font-[Mulish]">Training Coordinator:</p> <p class="code font-[Montserrat] font-extrabold ml-2">Dr. Wusu Senapon</p>
-      </div>    
-       </div>
- 
-       <div class="course border w-fit  px-24    py-12 rounded-md ">
-       <div class="progress border w-[150%] -ml-12" style="height: 10px;">
-        <div class="progress-bar bg-info " role="progressbar" style="width: 75%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-        </div>
-      <div class="flex flex-row mt-6 -ml-12">
-
- </p>  
-          <p class="title font-[Montserrat] font-extrabold ml-2 text-2xl">Artificial Intelligence</p>
-      </div>
-
-      <div class="flex flex-row mt-6 -ml-12">   
-      <p class="font-[Mulish]">Training Code:</p> <p class="code font-[Montserrat] font-extrabold ml-2">T0001</p>
-      </div>
-      <div class="flex flex-row mt-6 -ml-12">
-
-       <p class="font-[Mulish]">Training Coordinator:</p> <p class="code font-[Montserrat] font-extrabold ml-2">Dr. Wusu Senapon</p>
-      </div>    
-       </div>
-       <div class="course border w-fit  px-24    py-12 rounded-md ">
-       <div class="progress border w-[150%] -ml-12" style="height: 10px;">
-        <div class="progress-bar bg-info " role="progressbar" style="width: 75%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-        </div>
-      <div class="flex flex-row mt-6 -ml-12">
-
- </p>  
-          <p class="title font-[Montserrat] font-extrabold ml-2 text-2xl">Artificial Intelligence</p>
-      </div>
-
-      <div class="flex flex-row mt-6 -ml-12">   
-      <p class="font-[Mulish]">Training Code:</p> <p class="code font-[Montserrat] font-extrabold ml-2">T0001</p>
-      </div>
-      <div class="flex flex-row mt-6 -ml-12">
-
-       <p class="font-[Mulish]">Training Coordinator:</p> <p class="code font-[Montserrat] font-extrabold ml-2">Dr. Wusu Senapon</p>
-      </div>    
-       </div>
-       <div class="course border w-fit  px-24    py-12 rounded-md ">
-       <div class="progress border w-[150%] -ml-12" style="height: 10px;">
-        <div class="progress-bar bg-info " role="progressbar" style="width: 75%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-        </div>
-      <div class="flex flex-row mt-6 -ml-12">
-
- </p>  
-          <p class="title font-[Montserrat] font-extrabold ml-2 text-2xl">Artificial Intelligence</p>
-      </div>
-
-      <div class="flex flex-row mt-6 -ml-12">   
-      <p class="font-[Mulish]">Training Code:</p> <p class="code font-[Montserrat] font-extrabold ml-2">T0001</p>
-      </div>
-      <div class="flex flex-row mt-6 -ml-12">
-
-       <p class="font-[Mulish]">Training Coordinator:</p> <p class="code font-[Montserrat] font-extrabold ml-2">Dr. Wusu Senapon</p>
-      </div>    
-       </div>
+   
+     
    
  
    </div> 

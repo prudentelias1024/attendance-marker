@@ -24,15 +24,32 @@ class DB
             echo "Error:".$sql.' <BR>  '.$this->connectToDB()->error;
         }
     }
-    public function enrol($oracle_no, $name, $t_code, $t_cord){
+    public function enrol($oracle_no, $name, $t_title,$t_code,$t_cord){
         $this->connectToDB();
 
     
-        $sql = "INSERT INTO enrolled(Oracle_no, Name, Training_Code, Training_Coordinator) VALUES('$oracle_no','$name','$t_code', $t_cord)";
+        $sql = "INSERT INTO enrolled(Oracle_no, Name, Training_Title,Training_Code, Training_Cordinator) VALUES('$oracle_no','$name','$t_title','$t_code', '$t_cord')";
         if ($this->connectToDB()->query($sql)) {
-            echo 'User Successfully Enrolled';
+            return 'User Successfully Enrolled';
         } else {
-            echo "Error:".$sql.' <BR>  '.$this->connectToDB()->error;
+            return "Error:".$sql.' <BR>  '.$this->connectToDB()->error;
+        }
+    }
+    public function getEnrolledCourse($oracle_no){
+        $this->connectToDB();
+        $enrolled_courses = array();
+        $sql = "SELECT * FROM enrolled WHERE Oracle_no='$oracle_no'";
+        $result = $this->connectToDB()->query($sql);
+        if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()){
+            
+                $enrolled_courses[] = $row;
+            }
+            return $enrolled_courses;
+       
+            
+        } else {
+            return  null;
         }
     }
 
@@ -62,6 +79,33 @@ class DB
             }
         } else {
             return 'User Not Found';
+        }
+
+    }
+    public function getTrainingParticipants($training_code){
+        $participants = array();
+        $this->connectToDB();
+        $sql = "SELECT Oracle_no FROM enrolled WHERE Training_Code ='$training_code' ";
+        $result =  $this->connectToDB()->query($sql);
+        if ($result->num_rows > 0) {
+            while($rows = $result->fetch_assoc()){
+                
+                $oracle_nos = array();
+                $oracle_nos[] = $rows['Oracle_no'];
+                foreach ($oracle_nos as  $oracle) {
+                    $sql = "SELECT Image FROM Employee WHERE Oracle_no='$oracle'";
+                    $result =  $this->connectToDB()->query($sql);
+                    if ($result->num_rows > 0) {
+                        $participants[] = $result->fetch_assoc();
+
+                    }
+                    
+             }
+                
+            }
+            return $participants;
+        } else {
+            return 'No Participants';
         }
 
     }
