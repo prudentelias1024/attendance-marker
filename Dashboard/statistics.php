@@ -56,7 +56,7 @@ session_start();
     
     <div class="flex flex-col">
         <p class="font-[Mulish] text-lg mt-2 -mb-1 ml-3 indent-2"> Courses In Progress</p>
-        <p class="font-[Montserrat] text-white font-semibold text-2xl indent-40 mt-2 -mb-1">7</p>
+        <p class="font-[Montserrat] text-white font-semibold text-2xl indent-40 mt-2 -mb-1">0</p>
     </div>
     </div>
 
@@ -65,7 +65,7 @@ session_start();
     
     <div class="flex flex-col">
         <p class="font-[Mulish] text-lg mt-2 -mb-1 ml-3 indent-8">Course Failed</p>
-        <p class="font-[Montserrat]  text-white font-semibold text-2xl indent-32 mt-2 -mb-1">7</p>
+        <p class="font-[Montserrat]  text-white font-semibold text-2xl indent-32 mt-2 -mb-1">0</p>
     </div>
     </div>
 
@@ -75,19 +75,19 @@ session_start();
   <div class="countdown flex flex-row gap-56 ml-[12em] shadow-md border-1 p-4 
 bg-gradient-to-r from-violet-500 to-fuchsia-500 rounded-lg w-fit  ">
    <div class="days flex-col ml-24 -mr-4">
-    <p class="font-[Montserrat] text-8xl text-white font-extrabold">15</p>
+    <p class="font-[Montserrat] text-8xl text-white font-extrabold">01</p>
     <p class="font-[Montserrat] uppercase font-bold text-2xl text-white">Days</p>
    </div>
    <div class="hours flex-col">
-    <p class="font-[Montserrat] text-8xl text-white font-extrabold">07</p>
+    <p class="font-[Montserrat] text-8xl text-white font-extrabold">00</p>
     <p class="font-[Montserrat] uppercase font-bold text-2xl text-white">Hours</p>
    </div>
    <div class="minutes flex-col">
-    <p class="font-[Montserrat] text-8xl text-white font-extrabold">34</p>
+    <p class="font-[Montserrat] text-8xl text-white font-extrabold">00</p>
     <p class="font-[Montserrat] uppercase font-bold text-2xl text-white">Minutes</p>
    </div>
    <div class="seconds flex-col mr-10">
-    <p class="font-[Montserrat] text-8xl text-white font-extrabold">05</p>
+    <p class="font-[Montserrat] text-8xl text-white font-extrabold">00</p>
     <p class="font-[Montserrat] uppercase font-bold text-2xl text-white">Seconds</p>
    </div>
 

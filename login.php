@@ -8,6 +8,7 @@
    <?php
      include './includes/links.php';
     session_start();
+   
    ?>
 </head>
 <body>

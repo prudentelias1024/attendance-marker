@@ -9,21 +9,49 @@
 <link rel="manifest" href="/site.webmanifest">
   <script src="https://cdn.tailwindcss.com"></script>
   <title> Reports </title>
+  
 </head>
   <body>
-    <div class="reports flex flex-col ">
+    <div class="reports flex flex-row gap-16 ">
 
   <?php
-  
   session_start();
     include '../includes/links.php';
     if (empty($_SESSION['name'])) {
      header('Location: ../login.php');
     }
    include 'dashboardNav.php';
-    
     ?>
-    </div>
+     <table >
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">First</th>
+      <th scope="col">Last</th>
+      <th scope="col">Handle</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="height: 2em">
+      <th scope="row">1</th>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>@mdo</td>
+    </tr>
+    <tr style="height: 2em">
+      <th scope="row">2</th>
+      <td>Jacob</td>
+      <td>Thornton</td>
+      <td>@fat</td>
+    </tr>
+    <tr style="height: 2em">
+      <th scope="row">3</th>
+      <td colspan="2">Larry the Bird</td>
+      <td>@twitter</td>
+    </tr>
+  </tbody>
+</table>
+</table>
 <body>
 </body>
 </html>
