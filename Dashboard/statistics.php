@@ -70,24 +70,40 @@ session_start();
     </div>
 
 </div>
+<?php
+include '../includes/db.php';
+$db = new Db;
+$enrolledCourse  = $db->getEnrolledCourse($_SESSION['oracle_no']);
+$time = $db->getEnrolledCoursesStartTime($enrolledCourse[0]["Training_Code"]);
+// $timeToStart = $time[0]['Training_Time'];
+$t_day = new DateTime($time[0]['Training_Day'].' '.$time[0]['Training_Time']);
+$today = new DateTime(date("l jS  F Y h:i:s A"));
+ 
+ $diff=  date_diff($today,$t_day);
+ 
 
+
+// print_r($today);  
+$currentTime = date("l jS  F Y h:i:s A");
+// print_r($currentTime);
+?>
 <p class="font-[Mulish] font-semibold text-3xl mt-8 text-[#747474] text-center">Countdown To Next Training</p>
   <div class="countdown flex flex-row gap-56 ml-[12em] shadow-md border-1 p-4 
 bg-gradient-to-r from-violet-500 to-fuchsia-500 rounded-lg w-fit  ">
    <div class="days flex-col ml-24 -mr-4">
-    <p class="font-[Montserrat] text-8xl text-white font-extrabold">01</p>
+    <p class="font-[Montserrat] text-8xl text-white font-extrabold"><?php echo sprintf("%02d", $diff->d); ?></p>
     <p class="font-[Montserrat] uppercase font-bold text-2xl text-white">Days</p>
    </div>
    <div class="hours flex-col">
-    <p class="font-[Montserrat] text-8xl text-white font-extrabold">00</p>
+    <p class="font-[Montserrat] text-8xl text-white font-extrabold"><?php echo sprintf("%02d", $diff->h); ?></p>
     <p class="font-[Montserrat] uppercase font-bold text-2xl text-white">Hours</p>
    </div>
    <div class="minutes flex-col">
-    <p class="font-[Montserrat] text-8xl text-white font-extrabold">00</p>
+    <p class="font-[Montserrat] text-8xl text-white font-extrabold"><?php echo sprintf("%02d", $diff->i); ?></p>
     <p class="font-[Montserrat] uppercase font-bold text-2xl text-white">Minutes</p>
    </div>
    <div class="seconds flex-col mr-10">
-    <p class="font-[Montserrat] text-8xl text-white font-extrabold">00</p>
+    <p class="font-[Montserrat] text-8xl text-white font-extrabold"><?php echo sprintf("%02d", $diff->s); ?></p>
     <p class="font-[Montserrat] uppercase font-bold text-2xl text-white">Seconds</p>
    </div>
 
@@ -95,9 +111,7 @@ bg-gradient-to-r from-violet-500 to-fuchsia-500 rounded-lg w-fit  ">
 <div class="flex flex-col mt-10">
    <p class="font-[Mulish] font-semibold text-3xl mt-8 ml-36">Courses</p>
    <div class="courses grid grid-cols-3 ml-36 gap-12">
- <?php 
-    include '../includes/db.php';
-    $db = new DB;
+ <?php
     $enrolled_courses = $db->getEnrolledCourse($_SESSION['oracle_no']);
     
    if($enrolled_courses !== null){

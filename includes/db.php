@@ -125,6 +125,23 @@ class DB
         }
 
     }
+    public function getEnrolledCoursesStartTime($t_code){
+      
+        $this->connectToDB();
+        $sql = "SELECT * FROM trainings WHERE Training_Code ='$t_code' ORDER BY Training_Time";
+        $result =  $this->connectToDB()->query($sql);
+        $courses = array();
+        if ($result->num_rows > 0) {
+            while($rows = $result->fetch_assoc()){
+               $courses[] = $rows;
+            }
+              
+                return $courses;
+        } else {
+            return 'No Training';
+        }
+
+    }
     public function getCoordinatingCourses($name){
         $this->connectToDB();
         $sql = "SELECT * FROM trainings WHERE Course_Coordinator ='$name'";
