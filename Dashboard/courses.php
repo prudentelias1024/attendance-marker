@@ -32,7 +32,7 @@
   include '../includes/db.php';
   $db = new Db;
    $courses = $db->getCourses();
-   
+   $enrolledCourses = $db->getEnrolledCourse($_SESSION['Oracle_no']);
   foreach ($courses as $key => $course) {
     echo '<div class="course border w-fit flex flex-col   px-20 h-fit   py-16 rounded-md ">
      

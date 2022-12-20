@@ -1,6 +1,7 @@
 setInterval(() => {
     let now = moment();
     let date = document.getElementById("date").innerText
+    console.log(date)
     date = new Date(date).toISOString()
     date = moment(date)
     

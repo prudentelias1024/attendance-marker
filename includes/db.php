@@ -125,15 +125,17 @@ class DB
         }
 
     }
+    
     public function getEnrolledCoursesStartTime($t_code){
       
         $this->connectToDB();
-        $sql = "SELECT * FROM trainings WHERE Training_Code ='$t_code' ORDER BY Training_Time";
+        $sql = "SELECT * FROM trainings WHERE Training_Code ='$t_code' ORDER BY Training_Time, Training_Time";
         $result =  $this->connectToDB()->query($sql);
         $courses = array();
         if ($result->num_rows > 0) {
             while($rows = $result->fetch_assoc()){
-               $courses[] = $rows;
+                $courses[] = $rows;
+                print_r($rows);
             }
               
                 return $courses;
