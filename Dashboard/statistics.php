@@ -11,11 +11,12 @@
   
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css" integrity="sha384-b6lVK+yci+bfDmaY1u0zE8YYJt0TZxLEAFyYSLHId4xoVvsrQu3INevFKo+Xir8e" crossorigin="anonymous">
     <link rel="stylesheet" href="../circular_progress.css" >
-    
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.0.1/chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.min.js"></script>
 <script defer src="../chart.js"></script>
+<script defer src="./timeUpdater.js"></script>
+
 </head>
-<body>
+<body >
 <?php 
 
 include '../includes/links.php';
@@ -87,23 +88,25 @@ $today = new DateTime(date("l jS  F Y h:i:s A"));
 $currentTime = date("l jS  F Y h:i:s A");
 // print_r($currentTime);
 ?>
-<p class="font-[Mulish] font-semibold text-3xl mt-8 text-[#747474] text-center">Countdown To Next Training</p>
+<p id="date" style="opacity: 0;" ><?php echo date_format($t_day,"Y/m/d H:i:s");?></p>
+<p  class="font-[Mulish] font-semibold text-3xl mt-8 text-[#747474] text-center">Countdown To Next Training</p>
+
   <div class="countdown flex flex-row gap-56 ml-[12em] shadow-md border-1 p-4 
 bg-gradient-to-r from-violet-500 to-fuchsia-500 rounded-lg w-fit  ">
    <div class="days flex-col ml-24 -mr-4">
-    <p class="font-[Montserrat] text-8xl text-white font-extrabold"><?php echo sprintf("%02d", $diff->d); ?></p>
-    <p class="font-[Montserrat] uppercase font-bold text-2xl text-white">Days</p>
+    <p id="days" class="font-[Montserrat] text-8xl text-white font-extrabold"><?php echo sprintf("%02d", $diff->d); ?></p>
+    <p  class="font-[Montserrat] uppercase font-bold text-2xl text-white">Days</p>
    </div>
    <div class="hours flex-col">
-    <p class="font-[Montserrat] text-8xl text-white font-extrabold"><?php echo sprintf("%02d", $diff->h); ?></p>
+    <p id="hours" class="font-[Montserrat] text-8xl text-white font-extrabold"><?php echo sprintf("%02d", $diff->h); ?></p>
     <p class="font-[Montserrat] uppercase font-bold text-2xl text-white">Hours</p>
    </div>
    <div class="minutes flex-col">
-    <p class="font-[Montserrat] text-8xl text-white font-extrabold"><?php echo sprintf("%02d", $diff->i); ?></p>
+    <p  id="minutes" class="font-[Montserrat] text-8xl text-white font-extrabold"><?php echo sprintf("%02d", $diff->i); ?></p>
     <p class="font-[Montserrat] uppercase font-bold text-2xl text-white">Minutes</p>
    </div>
    <div class="seconds flex-col mr-10">
-    <p class="font-[Montserrat] text-8xl text-white font-extrabold"><?php echo sprintf("%02d", $diff->s); ?></p>
+    <p id="seconds" class="font-[Montserrat] text-8xl text-white font-extrabold"><?php echo sprintf("%02d", $diff->s); ?></p>
     <p class="font-[Montserrat] uppercase font-bold text-2xl text-white">Seconds</p>
    </div>
 
