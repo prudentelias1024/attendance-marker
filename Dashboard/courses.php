@@ -32,7 +32,9 @@
   include '../includes/db.php';
   $db = new Db;
    $courses = $db->getCourses();
-   $enrolledCourses = $db->getEnrolledCourse($_SESSION['Oracle_no']);
+   $enrolledCourses = $db->getEnrolledCourse($_SESSION['oracle_no']);
+  
+
   foreach ($courses as $key => $course) {
     echo '<div class="course border w-fit flex flex-col   px-20 h-fit   py-16 rounded-md ">
      
@@ -58,11 +60,12 @@
      echo  '<img src=".'.$image["Image"].'" alt="" class="rounded-full  w-10  h-10 object-cover ">
      
         </div>
-    </div>    
+    </div>';    
 
-
+     }
+     if (in_array($course["Training_Code"],$enrolledCourses)) {
     
-<div class="container flex-col relative left-16 top-4 ">
+    echo '<div class="container flex-col relative left-16 top-4 ">
 
   <p class="font-[Mulish] font-semibold mb-2 text-[#b8b8b8] ">Progress</p>
     <div class="row">
@@ -93,15 +96,18 @@
 
   </div>
 </div>
+
 <form action="./enrol.php" method="post" class="w-full">
-<button type="submit" id="enrol"style="width: inherit;" onclick="removeCourse(event)" class=" bg-[#512bd4] mt-14 text-white py-3 rounded-md -mb-12">Enrol</button>
-<input type="hidden" name="t_code" value="'.$course['Training_Code'].'"/>
-<input type="hidden" name="t_coordinator" value="'.$course['Course_Coordinator'].'"/>
-<input type="hidden" name="t_title" value="'.$course['Training_title'].'"/>
-</form>
-</div>
-';
-  } 
+  
+    <button type="submit" id="enrol"style="width: inherit;" onclick="removeCourse(event)" class=" bg-[#512bd4] mt-14 text-white py-3 rounded-md -mb-12">Enrol</button>
+    <input type="hidden" name="t_code" value="'.$course['Training_Code'].'"/>
+    <input type="hidden" name="t_coordinator" value="'.$course['Course_Coordinator'].'"/>
+    <input type="hidden" name="t_title" value="'.$course['Training_title'].'"/>
+    </form>
+    </div>';
+}
+
+  
 }
 ?>
 

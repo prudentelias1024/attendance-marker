@@ -30,15 +30,10 @@
         
         <?php
           if ($_SESSION['role'] != 'Member') {
-            echo '<a href="students_assessments.php" class="font-[Mulish] font-extrabold text-xl text-white no-underline text-center place-self-center ml-12">
-       <li class="-ml-5 block hover:bg-[#623cec] py-4 px-28">
-     <i class="fa-solid fa-people-roof"></i> Students Assessment    
-   </li>
-   </a>
-';
+
                 echo '        <a href="course_management.php" class="font-[Mulish] font-extrabold text-xl text-white no-underline text-center place-self-center ml-12">
                 <li class="-ml-5 block hover:bg-[#623cec] py-4 px-28">
-              <i class="fa-solid fa-pen"></i> Course Management    
+              <i class="fa-solid fa-people-roof"></i> Course Management    
             </li>
             </a>';
           }

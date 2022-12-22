@@ -6,7 +6,7 @@ setInterval(() => {
     date = moment(date)
     
     let days = date.diff(now, 'days');
-    let hours = date.diff(now, 'hours');
+    let hours = date.diff(now, 'hours') % 24;
     let minutes = date.diff(now, 'minutes') % 60;
     let seconds = date.diff(now, 'seconds') % 60;
     if (days < 10) {

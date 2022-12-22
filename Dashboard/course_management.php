@@ -55,11 +55,14 @@
   </div>
 </div> -->
  <?php
+ 
   include '../includes/db.php';
   $db = new Db;
    $courses = $db->getCoordinatingCourses($_SESSION['name']);
   foreach ($courses as  $course) {
-    echo '<div class="course border w-fit flex flex-col   px-20 h-fit   py-16 rounded-md ">
+    echo '<form action="./students_assessments.php" method="GET">
+    <button type="submit">
+    <div class="course border w-fit flex flex-col   px-20 h-fit   py-16 rounded-md ">
      
     <div class="flex flex-row mt-6 -ml-12">
 
@@ -68,7 +71,7 @@
     </div>
 
     <div class="flex flex-row mt-6 -ml-12 text-2xl">   
-    <p class="code font-[Montserrat] font-extrabold ml-2 text-[#939ca5]">'.$course['Training_Code'].'</p>
+    <input readonly name="course" class=" font-[Montserrat]  font-extrabold ml-2 text-[#939ca5]" value='.$course['Training_Code'].'>
     </div>
    <div class="flex flex-row gap-48">
 
@@ -119,6 +122,8 @@
 </div>
 
 </div>
+</button>
+,</form>
 ';
   } 
 ?>

@@ -8,7 +8,7 @@
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="manifest" href="/site.webmanifest">
   <script src="https://cdn.tailwindcss.com"></script>
-  <title> Reports </title>
+  <title> Marker </title>
   
 </head>
   <body>
@@ -16,42 +16,41 @@
 
   <?php
   session_start();
+  $course = htmlspecialchars($_GET['course']);
+  
     include '../includes/links.php';
-    if (empty($_SESSION['name'])) {
+    include '../includes/db.php';
+    $db = new Db;
+    $registrants = $db->getCourseRegistrants($course);
+     if (empty($_SESSION['name'])) {
      header('Location: ../login.php');
     }
    include 'dashboardNav.php';
     ?>
-     <table >
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="height: 2em">
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr style="height: 2em">
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr style="height: 2em">
-      <th scope="row">3</th>
-      <td colspan="2">Larry the Bird</td>
-      <td>@twitter</td>
-    </tr>
-  </tbody>
-</table>
-</table>
+  <div class="attendants pt-12">
+    <p class="text-4xl">Registered Students</p>
+    <?php
+    foreach ($registrants as  $registrant) {
+  echo '
+      <div class="registrant flex-col gap-32">
+      <form action="./marker.php" method="POST">
+        
+        <input readonly disabled class="font-[Mulish] text-2xl" value="'.$registrant['Name'].'" name="name" />
+        <input readonly disabled class="font-[Mulish] text-2xl" value="'.$registrant['Oracle_no'].'" name="oracle_no" />
+         <button  name="absent"> <i class="fa-solid fa-circle-xmark text-3xl bg-white-500 text-red-500 p-2"></i></button>
+        <button  name="present" > <i class="fa-solid fa-circle-check text-3xl bg-white-500 text-green-500 p-2"></i></button>
+      </form>
+     
+    </div>
+
+      
+      
+      ';
+    }
+    
+?>
+
+  </div>
 <body>
 </body>
 </html>

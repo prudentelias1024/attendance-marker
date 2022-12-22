@@ -52,7 +52,25 @@ class DB
             return  null;
         }
     }
-
+   
+    public function getCourseRegistrants($code){
+        $this->connectToDB();
+        $registrant = array();
+        $sql = "SELECT * FROM enrolled WHERE Training_Code='$code'";
+        $result = $this->connectToDB()->query($sql);
+        if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()){
+            
+                $registrant[] = $row;
+            }
+            return $registrant;
+       
+            
+        } else {
+            return  null;
+        }
+    }
+   
 
 
     public function getUserPassword($email){
@@ -135,7 +153,7 @@ class DB
         if ($result->num_rows > 0) {
             while($rows = $result->fetch_assoc()){
                 $courses[] = $rows;
-                print_r($rows);
+              
             }
               
                 return $courses;

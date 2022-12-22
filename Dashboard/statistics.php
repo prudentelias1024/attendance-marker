@@ -89,7 +89,7 @@ $currentTime = date("l jS  F Y h:i:s A");
 // print_r($currentTime);
 ?>
 <p id="date" style="opacity: 0;" ><?php echo date_format($t_day,"Y/m/d H:i:s");?></p>
-<p  class="font-[Mulish] font-semibold text-3xl mt-8 text-[#747474] text-center">Countdown To <?php echo $enrolledCourse[0]["Training_Code"]; ?></p>
+<p  class="font-[Mulish] font-semibold text-3xl mt-8 text-[#747474] text-center">Countdown To <?php  echo $enrolledCourse[0]["Training_Title"]; ?> (<?php echo $enrolledCourse[0]["Training_Code"]; ?>)</p>
 
   <div class="countdown flex flex-row gap-56 ml-[12em] shadow-md border-1 p-4 
 bg-gradient-to-r from-violet-500 to-fuchsia-500 rounded-lg w-fit  ">
