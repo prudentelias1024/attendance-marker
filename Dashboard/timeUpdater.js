@@ -1,8 +1,7 @@
 setInterval(() => {
     let now = moment();
     let date = document.getElementById("date").innerText
-    console.log(date)
-    date = new Date(date).toISOString()
+     date = new Date(date).toISOString()
     date = moment(date)
     
     let days = date.diff(now, 'days');
@@ -21,6 +20,11 @@ setInterval(() => {
     if (seconds < 10) {
        seconds = `0${seconds}`
     }
+    if (now.isAfter(date)) {
+      document.getElementById("countdown_title").innerText = "Training Ongoing";
+      document.getElementById("countdown_title").style.display = "none";
+    }
+    
     document.getElementById("days").innerText = days;
      document.getElementById("hours").innerText = hours;
      document.getElementById("minutes").innerText = minutes;

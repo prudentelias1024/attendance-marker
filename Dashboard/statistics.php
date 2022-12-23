@@ -98,10 +98,10 @@ if (!empty($enrolledCourse)) {
   
   // print_r($today);  
   $currentTime = date("l jS  F Y h:i:s A");
-  echo '<p id="date" style="opacity: 0;" ><?php echo date_format($t_day,"Y/m/d H:i:s");?></p>
-  <p  class="font-[Mulish] font-semibold text-3xl mt-8 text-[#747474] text-center">Countdown To'.$enrolledCourse[0]["Training_Title"] .'('. $enrolledCourse[0]["Training_Code"].')</p>
+  echo '<p id="date" style="opacity: 0;" >'. date_format($t_day,"Y/m/d H:i:s").'</p>
+  <p  id="countdown_title" class="font-[Mulish] font-semibold text-3xl mt-8 text-[#747474] text-center">Countdown To '.$enrolledCourse[0]["Training_Title"] .'('. $enrolledCourse[0]["Training_Code"].')</p>
   
-    <div class="countdown flex flex-row gap-56 ml-[12em] shadow-md border-1 p-4 
+    <div  id="countdown" class="countdown flex flex-row gap-56 ml-[12em] shadow-md border-1 p-4 
   bg-gradient-to-r from-violet-500 to-fuchsia-500 rounded-lg w-fit  ">
      <div class="days flex-col ml-24 -mr-4">
       <p id="days" class="font-[Montserrat] text-8xl text-white font-extrabold">'. sprintf("%02d", $diff->d).'</p>

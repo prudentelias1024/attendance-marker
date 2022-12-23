@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="../circular_progress.css" />
   <title> Attendance Marker </title>
   <script src="action_updater.js"></script>
+  
 </head>
   <body>
     
@@ -75,7 +76,7 @@
               <span class="prog-right">
                   <span class="prog-bar"></span>
               </span>
-              <div class="prog-value font-bold">90%</div>
+              <div class="prog-value font-bold">'.($course["Class_Taken"]/$course["No_Of_Classes"] * 100).'%</div>
           </div>
       </div>
 </div>
