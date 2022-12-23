@@ -33,7 +33,6 @@
   $db = new Db;
    $courses = $db->getCourses();
    $enrolledCourses = $db->getEnrolledCourse($_SESSION['oracle_no']);
-  
    foreach ($courses as $key => $course) {
    
      echo '<div class="course border w-fit flex flex-col   px-20 h-fit   py-16 rounded-md ">
@@ -95,9 +94,9 @@
 
 </div>
 </div>';
-foreach ($enrolledCourses as  $enrolledCourse) {
- 
-  if (in_array($course["Training_Code"],$enrolledCourse,true)) {
+if (!empty($enrolledCourses)) {
+   echo array_search($course["Training_Code"],$enrolledCourses);
+  if (array_search($course["Training_Code"],$enrolledCourses) == "Training_Code") {
     echo  '<form action="./enrol.php" method="post" class="w-full">
     
     <button type="submit" id="enrol"style="width: inherit;" onclick="removeCourse(event)" class=" bg-[#512bd4] mt-14 text-white py-3 rounded-md -mb-12">Enrol</button>
@@ -105,7 +104,17 @@ foreach ($enrolledCourses as  $enrolledCourse) {
     <input type="hidden" name="t_coordinator" value="'.$course['Course_Coordinator'].'"/>
     <input type="hidden" name="t_title" value="'.$course['Training_title'].'"/>
     </form>';
-  }
+  // }
+}
+} else {
+  echo '<form action="./enrol.php" method="post" class="w-full">
+    
+  <button type="submit" id="enrol"style="width: inherit;" onclick="removeCourse(event)" class=" bg-[#512bd4] mt-14 text-white py-3 rounded-md -mb-12">Enrol</button>
+  <input type="hidden" name="t_code" value="'.$course['Training_Code'].'"/>
+  <input type="hidden" name="t_coordinator" value="'.$course['Course_Coordinator'].'"/>
+  <input type="hidden" name="t_title" value="'.$course['Training_title'].'"/>
+  </form>'; 
+
 }
 echo '
 </div>

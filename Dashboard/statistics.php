@@ -39,7 +39,19 @@ session_start();
       <i class="bi bi-card-list text-5xl"></i>
       <div class="flex flex-col ">
           <p class="font-[Mulish] text-lg mt-2 -mb-1 indent-3">Enrolled Courses</p>
-          <p class="font-[Montserrat] text-white font-bold text-2xl indent-32 mt-2 -mb-1">7</p>
+          <p class="font-[Montserrat] text-white font-bold text-2xl indent-32 mt-2 -mb-1"><?php
+
+          include '../includes/db.php';
+          $db = new Db;
+          $enrolledCourse  = $db->getEnrolledCourse($_SESSION['oracle_no']);
+          if (!empty($enrolledCourse)) {
+            
+            $no_of_courses_enrolled = count($enrolledCourse);
+             echo $no_of_courses_enrolled;
+          } else {
+            echo 0;
+          }?></p>
+          
       </div>
       </div>
 
@@ -47,7 +59,7 @@ session_start();
         <i class="bi bi-patch-check-fill text-5xl"></i>
      <div class="flex flex-col">
         <p class="font-[Mulish] text-lg mt-2 -mb-1 ml-3 indent-2">Completed Courses</p>
-        <p class="font-[Montserrat] text-white font-semibold text-2xl indent-40 mt-2 -mb-1">7</p>
+        <p class="font-[Montserrat] text-white font-semibold text-2xl indent-40 mt-2 -mb-1">0</p>
     </div>
     </div>
 
@@ -72,45 +84,47 @@ session_start();
 
 </div>
 <?php
-include '../includes/db.php';
-$db = new Db;
 $enrolledCourse  = $db->getEnrolledCourse($_SESSION['oracle_no']);
-$time = $db->getEnrolledCoursesStartTime($enrolledCourse[0]["Training_Code"]);
-// $timeToStart = $time[0]['Training_Time'];
-$t_day = new DateTime($time[0]['Training_Day'].' '.$time[0]['Training_Time']);
-$today = new DateTime(date("l jS  F Y h:i:s A"));
+if (!empty($enrolledCourse)) {
  
- $diff=  date_diff($today,$t_day);
- 
-
-
-// print_r($today);  
-$currentTime = date("l jS  F Y h:i:s A");
+  $time = $db->getEnrolledCoursesStartTime($enrolledCourse[0]["Training_Code"]);
+  // $timeToStart = $time[0]['Training_Time'];
+  $t_day = new DateTime($time[0]['Training_Day'].' '.$time[0]['Training_Time']);
+  $today = new DateTime(date("l jS  F Y h:i:s A"));
+   
+   $diff=  date_diff($today,$t_day);
+   
+  
+  
+  // print_r($today);  
+  $currentTime = date("l jS  F Y h:i:s A");
+  echo '<p id="date" style="opacity: 0;" ><?php echo date_format($t_day,"Y/m/d H:i:s");?></p>
+  <p  class="font-[Mulish] font-semibold text-3xl mt-8 text-[#747474] text-center">Countdown To'.$enrolledCourse[0]["Training_Title"] .'('. $enrolledCourse[0]["Training_Code"].')</p>
+  
+    <div class="countdown flex flex-row gap-56 ml-[12em] shadow-md border-1 p-4 
+  bg-gradient-to-r from-violet-500 to-fuchsia-500 rounded-lg w-fit  ">
+     <div class="days flex-col ml-24 -mr-4">
+      <p id="days" class="font-[Montserrat] text-8xl text-white font-extrabold">'. sprintf("%02d", $diff->d).'</p>
+      <p  class="font-[Montserrat] uppercase font-bold text-2xl text-white">Days</p>
+     </div>
+     <div class="hours flex-col">
+      <p id="hours" class="font-[Montserrat] text-8xl text-white font-extrabold">'. sprintf("%02d", $diff->h).'</p>
+      <p class="font-[Montserrat] uppercase font-bold text-2xl text-white">Hours</p>
+     </div>
+     <div class="minutes flex-col">
+      <p  id="minutes" class="font-[Montserrat] text-8xl text-white font-extrabold">'. sprintf("%02d", $diff->i).'</p>
+      <p class="font-[Montserrat] uppercase font-bold text-2xl text-white">Minutes</p>
+     </div>
+     <div class="seconds flex-col mr-10">
+      <p id="seconds" class="font-[Montserrat] text-8xl text-white font-extrabold">'. sprintf("%02d", $diff->s).'</p>
+      <p class="font-[Montserrat] uppercase font-bold text-2xl text-white">Seconds</p>
+     </div>
+  
+    </div>
+  ';
+}
 // print_r($currentTime);
 ?>
-<p id="date" style="opacity: 0;" ><?php echo date_format($t_day,"Y/m/d H:i:s");?></p>
-<p  class="font-[Mulish] font-semibold text-3xl mt-8 text-[#747474] text-center">Countdown To <?php  echo $enrolledCourse[0]["Training_Title"]; ?> (<?php echo $enrolledCourse[0]["Training_Code"]; ?>)</p>
-
-  <div class="countdown flex flex-row gap-56 ml-[12em] shadow-md border-1 p-4 
-bg-gradient-to-r from-violet-500 to-fuchsia-500 rounded-lg w-fit  ">
-   <div class="days flex-col ml-24 -mr-4">
-    <p id="days" class="font-[Montserrat] text-8xl text-white font-extrabold"><?php echo sprintf("%02d", $diff->d); ?></p>
-    <p  class="font-[Montserrat] uppercase font-bold text-2xl text-white">Days</p>
-   </div>
-   <div class="hours flex-col">
-    <p id="hours" class="font-[Montserrat] text-8xl text-white font-extrabold"><?php echo sprintf("%02d", $diff->h); ?></p>
-    <p class="font-[Montserrat] uppercase font-bold text-2xl text-white">Hours</p>
-   </div>
-   <div class="minutes flex-col">
-    <p  id="minutes" class="font-[Montserrat] text-8xl text-white font-extrabold"><?php echo sprintf("%02d", $diff->i); ?></p>
-    <p class="font-[Montserrat] uppercase font-bold text-2xl text-white">Minutes</p>
-   </div>
-   <div class="seconds flex-col mr-10">
-    <p id="seconds" class="font-[Montserrat] text-8xl text-white font-extrabold"><?php echo sprintf("%02d", $diff->s); ?></p>
-    <p class="font-[Montserrat] uppercase font-bold text-2xl text-white">Seconds</p>
-   </div>
-
-  </div>
 <div class="flex flex-col mt-10">
    <p class="font-[Mulish] font-semibold text-3xl mt-8 ml-36">Courses</p>
    <div class="courses grid grid-cols-3 ml-36 gap-12">
