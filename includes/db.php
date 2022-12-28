@@ -12,12 +12,24 @@ class DB
     }
     return $conn;
     }
+
    
     public function createStudent($oracle_no, $full_name,$image,$email,$password,$designation,$location,$grade){
         $this->connectToDB();
 
     
         $sql = "INSERT INTO employee(Oracle_no, Name, Image, Email, Password, Designation,Location, grade) VALUES('$oracle_no','$full_name','$image', '$email', '$password', '$designation', '$location','$grade')";
+        if ($this->connectToDB()->query($sql)) {
+            echo 'New Employee  Created';
+        } else {
+            echo "Error:".$sql.' <BR>  '.$this->connectToDB()->error;
+        }
+    }
+    public function createTraining($training_coordinator,$training_title, $training_code,$training_loc,$training_dur,$training_time,$training_day,$training_startdate,$training_enddate, $no_of_classes, $training_schedule){
+        $this->connectToDB();
+
+    
+        $sql = "INSERT INTO employee(Training_Coordinator, Training_title, Training_Code, Training_Location, Training_Duration, Training_Time,Training_Startdate,Training_Enddate, No_Of_Classes,Schedule) VALUES('$training_coordinator','$training_title','$training_code','$training_loc', '$training_dur', '$training_time', '$training_day', '$training_startdate','$training_enddate', '$no_of_classes',$training_schedule)";
         if ($this->connectToDB()->query($sql)) {
             echo 'New Employee  Created';
         } else {

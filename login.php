@@ -19,7 +19,7 @@
  
 <?php
      include './includes/errorsDisplay.php';
-     require './trainingTableCreator.php';
+     
     
     ?>
    
