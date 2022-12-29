@@ -43,15 +43,20 @@ session_start();
     <label for="trainingDuration">Training Duration</label>
    <select id="duration" name="training_dur" class="form-control form-control-lg">
      <option value="1 day" > 1 Day</option>
-     <option value="7 days" > 7 Days</option>
+     <option value="2 days" > 2 Days</option>
+     <option value="3 days" > 3 Days</option>
+     <option value="4 days" > 4 Days</option>
+     <option value="5 days" > 5 Days</option>
+     <option value="6 days" > 6 Days</option>
+     <option value="1 week" > 1 Week</option>
      <option value="2 weeks" > 2 Weeks</option>
      <option value="3 weeks" > 3 Weeks</option>
-     <option value="1 Month" > 1 Month</option>
-     <option value="2 Months" > 2 Months</option>
-     <option value="3 Months" > 3 Months</option>
-     <option value="6 Months" > 6 Months</option>
-     <option value="9 Months" > 9 Months</option>
-     <option value="12 Months" > 12 Months</option>
+     <option value="1 month" > 1 Month</option>
+     <option value="2 months" > 2 Months</option>
+     <option value="3 months" > 3 Months</option>
+     <option value="6 months" > 6 Months</option>
+     <option value="9 months" > 9 Months</option>
+     <option value="12 months" > 12 Months</option>
      </select>
   </div>
 
@@ -90,8 +95,8 @@ session_start();
   </div>
   <div class="form-group">
     <label for="trainingDay">Training Schedule</label>
-    <select name="training_schedule" class="form-control form-control-lg">
-      <option value="Once" > Once</option>
+    <select id="training_sch" name="training_schedule" class="form-control form-control-lg">
+      <option  value="Once" > Once</option>
       <option value="Daily" > Daily</option>
       <option value="Weekly" >Weekly</option>
       <option value="Monthly" > Monthly</option>
@@ -124,17 +129,53 @@ session_start();
  function calEnddate(){
  
 let duration = document.getElementById('duration').value.trim();
-let startdate = document.getElementById("startdate").toString();    
+let schedule = document.getElementById("training_sch").value
+
+let startdate = document.getElementById("startdate").value.toString()  
 if (duration.endsWith('days') || duration.endsWith('day')) {
-   let enddate = moment().add(parseInt(duration.split(" ")[0]), 'days')
+   let enddate = moment(startdate).add(parseInt(duration.split(" ")[0]), 'days')
   enddate = enddate.format('YYYY-MM-DD')
   document.getElementById('enddate').value = enddate;
-  startdate = startdate.format('YYYY-MM-DD')
+    startdate = moment(startdate).format('YYYY-MM-DD')
    startdate = moment(new Date(startdate).toISOString())
    enddate = moment(new Date(enddate).toISOString())   
-   
-   alert(startdate.diff(enddate, 'days'))
-   document.getElementById('no_of_class').value = enddate.diff(startdate, 'days')
+   if (schedule == 'Daily') {
+       document.getElementById('no_of_classes').value = enddate.diff(startdate, 'days')
+   } 
+  
+} else if (duration.endsWith('weeks') || duration.endsWith('week')) {
+    alert(schedule)
+
+   let enddate = moment(startdate).add(parseInt(duration.split(" ")[0]), 'weeks')
+  enddate = enddate.format('YYYY-MM-DD')
+  document.getElementById('enddate').value = enddate;
+    startdate = moment(startdate).format('YYYY-MM-DD')
+   startdate = moment(new Date(startdate).toISOString())
+   enddate = moment(new Date(enddate).toISOString())   
+    if (schedule == 'Daily') {
+       document.getElementById('no_of_classes').value = enddate.diff(startdate, 'days')
+   } 
+    if (schedule == 'Weekly') {
+       document.getElementById('no_of_classes').value = enddate.diff(startdate, 'weeks')
+   } 
+  
+}else if (duration.endsWith('months') || duration.endsWith('month')) {
+   let enddate = moment(startdate).add(parseInt(duration.split(" ")[0]), 'months')
+  enddate = enddate.format('YYYY-MM-DD')
+  document.getElementById('enddate').value = enddate;
+    startdate = moment(startdate).format('YYYY-MM-DD')
+   startdate = moment(new Date(startdate).toISOString())
+   enddate = moment(new Date(enddate).toISOString())   
+   if (schedule == 'Daily') {
+       document.getElementById('no_of_classes').value = enddate.diff(startdate, 'days')
+   } 
+   if (schedule == 'Weekly') {
+       document.getElementById('no_of_classes').value = enddate.diff(startdate, 'weeks')
+   } 
+   if (schedule == 'Monthly') {
+       document.getElementById('no_of_classes').value = enddate.diff(startdate, 'months')
+   } 
+  
 }
 }
 

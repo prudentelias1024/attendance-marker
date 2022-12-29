@@ -1,19 +1,55 @@
 <?php
 class DB
 {
+    public function getNoOfClassesTaken($course){
+        $this->connectToDB();
+           $sql = "SELECT Classes_Taken FROM trainings WHERE    Training_Code='$course'";
+        $result = $this->connectToDB()->query($sql);
+        if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()){
+            
+                
+                return $row['Classes_Taken'];
+            }
+       
+            
+        } else {
+            return  null;
+        }
+    }
 
+    public function markAttendantPresentOrAbsent($training_coordinator,$name,$oracle_no,$status,$table){
+        $this->connectToDB();
+
+        $sql = "INSERT INTO `$table`(Course_Coordinator, Name, Oracle_no, Attendance_Status) VALUES('$training_coordinator', '$name', '$oracle_no', '$status')";
+        if ($this->connectToDB()->query($sql)) {
+            echo ''.$name.' is Marked '.$status.'';
+        } else {
+            echo "Error:".$sql.' <BR>  '.$this->connectToDB()->error;
+        }
+        }
+    
 
     public function connectToDB(){
     $conn = new mysqli('localhost','root','','attendance_marker');
     if ($conn->connect_error) {
         die("Connection Failed:". $conn->connect_error);
     } else {
-     
+    //   echo "Connection Successful";
     }
     return $conn;
     }
 
-   
+    public function createAttendanceTable($name){
+        $this->connectToDB();
+
+        $sql = "CREATE TABLE `$name` (`Course_Coordinator` VARCHAR(60) NOT NULL , `Name` VARCHAR(75) NOT NULL , `Oracle_No` VARCHAR(6) NOT NULL , `Attendance_Status` VARCHAR(8) NOT NULL , PRIMARY KEY (`Oracle_No`))";
+        if ($this->connectToDB()->query($sql)) {
+            echo ''.$name.'  Created';
+        } else {
+            echo "Error:".$sql.' <BR>  '.$this->connectToDB()->error;
+        }
+    }
     public function createStudent($oracle_no, $full_name,$image,$email,$password,$designation,$location,$grade){
         $this->connectToDB();
 
@@ -29,9 +65,9 @@ class DB
         $this->connectToDB();
 
     
-        $sql = "INSERT INTO employee(Training_Coordinator, Training_title, Training_Code, Training_Location, Training_Duration, Training_Time,Training_Startdate,Training_Enddate, No_Of_Classes,Schedule) VALUES('$training_coordinator','$training_title','$training_code','$training_loc', '$training_dur', '$training_time', '$training_day', '$training_startdate','$training_enddate', '$no_of_classes',$training_schedule)";
+        $sql = "INSERT INTO trainings(Training_Coordinator, Training_title, Training_Code, Training_Location, Training_Duration, Training_Time, Training_Day,Training_Startdate,Training_Enddate, No_Of_Classes,Schedule) VALUES('$training_coordinator','$training_title','$training_code','$training_loc', '$training_dur', '$training_time', '$training_day', '$training_startdate','$training_enddate', $no_of_classes,'$training_schedule')";
         if ($this->connectToDB()->query($sql)) {
-            echo 'New Employee  Created';
+            echo 'New Course Created';
         } else {
             echo "Error:".$sql.' <BR>  '.$this->connectToDB()->error;
         }
@@ -179,6 +215,8 @@ class DB
         $sql = "SELECT * FROM trainings WHERE Course_Coordinator ='$name'";
         $result =  $this->connectToDB()->query($sql);
         $courses = array();
+        if (!empty($courses)) {
+        
         if ($result->num_rows > 0) {
             while($rows = $result->fetch_assoc()){
                $courses[] = $rows;
@@ -189,6 +227,9 @@ class DB
             return 'You are coordinating 0 Training';
         }
 
+    } else {
+        return 'You are coordinating 0 Training';
     }
+}
 }
 ?>

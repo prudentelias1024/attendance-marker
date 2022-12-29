@@ -34,6 +34,7 @@
   $db = new Db;
    $courses = $db->getCourses();
    $enrolledCourses = $db->getEnrolledCourse($_SESSION['oracle_no']);
+   if($courses !== 'No Training'){
    foreach ($courses as $key => $course) {
    
      echo '<div class="course border w-fit flex flex-col   px-20 h-fit   py-16 rounded-md ">
@@ -122,7 +123,9 @@ echo '
 ';
 
 }
-  
+} else {
+ echo '<p class="text-3xl">No Courses To Display </p>';
+}
 ?>
 
 

@@ -63,6 +63,9 @@
   include '../includes/db.php';
   $db = new Db;
    $courses = $db->getCoordinatingCourses($_SESSION['name']);
+    if ($courses !== 'You are coordinating 0 Training') {
+     
+    
   foreach ($courses as  $course) {
     echo '<form action="./students_assessments.php" method="GET">
     <button type="submit">
@@ -129,7 +132,10 @@
 </button>
 ,</form>
 ';
-  } 
+  }
+} else {
+  echo '<p class="text-3xl>You are coordinating 0 Training </p>';
+}
 ?>
 
 

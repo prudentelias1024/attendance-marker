@@ -11,7 +11,7 @@
   
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css" integrity="sha384-b6lVK+yci+bfDmaY1u0zE8YYJt0TZxLEAFyYSLHId4xoVvsrQu3INevFKo+Xir8e" crossorigin="anonymous">
     <link rel="stylesheet" href="../circular_progress.css" >
-    <script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.min.js"></script>
+    CREATE TABLE 'T0003_01' (`Course_Coordinator` VARCHAR(60) NOT NULL , `Name` VARCHAR(75) NOT NULL , `Oracle_No` VARCHAR(6) NOT NULL , `Attendance_Status` VARCHAR(8) NOT NULL , PRIMARY KEY (`Oracle_No`))
 <script defer src="../chart.js"></script>
 <script defer src="./timeUpdater.js"></script>
 
@@ -85,6 +85,7 @@ session_start();
 </div>
 <?php
 $enrolledCourse  = $db->getEnrolledCourse($_SESSION['oracle_no']);
+
 if (!empty($enrolledCourse)) {
  
   $time = $db->getEnrolledCoursesStartTime($enrolledCourse[0]["Training_Code"]);

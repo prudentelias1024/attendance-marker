@@ -37,13 +37,13 @@
         
         <input readonly disabled class="font-[Mulish] text-2xl" value="'.$registrant['Name'].'" name="name" />
         <input readonly disabled class="font-[Mulish] text-2xl" value="'.$registrant['Oracle_no'].'" name="oracle_no" />
+        <input readonly disabled class="font-[Mulish] text-2xl" value="'.$course.'" name="course" />
          <button  name="absent"> <i class="fa-solid fa-circle-xmark text-3xl bg-white-500 text-red-500 p-2"></i></button>
         <button  name="present" > <i class="fa-solid fa-circle-check text-3xl bg-white-500 text-green-500 p-2"></i></button>
       </form>
      
     </div>
 
-      
       
       ';
     }
