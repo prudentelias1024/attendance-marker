@@ -3,13 +3,13 @@ class DB
 {
     public function getNoOfClassesTaken($course){
         $this->connectToDB();
-           $sql = "SELECT Classes_Taken FROM trainings WHERE    Training_Code='$course'";
+           $sql = "SELECT Class_Taken FROM trainings WHERE    Training_Code='$course'";
         $result = $this->connectToDB()->query($sql);
         if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()){
             
                 
-                return $row['Classes_Taken'];
+                return $row['Class_Taken'];
             }
        
             
@@ -61,11 +61,11 @@ class DB
             echo "Error:".$sql.' <BR>  '.$this->connectToDB()->error;
         }
     }
-    public function createTraining($training_coordinator,$training_title, $training_code,$training_loc,$training_dur,$training_time,$training_day,$training_startdate,$training_enddate, $no_of_classes, $training_schedule){
+    public function createTraining($training_coordinator,$training_title, $training_code,$training_loc,$training_dur,$training_time,$training_day,$training_startdate,$training_enddate, $no_of_classes,$training_endtime,$training_schedule){
         $this->connectToDB();
 
     
-        $sql = "INSERT INTO trainings(Training_Coordinator, Training_title, Training_Code, Training_Location, Training_Duration, Training_Time, Training_Day,Training_Startdate,Training_Enddate, No_Of_Classes,Schedule) VALUES('$training_coordinator','$training_title','$training_code','$training_loc', '$training_dur', '$training_time', '$training_day', '$training_startdate','$training_enddate', $no_of_classes,'$training_schedule')";
+        $sql = "INSERT INTO trainings(Training_Coordinator, Training_title, Training_Code, Training_Location, Training_Duration,Training_Endtime. Training_Time, Training_Day,Training_Startdate,Training_Enddate, No_Of_Classes,Schedule) VALUES('$training_coordinator','$training_title','$training_code','$training_loc', '$training_dur', '$training_endtime','$training_time', '$training_day', '$training_startdate','$training_enddate', $no_of_classes,'$training_schedule')";
         if ($this->connectToDB()->query($sql)) {
             echo 'New Course Created';
         } else {
@@ -212,10 +212,9 @@ class DB
     }
     public function getCoordinatingCourses($name){
         $this->connectToDB();
-        $sql = "SELECT * FROM trainings WHERE Course_Coordinator ='$name'";
+        $sql = "SELECT * FROM trainings WHERE Training_Coordinator ='$name'";
         $result =  $this->connectToDB()->query($sql);
         $courses = array();
-        if (!empty($courses)) {
         
         if ($result->num_rows > 0) {
             while($rows = $result->fetch_assoc()){
@@ -225,11 +224,9 @@ class DB
                 return $courses;
         } else {
             return 'You are coordinating 0 Training';
-        }
+        
 
-    } else {
-        return 'You are coordinating 0 Training';
-    }
+    } 
 }
 }
 ?>

@@ -11,7 +11,8 @@
   
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css" integrity="sha384-b6lVK+yci+bfDmaY1u0zE8YYJt0TZxLEAFyYSLHId4xoVvsrQu3INevFKo+Xir8e" crossorigin="anonymous">
     <link rel="stylesheet" href="../circular_progress.css" >
-    CREATE TABLE 'T0003_01' (`Course_Coordinator` VARCHAR(60) NOT NULL , `Name` VARCHAR(75) NOT NULL , `Oracle_No` VARCHAR(6) NOT NULL , `Attendance_Status` VARCHAR(8) NOT NULL , PRIMARY KEY (`Oracle_No`))
+    
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.min.js"></script>
 <script defer src="../chart.js"></script>
 <script defer src="./timeUpdater.js"></script>
 
@@ -91,6 +92,7 @@ if (!empty($enrolledCourse)) {
   $time = $db->getEnrolledCoursesStartTime($enrolledCourse[0]["Training_Code"]);
   // $timeToStart = $time[0]['Training_Time'];
   $t_day = new DateTime($time[0]['Training_Day'].' '.$time[0]['Training_Time']);
+  $t_endtime = new DateTime($time[0]['Training_Day'].' '.$time[0]['Training_Endtime']);
   $today = new DateTime(date("l jS  F Y h:i:s A"));
    
    $diff=  date_diff($today,$t_day);
@@ -99,7 +101,9 @@ if (!empty($enrolledCourse)) {
   
   // print_r($today);  
   $currentTime = date("l jS  F Y h:i:s A");
-  echo '<p id="date" style="opacity: 0;" >'. date_format($t_day,"Y/m/d H:i:s").'</p>
+  echo '<p id="date" style="opacity: 0;" >'. date_format($t_day,"Y/m/d H:i:s").'</p>;
+  <p id="enddate" style="opacity: 0;" >'. date_format($t_day,"Y/m/d H:i:s").'</p>
+  <p  style="opacity: 0;" id="countdown__end__title" class="font-[Mulish] font-semibold text-3xl mt-8 text-[#747474] text-center"></p>
   <p  id="countdown_title" class="font-[Mulish] font-semibold text-3xl mt-8 text-[#747474] text-center">Countdown To '.$enrolledCourse[0]["Training_Title"] .'('. $enrolledCourse[0]["Training_Code"].')</p>
   
     <div  id="countdown" class="countdown flex flex-row gap-56 ml-[12em] shadow-md border-1 p-4 

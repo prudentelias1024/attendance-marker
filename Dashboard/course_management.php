@@ -108,7 +108,8 @@
                 <span class="prog-right">
                     <span class="prog-bar"></span>
                 </span>
-                <div class="prog-value font-bold">90%</div>
+                <div style="
+                margin-left: 0.7em;" class="prog-value font-bold">90%</div>
             </div>
         </div>
 </div>

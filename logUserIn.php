@@ -1,4 +1,5 @@
 <?php
+print_r($_POST);
 if (isset($_POST['login'])) {
     $error_messages = array();
     $email = $_POST['email'];

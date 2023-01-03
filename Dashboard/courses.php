@@ -54,8 +54,12 @@
 
    <p class="font-[Mulish] font-semibold text-[#b8b8b8]">Participants</p> <br> 
 
-   <div class="participants flex flex-row -mt-8">';
+   <div style="
+   margin-left: 16em;
+   margin-top: -8em;" class="participants flex flex-row -mt-8">';
    $images =  $db->getTrainingParticipants($course['Training_Code']);
+   
+   if ($images !== 'No Participants') {
    foreach ($images as $image) {
 
    echo  '<img src=".'.$image["Image"].'" alt="" class="rounded-full  w-10  h-10 object-cover ">
@@ -65,6 +69,9 @@
   ';    
 
    }
+   
+  }
+  
   echo '<div class="container flex-col relative left-16 top-4 ">
 
 <p class="font-[Mulish] font-semibold mb-2 text-[#b8b8b8] ">Progress</p>
@@ -77,7 +84,8 @@
               <span class="prog-right">
                   <span class="prog-bar"></span>
               </span>
-              <div class="prog-value font-bold">'.($course["Class_Taken"]/$course["No_Of_Classes"] * 100).'%</div>
+              <div style="
+              margin-left: 0.7em;" class="prog-value font-bold">'.($course["Class_Taken"]/$course["No_Of_Classes"] * 100).'%</div>
           </div>
       </div>
 </div>
@@ -86,9 +94,9 @@
    
     
 <div class="flex flex-row mt-12 justify-between -ml-20 -mb-12">
-<div class="flex flex-row gap-2 ml-6">
+<div style="margin-left: 5em;" class="flex flex-row gap-2 ml-6">
   <i class="fa-solid fa-user text-[#b8b8b8] mt-1"></i>
-<p class="font-[Mulish] text-[#adadad] font-bold">'.$course['Course_Coordinator'].'</p>
+<p class="font-[Mulish] text-[#adadad] font-bold">'.$course['Training_Coordinator'].'</p>
 </div>
 <div class="flex flex-row relative left-16 gap-1">
 <i class="fa-solid fa-list text-[#adadad] mt-1 "></i>
@@ -113,7 +121,7 @@ if (!empty($enrolledCourses)) {
     
   <button type="submit" id="enrol"style="width: inherit;" onclick="removeCourse(event)" class=" bg-[#512bd4] mt-14 text-white py-3 rounded-md -mb-12">Enrol</button>
   <input type="hidden" name="t_code" value="'.$course['Training_Code'].'"/>
-  <input type="hidden" name="t_coordinator" value="'.$course['Course_Coordinator'].'"/>
+  <input type="hidden" name="t_coordinator" value="'.$course['Training_Coordinator'].'"/>
   <input type="hidden" name="t_title" value="'.$course['Training_title'].'"/>
   </form>'; 
 

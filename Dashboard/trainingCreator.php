@@ -12,6 +12,7 @@ $training_time = $_POST["training_time"];
 $training_schedule = $_POST["training_schedule"];
 $training_startdate = $_POST["training_startdate"];
 $training_enddate = $_POST["training_enddate"];
+$training_endtime = $_POST["training_endtime"];
 $no_of_class = $_POST['no_of_class'];
 if (!empty($db->getCourses())) {
     $getLastCourseNumber = $db->getCourses()[count($db->getCourses()) -1]['Training_Code'];
@@ -27,11 +28,11 @@ if (!empty($db->getCourses())) {
 } else {
     $training_code = 'T0001';
 }
-$db->createTraining($course_coordinator,$training_title,$training_code,$training_loc,$training_dur,$training_time,$training_day,$training_startdate,$training_enddate,$no_of_class,$training_schedule);
+$db->createTraining($course_coordinator,$training_title,$training_code,$training_loc,$training_dur,$training_time,$training_day,$training_startdate,$training_enddate,$no_of_class,$training_endtime,$training_schedule);
 
-// for ($i=1; $i <= $no_of_class ; $i++) { 
-//     $attendance_code = $training_code. '_0'. $i;
-//   $db->createAttendanceTable($attendance_code);
-// }
+for ($i=1; $i <= $no_of_class ; $i++) { 
+    $attendance_code = $training_code. '_0'. $i;
+  $db->createAttendanceTable($attendance_code);
+}
 
 }
