@@ -1,6 +1,25 @@
 <?php
 class DB
 {
+
+  public function getAllStudentStatus($table){
+    $this->connectToDB();
+    $enrolled_courses = array();
+    $sql = "SELECT * FROM '$table'";
+    $result = $this->connectToDB()->query($sql);
+    if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()){
+        
+            $attendant[] = $row;
+        }
+        return $attendant;
+   
+        
+    } else {
+        return  null;
+    }
+  }
+
     public function getNoOfClassesTaken($course){
         $this->connectToDB();
            $sql = "SELECT Class_Taken FROM trainings WHERE    Training_Code='$course'";

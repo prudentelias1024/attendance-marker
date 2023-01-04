@@ -2,24 +2,27 @@
 include '../includes/db.php';
 $db = new Db;
 session_start();
-if (isset($_POST['present']) ) {
+if (isset($_POST['fullname']) && $_POST['status'] == 'Present') {
     $name = $_POST['fullname'];
     $oracle_no = $_POST['oracle_no'];
     $course = $_POST['course'];
     $classesTaken = $db->getNoOfClassesTaken($course);
-    print_r($classesTaken);
+    $status= $_POST['status'];
     $table = $course. '_0'.strval(intval($classesTaken) + 1);
-    $db->markAttendantPresentOrAbsent($_SESSION['name'],$name,$oracle_no, 'present',$table);
+
+    echo $db->markAttendantPresentOrAbsent($_SESSION['name'],$name,$oracle_no, $status,$table);
+     // header('Location: ./students_assessments.php?course='.$course.'');  
+    
 }
 
-if (isset($_POST['absent'])) {
-    $name = $_POST['name'];
+if (isset($_POST['fullname']) && $_POST['status'] == 'Absent') {
+    $name = $_POST['fullname'];
 $oracle_no = $_POST['oracle_no'];
 $course = $_POST['course'];
 $classesTaken = $db->getNoOfClassesTaken($course);
-print_r($classesTaken);
-
- $db->markAttendantPresentOrAbsent($_SESSION['name'],$name,$oracle_no,'absent',$table);
-   
+    $status= $_POST['status'];
+    $table = $course. '_0'.strval(intval($classesTaken) + 1);
+    echo $db->markAttendantPresentOrAbsent($_SESSION['name'],$name,$oracle_no, $status,$table);
+ 
 }
 ?>

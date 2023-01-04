@@ -67,7 +67,7 @@
      
     
   foreach ($courses as  $course) {
-    echo '<form action="./students_assessments.php" method="GET">
+    echo '<form id="marker" action="./students_assessments.php" method="GET">
     <button type="submit">
     <div class="course border w-fit flex flex-col   px-20 h-fit   py-16 rounded-md ">
      
