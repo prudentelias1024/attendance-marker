@@ -42,7 +42,7 @@ class DB
 
         $sql = "INSERT INTO `$table`(Course_Coordinator, Name, Oracle_no, Attendance_Status) VALUES('$training_coordinator', '$name', '$oracle_no', '$status')";
         if ($this->connectToDB()->query($sql)) {
-            echo ''.$name.' is Marked '.$status.'';
+            echo ''.$name.' is Marked '.$status.'.';
         } else {
             echo "Error:".$sql.' <BR>  '.$this->connectToDB()->error;
         }

@@ -2,27 +2,21 @@
 include '../includes/db.php';
 $db = new Db;
 session_start();
-if (isset($_POST['fullname']) && $_POST['status'] == 'Present') {
-    $name = $_POST['fullname'];
-    $oracle_no = $_POST['oracle_no'];
-    $course = $_POST['course'];
-    $classesTaken = $db->getNoOfClassesTaken($course);
-    $status= $_POST['status'];
-    $table = $course. '_0'.strval(intval($classesTaken) + 1);
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+$jobs = json_decode(stripslashes($_POST["jobs"]),true);
+   foreach ($jobs as  $job) {       
+   
+       $name = $job['fullname'];
+       $oracle_no = $job['oracle_no'];
+       $course = $job['course'];
+       $classesTaken = $db->getNoOfClassesTaken($course);
+       $status= $job['status'];
+       $table = $course. '_0'.strval(intval($classesTaken) + 1);
+       
+    print_r(explode('.', $db->markAttendantPresentOrAbsent($_SESSION['name'],$name,$oracle_no, $status,$table))[0]);
 
-    echo $db->markAttendantPresentOrAbsent($_SESSION['name'],$name,$oracle_no, $status,$table);
-     // header('Location: ./students_assessments.php?course='.$course.'');  
-    
+}       
+        header('Location: ./course_management.php');  
 }
 
-if (isset($_POST['fullname']) && $_POST['status'] == 'Absent') {
-    $name = $_POST['fullname'];
-$oracle_no = $_POST['oracle_no'];
-$course = $_POST['course'];
-$classesTaken = $db->getNoOfClassesTaken($course);
-    $status= $_POST['status'];
-    $table = $course. '_0'.strval(intval($classesTaken) + 1);
-    echo $db->markAttendantPresentOrAbsent($_SESSION['name'],$name,$oracle_no, $status,$table);
- 
-}
 ?>

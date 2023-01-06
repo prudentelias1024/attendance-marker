@@ -24,119 +24,6 @@
 
     }
     </style>
-  <script>
-    let req = null
-    $(document).ready(()=>{
-
-      $("#present").click(function(event) {
-       let data ={present: {
-        fullname: $("#fullname").val(),
-        oracle_no: $("#oracle_no").val(),
-        course: $("#course").val(),
-        status: "Present"
-      
-      } }
-      console.log(data.present)
-      event.preventDefault()
-     req =  $.ajax({
-        type: "POST",
-        url: 'marker.php',
-       
-        data: data.present,
-        complete: (data) => {
-          console.log(data)
-          $('#present').hide();
-            $('#absent').hide();
-            $('#showPresent').show();
-            $('#showPresent').css({'display':'inline-block', 'margin-left':'-3em',"font-weight": 700});
-             $.toast({
-          heading: 'Success',
-          text: data.responseText,
-          showHideTransition: 'slide',
-          hideAfter: 30000,
-          allowToastClose: false,
-          position: 'bottom-center',
-         bgColor: '#00800099',
-       textColor: 'white',
-      
-      })
-                  data.abort()
-
-     },
-      
-        
-     
-
-        }) 
-      
-          
-      });
-
-      $("#absent").click(function(event) {
-       let data ={absent: {
-        fullname: $("#fullname").val(),
-        oracle_no: $("#oracle_no").val(),
-        course: $("#course").val(),
-        status: "Absent",
-      
-      } }
-      
-      event.preventDefault()
-      $.ajax({
-        type: "POST",
-        url: 'marker.php',
-        data: data.absent,
-        
-        complete: (data) => {
-          console.log(data)
-          $('#present').hide();
-            $('#absent').hide();
-            $('#showAbsent').show();
-            $('#showAbsent').css({'display':'inline-block', 'margin-left':'-3em',"font-weight": 700});
-      
-             $.toast({
-          heading: 'Success',
-          text: data,
-          showHideTransition: 'slide',
-          hideAfter: 30000,
-          allowToastClose: false,
-          position: 'bottom-center',
-         bgColor: '#00800099',
-       textColor: 'white',
-      
-      })
-      $("#present").unbind("click") 
-        },
-     
-
-        }) 
-      
-          
-      });
-      
-    
-          })
-   
-   
-      // $("#absent").click(()=> {
-        //   let data ={absent: {
-    //     fullname: $("#fullname").val(),
-    //     oracle_no: $("#oracle_no").val(),
-    //     course: $("#course").val()
-    //   } }
-      
-    //   $.ajax({
-    //     type: POST,
-    //     url: 'marker.php',
-    //     data: data,
-    //     success: () => {
-    //       $('#present').hide();
-    //       $('#absent').hide();
-    //       $('#showAbsent').show();
-    //     }
-    //   })
-    // })
-  </script>
   <title> Marker </title>
   
 </head>
@@ -166,15 +53,15 @@
       <div class="registrant flex-col gap-32">
       <form action="marker.php" method="POST">
       
-      <input readonly id="fullname" class="font-[Mulish] text-2xl" value="'.$registrant['Name'].'" name="fullname" />
-      <input readonly id="oracle_no"  class="font-[Mulish] text-2xl" value="'.$registrant['Oracle_no'].'" name="oracle_no" />
-      <input readonly id="course" class="font-[Mulish] text-2xl" value="'.$course.'" name="course" />
-      <button  id="absent"  type="submit" name="absent"> <i class="fa-solid fa-circle-xmark text-3xl bg-white-500 text-red-500 p-2"></i></button>
-      <button id="present" type="submit" name="present" > <i class="fa-solid fa-circle-check text-3xl bg-white-500 text-green-500 p-2"></i></button>
+      <input readonly class="fullname" class="font-[Mulish] text-2xl" value="'.$registrant['Name'].'" name="fullname" />
+      <input readonly class="oracle_no"  class="font-[Mulish] text-2xl" value="'.$registrant['Oracle_no'].'" name="oracle_no" />
+      <input readonly class="course" class="font-[Mulish] text-2xl" value="'.$course.'" name="course" />
+      <button  class="absent"  type="button" name="absent"> <i class="fa-solid fa-circle-xmark text-3xl bg-white-500 text-red-500 p-2"></i></button>
+      <button class="present" type="button" name="present" > <i class="fa-solid fa-circle-check text-3xl bg-white-500 text-green-500 p-2"></i></button>
 
-      <p style="display:none; " id="showAbsent" class="text-xl text-red-600">Absent</p>
-      <p style="display:none;" id="showPresent" class="text-xl text-green-600">Present</p>
-      </form>
+      <p style="display:none; " class="showAbsent" class="text-xl text-red-600">Absent</p>
+      <p style="display:none;" class="showPresent" class="text-xl text-green-600">Present</p>
+    
       
       </div>
       
@@ -184,10 +71,113 @@
   } else {
     echo 'No Registered Student Yet';
   }
-    
-?>
+  
+  ?>
+
+ 
+    <button type="submit" id="save"  name="save" class=" bg-blue-400 mt-14 text-white py-3 rounded-md -mb-12 w-1/6 ">Save </button>
+  </form>
 
   </div>
-<body>
+  <script>
+    let req = null
+    let jobs = []
+    $(document).ready(()=>{
+
+      $(".present").click(function(event) {
+        event.preventDefault()
+       let parent = event.target.parentElement.parentElement
+         let fullname = parent.getElementsByTagName("input")[0].value
+        let oracle = parent.getElementsByTagName("input")[1].value
+        let course = parent.getElementsByTagName("input")[2].value
+       
+       
+       let job ={
+        fullname: fullname,
+        oracle_no: oracle,
+        course:   course,
+        status: "Present"
+      } 
+      jobs.push(job)
+      parent.getElementsByTagName("button")[0].style.display = "none"
+      parent.getElementsByTagName("button")[1].style.display = "none"
+     parent.getElementsByTagName("p")[1].style.display = "inline-block"
+     parent.getElementsByTagName("p")[1].style.marginLeft = "-3em"
+      parent.getElementsByTagName("p")[1].style.fontWeight = 700
+     parent.getElementsByTagName("p")[1].classList.add("text-xl","text-green-600")
+     
+    });
+    
+    $(".absent").click(function(event) {
+      event.preventDefault()  
+      let parent = event.target.parentElement.parentElement
+      let fullname = parent.getElementsByTagName("input")[0].value
+      let oracle = parent.getElementsByTagName("input")[1].value
+      let course = parent.getElementsByTagName("input")[2].value
+      
+      parent.getElementsByTagName("button")[0].style.display = "none"
+      parent.getElementsByTagName("button")[1].style.display = "none"
+       parent.getElementsByTagName("p")[0].style.display = "inline-block"
+      parent.getElementsByTagName("p")[0].style.marginLeft = "-3em"
+      parent.getElementsByTagName("p")[0].style.fontWeight = 700
+        parent.getElementsByTagName("p")[0].classList.add("text-xl","text-red-600")
+       
+        let job ={
+        fullname: fullname,
+        oracle_no: oracle,
+        course:   course,
+        status: "Present"
+       } 
+      jobs.push(job)
+
+    })
+
+    $("#save").click(function(event){
+      // event.preventDefault()
+        $.ajax({
+        type: "POST",
+        url: 'marker.php',
+        data: {jobs: JSON.stringify(jobs)},
+        complete: (data) => {
+          if (data.response!== undefined) {
+            
+            $.toast({
+            heading: 'Success',
+            text: 'Attendance Successfully Marked',
+            showHideTransition: 'slide',
+            hideAfter: 500,
+            allowToastClose: false,
+            position: 'bottom-center',
+           bgColor: '#00800099',
+         textColor: 'white',
+          
+      
+      })
+    } else {
+
+      $.toast({
+          heading: 'No Job  ',
+          text: 'No Student Marked',
+          showHideTransition: 'slide',
+          hideAfter: 1500,
+          allowToastClose: false,
+          position: 'bottom-center',
+         bgColor: '	#ffc107',
+       textColor: 'white',
+    })
+    }
+     
+        },
+    }) 
+     
+  });
+
+      })
+
+ 
+  </script>
+
+
+
 </body>
 </html>
