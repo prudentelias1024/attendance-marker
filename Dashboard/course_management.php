@@ -32,8 +32,14 @@
   type="text/javascript"
   src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.1/mdb.min.js"
 ></script>
-<script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+
 <script defer src="./modal.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js" integrity="sha512-zlWWyZq71UMApAjih4WkaRpikgY9Bz1oXIW5G0fED4vk14JjGlQ1UmkGM392jEULP8jbNMiwLWdM8Z87Hu88Fw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
   <title> Attendance Marker </title>
 </head>  <body>
    
@@ -67,8 +73,23 @@
      
     
   foreach ($courses as  $course) {
-    echo '<form id="marker" action="./students_assessments.php" method="GET">
-    <button type="submit">
+    
+    echo  '<p class="absolute" id="startdate" style="opacity: 0;" >'.    
+    
+        date_format(new DateTime($course["Training_Startdate"].' '.$course["Training_Time"]),"Y/m/d H:i:s")
+  .'</p>';
+  
+    echo  '<p class="absolute" id="enddate" style="opacity: 0;" >'.
+    
+    date_format(new DateTime($course["Training_Enddate"]),"Y/m/d H:i:s").'</p>';
+    echo  '<p class="absolute" id="classTaken" style="opacity: 0;" >'.
+    $course["Class_Taken"].'</p>';
+    echo  '<p class="absolute" id="noc" style="opacity: 0;" >'.
+    
+    $course["No_Of_Classes"].'</p>';
+
+    echo '<form id="marker"   action="./students_assessments.php" method="GET">
+    <button id="marker_link" type="submit">
     <div class="course border w-fit flex flex-col   px-20 h-fit   py-16 rounded-md ">
      
     <div class="flex flex-row mt-6 -ml-12">
@@ -109,7 +130,7 @@
                     <span class="prog-bar"></span>
                 </span>
                 <div style="
-                margin-left: 0.7em;" class="prog-value font-bold">90%</div>
+                margin-left: 0.7em;" id="percentage" class="prog-value font-bold"></div>
             </div>
         </div>
 </div>
@@ -144,6 +165,29 @@
 </div>
 
     </div>
+    <script>
+  let classTaken =  document.getElementById("classTaken").innerText
+  let no_of_classes = document.getElementById("noc").innerText
+  let percentage = (classTaken/ no_of_classes) * 100
+  console.log(classTaken)
+   document.getElementById("percentage").innerText = 
+   `${percentage}%`
 
+    let startdate = document.getElementById("startdate").innerText  
+    let enddate = document.getElementById("enddate").innerText 
+   
+    let formLink = document.getElementById("marker_link")
+    let form = document.getElementById("marker")
+    let now = moment();
+    startdate = new Date(startdate).toISOString()
+    enddate = new Date(enddate).toISOString()
+    if (now.isBefore(startdate)) {
+      formLink.setAttribute("disabled","true")
+    }
+    if(now.isAfter(enddate.add(6,"days"))){
+      formLink.setAttribute("disabled","true")
+    }
+  
+ </script>
 </body>
 </html>

@@ -19,6 +19,12 @@ class DB
         return  null;
     }
   }
+  public function incrementClassTaken($course,$no_of_class){
+    $this->connectToDB();
+       $sql = " UPDATE TRAINING SET Class_Taken='$no_of_class' WHERE Training_Code='$course''";
+    $this->connectToDB()->query($sql);
+  
+}
 
     public function getNoOfClassesTaken($course){
         $this->connectToDB();
@@ -42,7 +48,7 @@ class DB
 
         $sql = "INSERT INTO `$table`(Course_Coordinator, Name, Oracle_no, Attendance_Status) VALUES('$training_coordinator', '$name', '$oracle_no', '$status')";
         if ($this->connectToDB()->query($sql)) {
-            echo ''.$name.' is Marked '.$status.'.';
+            return ''.$name.' is Marked '.$status.'.';
         } else {
             echo "Error:".$sql.' <BR>  '.$this->connectToDB()->error;
         }

@@ -11,8 +11,22 @@
   <link rel="stylesheet" href="../circular_progress.css" />
   <title> Attendance Marker </title>
   <script src="action_updater.js"></script>
-  
+  <style>
+    .jq-toast-wrap{
+    position: fixed;
+    left: 50%;
+    bottom: 90%;
+    
+    }
+    .jq-toast-single{
+      border-radius: 1em;
+    padding: 3em;
+    width: fit-content;
+
+    }
+    </style>  
 </head>
+
   <body>
     
     <div class="courses flex flex-row ">

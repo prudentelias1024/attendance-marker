@@ -13,8 +13,8 @@ $jobs = json_decode(stripslashes($_POST["jobs"]),true);
        $status= $job['status'];
        $table = $course. '_0'.strval(intval($classesTaken) + 1);
        
-    print_r(explode('.', $db->markAttendantPresentOrAbsent($_SESSION['name'],$name,$oracle_no, $status,$table))[0]);
-
+    print_r(explode('.', $db->markAttendantPresentOrAbsent($_SESSION['name'],$name,$oracle_no, $status,$table))[0]);;
+     $db->incrementClassTaken($course,intval($classesTaken) + 1);
 }       
         header('Location: ./course_management.php');  
 }
