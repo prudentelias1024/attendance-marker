@@ -133,12 +133,13 @@
     })
 
     $("#save").click(function(event){
-      // event.preventDefault()
+       event.preventDefault()
         $.ajax({
         type: "POST",
         url: 'marker.php',
         data: {jobs: JSON.stringify(jobs)},
         complete: (data) => {
+          console.log(data.responseText)
           if (data.response!== undefined) {
             
             $.toast({
@@ -169,6 +170,7 @@
      
         },
     }) 
+    
      
   });
 

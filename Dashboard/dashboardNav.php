@@ -38,6 +38,16 @@
             </a>';
           }
         ?>
+        <?php
+          if ($_SESSION['admin'] !== false) {
+
+                echo '        <a href="admin.php" class="font-[Mulish] font-extrabold text-xl text-white no-underline text-center place-self-center ml-12">
+                <li class="-ml-5 block hover:bg-[#623cec] py-4 px-28">
+                <i class="fa-solid fa-people-group"></i> Manage Coordinators    
+            </li>
+            </a>';
+          }
+        ?>
         <a href="../logout.php" class="font-[Mulish] font-extrabold text-xl text-white no-underline text-center place-self-center ml-12">
             <li class="mb-0 -ml-5 block hover:bg-[#623cec] py-4 px-28">
           <i class="fa-solid fa-right-from-bracket"></i>Logout 

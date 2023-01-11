@@ -14,8 +14,7 @@
     <div class="dashboard flex flex-col ">
 
   <?php
-  
-  session_start();
+     session_start();
     include '../includes/links.php';
     if (empty($_SESSION['name'])) {
      header('Location: ../login.php');

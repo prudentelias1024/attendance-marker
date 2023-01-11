@@ -105,6 +105,7 @@ if (!empty($enrolledCourse)) {
   $currentTime = date("l jS  F Y h:i:s A");
   echo '<p id="date" style="opacity: 0;" >'. date_format($t_day,"Y/m/d H:i:s").'</p>;
   <p id="enddate" style="opacity: 0;" >'. date_format($t_day,"Y/m/d H:i:s").'</p>
+  <p id="endtime" style="opacity: 0;" >'. date_format($t_endtime,"Y/m/d H:i:s").'</p>
   <p  style="opacity: 0;" id="countdown__end__title" class="font-[Mulish] font-semibold text-3xl mt-8 text-[#747474] text-center"></p>
   <p  id="countdown_title" class="font-[Mulish] font-semibold text-3xl mt-8 text-[#747474] text-center">Countdown To '.$enrolledCourse[0]["Training_Title"] .'('. $enrolledCourse[0]["Training_Code"].')</p>
   

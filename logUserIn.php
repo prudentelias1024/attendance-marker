@@ -15,7 +15,9 @@ if (isset($_POST['login'])) {
 } 
 if ($result !=="User Not Found"  && password_verify($password,$result)) {
     $user = $db->getUser($email);
+    $admin = $db->getAdminStatus($user[0]);
     session_start();
+    $_SESSION['admin'] = $admin;
     $_SESSION["oracle_no"] = $user[0];
     $_SESSION["name"] = $user[1];
     $_SESSION["image"] = $user[2];

@@ -2,10 +2,13 @@ setInterval(() => {
     let now = moment();
     let date = document.getElementById("date").innerText
     let enddate = document.getElementById("enddate").innerText
+    let endtime = document.getElementById("endtime").innerText
      date = new Date(date).toISOString()
     date = moment(date)
      enddate = new Date(enddate).toISOString()
     enddate = moment(enddate)
+     endtime = new Date(endtime).toISOString()
+    endtime = moment(endtime)
     
     let days = date.diff(now, 'days');
     let hours = date.diff(now, 'hours') % 24;
@@ -23,14 +26,14 @@ setInterval(() => {
     if (seconds < 10) {
        seconds = `0${seconds}`
     }
-    if (now.isAfter(date) && now.isBefore(enddate)) {
-      document.getElementById("countdown_title").innerText = "Training Ongoing";
-      document.getElementById("countdown_title").style.display = "none";
+    if (now.isAfter(date) && now.isBefore(endtime)) {
+      document.getElementById("countdown_title").innerText = "Training Ongoing.....";
+      document.getElementById("countdown").style.display = "none";
     }
     
     
     if (now.isAfter(date) && now.isAfter(enddate)) {
-      document.getElementById("countdown-_end__title").innerText = "Training Has Ended";
+      document.getElementById("countdown__end__title").innerText = "Training Has Ended";
     }
 
     

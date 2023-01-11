@@ -175,7 +175,6 @@
 
     let startdate = document.getElementById("startdate").innerText  
     let enddate = document.getElementById("enddate").innerText 
-   
     let formLink = document.getElementById("marker_link")
     let form = document.getElementById("marker")
     let now = moment();
@@ -184,7 +183,9 @@
     if (now.isBefore(startdate)) {
       formLink.setAttribute("disabled","true")
     }
-    if(now.isAfter(enddate.add(6,"days"))){
+   
+   
+    if(now.isAfter(moment(enddate).add(6,"days"))){
       formLink.setAttribute("disabled","true")
     }
   

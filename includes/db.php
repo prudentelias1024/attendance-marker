@@ -2,15 +2,15 @@
 class DB
 {
 
-  public function getAllStudentStatus($table){
+  public function getAllPresentStudent($table){
     $this->connectToDB();
     $enrolled_courses = array();
-    $sql = "SELECT * FROM '$table'";
+   
+    $sql = "SELECT * FROM $table WHERE Attendance_Status='Present'";
     $result = $this->connectToDB()->query($sql);
-    if ($result->num_rows > 0) {
+     if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()){
-        
-            $attendant[] = $row;
+             $attendant[] = $row;
         }
         return $attendant;
    
@@ -21,14 +21,30 @@ class DB
   }
   public function incrementClassTaken($course,$no_of_class){
     $this->connectToDB();
-       $sql = " UPDATE TRAINING SET Class_Taken='$no_of_class' WHERE Training_Code='$course''";
+       $sql = " UPDATE TRAININGS SET Class_Taken='$no_of_class' WHERE Training_Code='$course'";
+    $this->connectToDB()->query($sql);
+  
+}
+  public function addCoordinator($oracle_no){
+    $this->connectToDB();
+       $sql = " UPDATE EMPLOYEE SET Role='Coordinator' WHERE Oracle_no='$oracle_no'";
+    if($this->connectToDB()->query($sql) == TRUE){
+     return 'Coordinator Added';
+    } else {
+       echo "Error ".$this->connectToDB()->error;
+    }
+  
+}
+  public function removeCoordinator($oracle_no){
+    $this->connectToDB();
+       $sql = " UPDATE EMPLOYEE SET Role='Member' WHERE Oracle_no='$oracle_no'";
     $this->connectToDB()->query($sql);
   
 }
 
     public function getNoOfClassesTaken($course){
         $this->connectToDB();
-           $sql = "SELECT Class_Taken FROM trainings WHERE    Training_Code='$course'";
+           $sql = "SELECT Class_Taken FROM trainings WHERE  Training_Code='$course'";
         $result = $this->connectToDB()->query($sql);
         if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()){
@@ -40,6 +56,16 @@ class DB
             
         } else {
             return  null;
+        }
+    }
+    public function getAdminStatus($oracle){
+        $this->connectToDB();
+           $sql = "SELECT * FROM ADMIN WHERE  Oracle_no='$oracle'";
+        $result = $this->connectToDB()->query($sql);
+        if ($result->num_rows > 0) {
+            return true;
+            }else {
+            return  false;
         }
     }
 
@@ -88,7 +114,6 @@ class DB
     }
     public function createTraining($training_coordinator,$training_title, $training_code,$training_loc,$training_dur,$training_time,$training_day,$training_startdate,$training_enddate, $no_of_classes,$training_endtime,$training_schedule){
         $this->connectToDB();
-
     
         $sql = "INSERT INTO trainings(Training_Coordinator, Training_title, Training_Code, Training_Location, Training_Duration,Training_Endtime. Training_Time, Training_Day,Training_Startdate,Training_Enddate, No_Of_Classes,Schedule) VALUES('$training_coordinator','$training_title','$training_code','$training_loc', '$training_dur', '$training_endtime','$training_time', '$training_day', '$training_startdate','$training_enddate', $no_of_classes,'$training_schedule')";
         if ($this->connectToDB()->query($sql)) {
@@ -159,6 +184,21 @@ class DB
         }
 
     }
+    public function getAllEmployee(){
+        $this->connectToDB();
+        $sql = "SELECT * FROM employee  ";
+        $result =  $this->connectToDB()->query($sql);
+        if ($result->num_rows > 0) {
+            while($rows = $result->fetch_assoc()){
+              $employees[] = $rows;
+            }
+
+            return $employees;
+        } else {
+            return 'User Not Found';
+        }
+
+    }
     
     public function getUser($email){
         $this->connectToDB();
@@ -211,6 +251,23 @@ class DB
             }
               
                 return $courses;
+        } else {
+            return 'No Training';
+        }
+
+    }
+    
+    public function getACourse($course_code){
+        $this->connectToDB();
+        $sql = "SELECT * FROM trainings WHERE Training_Code='$course_code'";
+        $result =  $this->connectToDB()->query($sql);
+        $courses = array();
+        if ($result->num_rows > 0) {
+            while($rows = $result->fetch_assoc()){
+                $courses[] = $rows;
+            }
+              
+                return $courses[0];
         } else {
             return 'No Training';
         }
