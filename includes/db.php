@@ -19,6 +19,23 @@ class DB
         return  null;
     }
   }
+  public function getAllAbsentStudent($table){
+    $this->connectToDB();
+    $enrolled_courses = array();
+   
+    $sql = "SELECT * FROM $table WHERE Attendance_Status='Absent'";
+    $result = $this->connectToDB()->query($sql);
+     if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()){
+             $attendant[] = $row;
+        }
+        return $attendant;
+   
+        
+    } else {
+        return  null;
+    }
+  }
   public function incrementClassTaken($course,$no_of_class){
     $this->connectToDB();
        $sql = " UPDATE TRAININGS SET Class_Taken='$no_of_class' WHERE Training_Code='$course'";
