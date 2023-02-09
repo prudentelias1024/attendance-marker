@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `admin` (
-  `Oracle_no` varchar(5) NOT NULL,
+  `Oracle_no` varchar(5) NOT NULL PRIMARY KEY,
   `Name` varchar(50) NOT NULL,
   `Email` varchar(65) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -38,7 +38,6 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`Oracle_no`, `Name`, `Email`) VALUES
-('Q1011', 'James Cardif', 'qwertu@gmail.com'),
 ('Q1011', 'James Cardif', 'qwertu@gmail.com');
 
 -- --------------------------------------------------------

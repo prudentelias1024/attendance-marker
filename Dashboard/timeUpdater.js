@@ -3,6 +3,7 @@ setInterval(() => {
     let date = document.getElementById("date").innerText
     let enddate = document.getElementById("enddate").innerText
     let endtime = document.getElementById("endtime").innerText
+    let enddatetime = document.getElementById("enddatetime").innerText
      date = new Date(date).toISOString()
     date = moment(date)
      enddate = new Date(enddate).toISOString()
@@ -32,8 +33,14 @@ setInterval(() => {
     }
     
     
-    if (now.isAfter(date) && now.isAfter(enddate)) {
+    if (now.isAfter(date) && now.isAfter(endtime)) {
+     
       document.getElementById("countdown__end__title").innerText = "Training Has Ended";
+   }
+   if (now.isAfter(enddatetime)) {
+      document.getElementById("countdown").style.display = "none";
+      document.getElementById("countdown_title").innerText = "No Ongoing Training";
+      document.getElementById("countdown_title").classList.add("-mt-28")
     }
 
     

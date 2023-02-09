@@ -41,15 +41,15 @@ session_start();
     <div class="flex flex-row gap-8 h-fit  text-white bg-purple-600 rounded-lg border px-8 py-4 ">
       <i class="bi bi-card-list text-5xl"></i>
       <div class="flex flex-col ">
-          <p class="font-[Mulish] text-lg mt-2 -mb-1 indent-3">Enrolled Courses</p>
+          <p class="font-[Mulish] text-lg mt-2 -mb-1 indent-3">Enrolled Training</p>
           <p class="font-[Montserrat] text-white font-bold text-2xl indent-32 mt-2 -mb-1"><?php
 
           include '../includes/db.php';
           $db = new Db;
-          $enrolledCourse  = $db->getEnrolledCourse($_SESSION['oracle_no']);
+          $enrolledCourses  = $db->getEnrolledCourse($_SESSION['oracle_no']);
           if (!empty($enrolledCourse)) {
             
-            $no_of_courses_enrolled = count($enrolledCourse);
+            $no_of_courses_enrolled = count($enrolledCourses);
              echo $no_of_courses_enrolled;
           } else {
             echo 0;
@@ -61,8 +61,11 @@ session_start();
     <div class="flex flex-row h-fit text-white bg-teal-500 rounded-lg border px-4 py-4">
         <i class="bi bi-patch-check-fill text-5xl"></i>
      <div class="flex flex-col">
-        <p class="font-[Mulish] text-lg mt-2 -mb-1 ml-3 indent-2">Completed Courses</p>
-        <p class="font-[Montserrat] text-white font-semibold text-2xl indent-40 mt-2 -mb-1">0</p>
+        <p class="font-[Mulish] text-lg mt-2 -mb-1 ml-3 indent-2">Completed Training</p>
+        <p class="font-[Montserrat] text-white font-semibold text-2xl indent-40 mt-2 -mb-1">
+  1
+
+        </p>
     </div>
     </div>
 
@@ -71,7 +74,7 @@ session_start();
     <i class="fa-solid fa-bars-progress  text-5xl"></i>
     
     <div class="flex flex-col">
-        <p class="font-[Mulish] text-lg mt-2 -mb-1 ml-3 indent-2"> Courses In Progress</p>
+        <p class="font-[Mulish] text-lg mt-2 -mb-1 ml-3 indent-2"> Training In Progress</p>
         <p class="font-[Montserrat] text-white font-semibold text-2xl indent-40 mt-2 -mb-1">0</p>
     </div>
     </div>
@@ -80,7 +83,7 @@ session_start();
     <i class="bi bi-x-circle-fill  text-5xl"></i>
     
     <div class="flex flex-col">
-        <p class="font-[Mulish] text-lg mt-2 -mb-1 ml-3 indent-8">Course Failed</p>
+        <p class="font-[Mulish] text-lg mt-2 -mb-1 ml-3 indent-8">Training Failed</p>
         <p class="font-[Montserrat]  text-white font-semibold text-2xl indent-32 mt-2 -mb-1">0</p>
     </div>
     </div>
@@ -95,6 +98,7 @@ if (!empty($enrolledCourse)) {
   // $timeToStart = $time[0]['Training_Time'];
   $t_day = new DateTime($time[0]['Training_Day'].' '.$time[0]['Training_Time']);
   $t_endtime = new DateTime($time[0]['Training_Day'].' '.$time[0]['Training_Endtime']);
+  $t_enddatetime = new DateTime($time[0]['Training_Enddate'].' '.$time[0]['Training_Endtime']);
   $today = new DateTime(date("l jS  F Y h:i:s A"));
    
    $diff=  date_diff($today,$t_day);
@@ -106,6 +110,8 @@ if (!empty($enrolledCourse)) {
   echo '<p id="date" style="opacity: 0;" >'. date_format($t_day,"Y/m/d H:i:s").'</p>;
   <p id="enddate" style="opacity: 0;" >'. date_format($t_day,"Y/m/d H:i:s").'</p>
   <p id="endtime" style="opacity: 0;" >'. date_format($t_endtime,"Y/m/d H:i:s").'</p>
+  <p id="enddatetime" style="opacity: 0;" >'. date_format($t_enddatetime,"Y/m/d H:i:s").'</p>
+  
   <p  style="opacity: 0;" id="countdown__end__title" class="font-[Mulish] font-semibold text-3xl mt-8 text-[#747474] text-center"></p>
   <p  id="countdown_title" class="font-[Mulish] font-semibold text-3xl mt-8 text-[#747474] text-center">Countdown To '.$enrolledCourse[0]["Training_Title"] .'('. $enrolledCourse[0]["Training_Code"].')</p>
   
@@ -129,6 +135,7 @@ if (!empty($enrolledCourse)) {
      </div>
   
     </div>
+ 
   ';
 }
 // print_r($currentTime);

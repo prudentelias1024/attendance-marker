@@ -1,6 +1,28 @@
 <?php
 class DB
 {
+    public function getUserTrainingCompletionStatus($course, $name)
+    {
+        $no_of_classes_attended = 0;
+     $no_of_training_sessions =   $this->getNoOfClassesTaken($course);
+     for ($i=1; $i < $no_of_training_sessions; $i++) { 
+        $table = $course. '_0'. $i;
+       $sql = "SELECT Attendance_Status FROM $table WHERE Name='Present' ";
+       $result = $this->connectToDB()->query($sql);
+       if ($result->num_rows > 0) {
+           while($row = $result->fetch_assoc()){
+               $attendant[] = $row;
+               print_r($row);
+          }
+          return $attendant;
+     
+          
+     
+       
+     }
+    }
+}
+    
 
   public function getAllPresentStudent($table){
     $this->connectToDB();
@@ -65,8 +87,7 @@ class DB
         $result = $this->connectToDB()->query($sql);
         if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()){
-            
-                
+
                 return $row['Class_Taken'];
             }
        
