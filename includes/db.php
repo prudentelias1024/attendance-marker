@@ -12,7 +12,7 @@ class DB
        if ($result->num_rows > 0) {
            while($row = $result->fetch_assoc()){
                $attendant[] = $row;
-               print_r($row);
+               print($attendant);
           }
           return $attendant;
      
