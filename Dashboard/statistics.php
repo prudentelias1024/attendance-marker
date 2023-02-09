@@ -47,10 +47,11 @@ session_start();
           include '../includes/db.php';
           $db = new Db;
           $enrolledCourses  = $db->getEnrolledCourse($_SESSION['oracle_no']);
-          if (!empty($enrolledCourse)) {
+          if (!empty($enrolledCourses)) {
             
             $no_of_courses_enrolled = count($enrolledCourses);
-             echo $no_of_courses_enrolled;
+           
+            echo $no_of_courses_enrolled;
           } else {
             echo 0;
           }?></p>
@@ -63,7 +64,14 @@ session_start();
      <div class="flex flex-col">
         <p class="font-[Mulish] text-lg mt-2 -mb-1 ml-3 indent-2">Completed Training</p>
         <p class="font-[Montserrat] text-white font-semibold text-2xl indent-40 mt-2 -mb-1">
-  1
+   <?php
+      $no_of_completed_training = 0;
+       foreach ($enrolledCourses as $enrolledCourse) {
+        $status=  $db->getUserTrainingCompletionStatus($enrolledCourse['Training_Code'],$_SESSION['name']);
+        $no_of_completed_training += $status;
+      }
+       echo $no_of_completed_training;
+   ?>
 
         </p>
     </div>
@@ -75,7 +83,17 @@ session_start();
     
     <div class="flex flex-col">
         <p class="font-[Mulish] text-lg mt-2 -mb-1 ml-3 indent-2"> Training In Progress</p>
-        <p class="font-[Montserrat] text-white font-semibold text-2xl indent-40 mt-2 -mb-1">0</p>
+        <p class="font-[Montserrat] text-white font-semibold text-2xl indent-40 mt-2 -mb-1">
+        <?php
+      $no_of_ongoing_training = 0;
+       foreach ($enrolledCourses as $enrolledCourse) {
+        $status =  $db->getUserOngoingTraining($enrolledCourse['Training_Code'],$_SESSION['name']);
+           $no_of_ongoing_training += $status;
+      }
+       echo $no_of_ongoing_training;
+   ?>
+
+        </p>
     </div>
     </div>
 

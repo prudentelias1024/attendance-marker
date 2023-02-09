@@ -1,26 +1,61 @@
 <?php
 class DB
 {
+    public function getUserOngoingTraining($course, $name)
+    {
+       
+     $no_of_training_taken =   $this->getNoOfClassesTaken($course);
+     $no_of_training_sessions = $this->getNoOfClasses($course);
+       if($no_of_training_sessions > $no_of_training_taken){
+            return 1;
+     } 
+     if ($no_of_training_sessions == $no_of_training_taken) {
+      return 0;
+     }
+   
+}
+
+
+    public function getNoOfClasses($course)
+    {
+        $sql = "SELECT No_Of_Classes FROM trainings WHERE  Training_Code='$course'";
+        $result = $this->connectToDB()->query($sql);
+        if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()){
+                return $row['No_Of_Classes'];
+            }
+           } else {
+               return  null;
+           }
+    }
     public function getUserTrainingCompletionStatus($course, $name)
     {
         $no_of_classes_attended = 0;
      $no_of_training_sessions =   $this->getNoOfClassesTaken($course);
-     for ($i=1; $i < $no_of_training_sessions; $i++) { 
+    //  print_r($no_of_training_sessions);
+     for ($i=1; $i < $no_of_training_sessions + 1; $i++) { 
         $table = $course. '_0'. $i;
-       $sql = "SELECT Attendance_Status FROM $table WHERE Name='Present' ";
+        
+       $sql = "SELECT Attendance_Status FROM $table WHERE Name='$name'";
        $result = $this->connectToDB()->query($sql);
-       if ($result->num_rows > 0) {
-           while($row = $result->fetch_assoc()){
-               $attendant[] = $row;
-               print($attendant);
-          }
-          return $attendant;
+       while($row = $result->fetch_assoc()){
+      $status = $row["Attendance_Status"];
      
-          
+       if ($status == 'Present') {
+       $no_of_classes_attended++;
+       
+       }
+   }
+}
+     if ($no_of_classes_attended == $no_of_training_sessions) {
+        return 1;
+     }  else {
+        return 0;
+     }    
      
        
-     }
-    }
+     
+    
 }
     
 
