@@ -1,5 +1,4 @@
 <?php
-print_r($_POST);
 if (isset($_POST['login'])) {
     $error_messages = array();
     $email = $_POST['email'];
@@ -13,7 +12,7 @@ if (isset($_POST['login'])) {
    array_push($error_messages, "User Not Found");
    include './login.php';
 } 
-if ($result !=="User Not Found"  && password_verify($password,$result)) {
+if ($result !=="User Not Found"  && $password == $result ) {
     $user = $db->getUser($email);
     $admin = $db->getAdminStatus($user[0]);
     session_start();
@@ -32,7 +31,7 @@ if ($result !=="User Not Found"  && password_verify($password,$result)) {
     
     
 }
-if ($result !=="User Not Found"  && !password_verify($password,$result)) {
+if ($result !=="User Not Found"  && $password !== $result) {
        array_push($error_messages, "Password is not correct");
          include './login.php';
      

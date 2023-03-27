@@ -29,7 +29,7 @@
 
   <body>
     
-    <div class="courses flex flex-row ">
+    <div class="courses flex flex-row gap-16">
 
   <?php
   
@@ -42,7 +42,7 @@
     
     ?>
     
-  <div class="course_list grid grid-cols-3 gap-10 ml-10 mt-16 mr-8">
+<div style="gap: 2em;" class="course_list grid h-fit grid-cols-2 xl:grid-cols-3  ml-10 mt-16 ">
  <?php
   include '../includes/db.php';
   $db = new Db;
@@ -51,32 +51,31 @@
    if($courses !== 'No Training'){
    foreach ($courses as $key => $course) {
    
-     echo '<div class="course border w-fit flex flex-col   px-20 h-fit   py-16 rounded-md ">
+     echo '<div class="course border  w-full flex flex-col   px-20 h-fit   py-16 rounded-md ">
     
     <div class="flex flex-row mt-6 -ml-12">
 
       
-        <p class="title font-[Mulish] text-4xl font-extrabold ml-2 text-[#939ca5]">'.$course['Training_title'].'</p>
+        <p class="title font-[Mulish] text-3xl  font-extrabold ml-2 text-[#939ca5]">'.$course['Training_title'].'</p>
     </div>
 
   <div class="flex flex-row mt-6 -ml-12 text-2xl">   
   <p class="code font-[Montserrat] font-extrabold ml-2 text-[#939ca5]">'.$course['Training_Code'].'</p>
   </div>
- <div class="flex flex-row gap-48">
+ <div class="flex flex-row gap-0">
 
   <div class="flex flex-col mt-6 -ml-12">
 
    <p class="font-[Mulish] font-semibold text-[#b8b8b8]">Participants</p> <br> 
 
-   <div style="
-   margin-left: 16em;
-   margin-top: -8em;" class="participants flex flex-row -mt-8">';
+   <div  class="participants flex flex-row -mt-8 ">';
    $images =  $db->getTrainingParticipants($course['Training_Code']);
    
    if ($images !== 'No Participants') {
-   foreach ($images as $image) {
+     foreach ($images as $image) {
+    
 
-   echo  '<img src=".'.$image["Image"].'" alt="" class="rounded-full  w-10  h-10 object-cover ">
+   echo  '<img style="width: 2.5em; height: 2.5em;" src=".'.$image["Image"].'" alt="" class="rounded-full -ml-4 mt-4 object-cover ">
    
       </div>
   </div>
@@ -84,9 +83,11 @@
 
    }
    
+  } else {
+    echo 'No participants';
   }
   
-  echo '<div class="container flex-col relative left-16 top-4 ">
+  echo '<div style="position: relative; left: 12.2em; top: 1.7em" class="container flex-col flex  ">
 
 <p class="font-[Mulish] font-semibold mb-2 text-[#b8b8b8] ">Progress</p>
   <div class="row">
@@ -108,7 +109,7 @@
    
     
 <div class="flex flex-row mt-12 justify-between -ml-20 -mb-12">
-<div style="margin-left: 5em;" class="flex flex-row gap-2 ml-6">
+<div style="margin-left: 1em;" class="flex flex-row gap-2 ml-6">
   <i class="fa-solid fa-user text-[#b8b8b8] mt-1"></i>
 <p class="font-[Mulish] text-[#adadad] font-bold">'.$course['Training_Coordinator'].'</p>
 </div>
@@ -133,7 +134,7 @@ if (!empty($enrolledCourses)) {
 } else {
   echo '<form action="./enrol.php" method="post" class="w-full">
     
-  <button type="submit" id="enrol"style="width: inherit;" onclick="removeCourse(event)" class=" bg-[#512bd4] mt-14 text-white py-3 rounded-md -mb-12">Enrol</button>
+  <button type="submit" id="enrol" style="width: 100%;" onclick="removeCourse(event)" class="w-fit bg-[#512bd4] mt-32 text-white py-3 rounded-md ">Enrol</button>
   <input type="hidden" name="t_code" value="'.$course['Training_Code'].'"/>
   <input type="hidden" name="t_coordinator" value="'.$course['Training_Coordinator'].'"/>
   <input type="hidden" name="t_title" value="'.$course['Training_title'].'"/>
@@ -143,6 +144,7 @@ if (!empty($enrolledCourses)) {
 echo '
 </div>
 ';
+
 
 }
 } else {

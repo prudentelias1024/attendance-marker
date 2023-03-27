@@ -43,7 +43,7 @@
   <title> Attendance Marker </title>
 </head>  <body>
    
-    <div class="courses flex flex-row ">
+    <div class="courses flex flex-row gap-32 ">
 
   <?php
   
@@ -55,8 +55,9 @@
    include 'dashboardNav.php';
     
     ?>
-  <div class="course_list grid grid-cols-3 gap-10 ml-10 mt-16 mr-8">
-  <a href="./training_form.php"><button class="course text-[#512bd4]   w-fit flex flex-col  px-44 h-fit   py-52 " type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalForm">
+  <div class="course_list h-fit grid grid-cols-3 md:grid-cols-2  gap-10 ml-2 mt-2 mr-2">
+  <a href="./training_form.php" style="padding-top:12em;">
+    <button class="course text-[#512bd4]  w-fit flex flex-col mt-[12em] mx-auto" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalForm">
 
   <i class="fa-solid fa-plus text-4xl"></i>
   <p class="font-extrabold font-[Mulish] text-2xl -indent-10 mt-3  ">Add Training</p>
@@ -88,26 +89,26 @@
     
     $course["No_Of_Classes"].'</p>';
 
-    echo '<form id="marker"   action="./students_assessments.php" method="GET">
+    echo '<form id="marker" class="h-fit"   action="./students_assessments.php" method="GET">
     <button id="marker_link" type="submit">
     <div class="course border w-fit flex flex-col   px-20 h-fit   py-16 rounded-md ">
      
     <div class="flex flex-row mt-6 -ml-12">
 
        
-        <p class="title font-[Mulish] text-4xl font-extrabold ml-2 text-[#939ca5]">'.$course['Training_title'].'</p>
+        <p class="title font-[Mulish] text-3xl font-extrabold ml-2 text-[#939ca5]">'.$course['Training_title'].'</p>
     </div>
 
-    <div class="flex flex-row mt-6 -ml-12 text-2xl">   
+    <div class="flex flex-row mt-6 -ml-12 text-xl">   
     <input readonly name="course" class=" font-[Montserrat]  font-extrabold ml-2 text-[#939ca5]" value='.$course['Training_Code'].'>
     </div>
-   <div class="flex flex-row gap-48">
+   <div class="flex flex-row gap-24">
 
     <div class="flex flex-col mt-6 -ml-12">
 
      <p class="font-[Mulish] font-semibold text-[#b8b8b8]">Participants</p> <br> 
 
-     <div class="participants flex flex-row -mt-8">
+     <div class="participants flex flex-row ">
       <img src="../mock.jpg" alt="" class="rounded-full  w-10  h-10 object-cover ">
       <img src="../mock.jpg" alt="" class="rounded-full  w-10  h-10 object-cover -ml-6">
       <img src="../mock.jpg" alt="" class="rounded-full  w-10  h-10 object-cover -ml-6 ">

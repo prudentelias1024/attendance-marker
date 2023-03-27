@@ -14,7 +14,7 @@
 <body>
 <form  action="logUserIn.php" method="post" class="w-1/2 justify-center border rounded-lg ml-[30em] mt-32 px-12 py-6 flex flex-col gap-6">
   <div >
-      <img class="ml-80" src="npa1.png"/>
+      <img class="m-auto" src="npa1.png"/>
     </div>
  
 <?php

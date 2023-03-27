@@ -51,7 +51,7 @@ CREATE TABLE `employee` (
   `Name` varchar(75) NOT NULL,
   `Image` varchar(50) NOT NULL,
   `Email` varchar(60) NOT NULL,
-  `Password` varchar(60) NOT NULL,
+  `PN` varchar(5) NOT NULL,
   `Designation` varchar(30) NOT NULL,
   `Location` text NOT NULL,
   `Grade` int(2) NOT NULL,
@@ -63,12 +63,12 @@ CREATE TABLE `employee` (
 -- Dumping data for table `employee`
 --
 
-INSERT INTO `employee` (`Oracle_no`, `Name`, `Image`, `Email`, `Password`, `Designation`, `Location`, `Grade`, `Role`, `Training_Code`) VALUES
-('AW1634', 'Olamide Kosoko', './uploads/Olamide Kosoko.jpg', 'work321@yahoo.com', '$2y$10$U2Se6la.tP6zyd.AZzMuO.qvypX.v6lHdqi4dcA54Z1EfX4q2QWwm', 'Full-Stack Developer', 'United Kingdom', 10, 'Member', ''),
-('G2742', 'Vhikthors Davidsons', './uploads/Vhikthors Davidsons.jfif', 'qwerty12345@gmail.com', '$2y$10$gyq1rfu2aYDtW896PMMfWuPK7nf2LIRx/4Wt8sspkuzKzSx8WFtWm', 'Backend Developer', 'Apapa', 10, 'Member', ''),
-('Q1010', 'Oladips Vhikthors', './uploads/Oladips Vhikthors.jpg', 'qwerty@gmail.com', '$2y$10$3nva9YNNRh6vnpc/EWoBc.ZdxWkJnT0QdlCe/KqVZAGiPrHICiru2', 'Web Developer', 'Marina ', 1, 'Member', ''),
-('Q1011', 'James Cardiff', './uploads/James Cardiff.jfif', 'qwertu@gmail.com', '$2y$10$PEx4o2o9mXtiVkxITeapcOo.KaGW6H70/Aue19iwbGuWII431DsJe', 'Web Developer', 'Tincan', 1, 'Coordinator', ''),
-('Z0121', 'Dikko Oladapo Chinedu', './uploads/Dikko Oladapo Chinedu.jfif', 'practice@gmail.com', '$2y$10$oG/mFIbExpZjn//jbGog/.9EGcz.r6E0gfal4xr6ji1NRVlAjq3ZW', 'Web Developer', 'Marina HQ', 10, 'Member', '');
+INSERT INTO `employee` (`Oracle_no`, `Name`, `Image`, `Email`, `PN`, `Designation`, `Location`, `Grade`, `Role`, `Training_Code`) VALUES
+('AW1634', 'Olamide Kosoko', './uploads/Olamide Kosoko.jpg', 'work321@yahoo.com', 'AW1634', 'Full-Stack Developer', 'United Kingdom', 10, 'Member', ''),
+('G2742', 'Vhikthors Davidsons', './uploads/Vhikthors Davidsons.jfif', 'qwerty12345@gmail.com', 'G2742', 'Backend Developer', 'Apapa', 10, 'Member', ''),
+('Q1010', 'Oladips Vhikthors', './uploads/Oladips Vhikthors.jpg', 'qwerty@gmail.com', 'Q1010', 'Web Developer', 'Marina ', 1, 'Member', ''),
+('Q1011', 'James Cardiff', './uploads/James Cardiff.jfif', 'qwertu@gmail.com', 'Q1011', 'Web Developer', 'Tincan', 1, 'Coordinator', ''),
+('Z0121', 'Dikko Oladapo Chinedu', './uploads/Dikko Oladapo Chinedu.jfif', 'practice@gmail.com', 'Z0121', 'Web Developer', 'Marina HQ', 10, 'Member', '');
 
 -- --------------------------------------------------------
 

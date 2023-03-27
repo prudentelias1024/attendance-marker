@@ -1,6 +1,26 @@
 <?php
 class DB
 {
+    public function getCoursePercentageCompletion($course,$name){
+        $no_of_classes_attended = 0;
+           $no_of_training_sessions = $this->getNoOfClasses($course);
+           for ($i=1; $i < $no_of_training_sessions + 1; $i++) { 
+            $table = $course. '_0'. $i;
+            
+           $sql = "SELECT Attendance_Status FROM $table WHERE Name='$name'";
+           $result = $this->connectToDB()->query($sql);
+           while($row = $result->fetch_assoc()){
+          $status = $row["Attendance_Status"];
+         
+           if ($status == 'Present') {
+           $no_of_classes_attended++;
+           
+           }
+
+       }
+    }
+     return(($no_of_classes_attended/$no_of_training_sessions)*100);
+}
     public function getUserOngoingTraining($course, $name)
     {
        
@@ -8,8 +28,7 @@ class DB
      $no_of_training_sessions = $this->getNoOfClasses($course);
        if($no_of_training_sessions > $no_of_training_taken){
             return 1;
-     } 
-     if ($no_of_training_sessions == $no_of_training_taken) {
+     } else  if ($no_of_training_sessions == $no_of_training_taken) {
       return 0;
      }
    
@@ -25,7 +44,7 @@ class DB
                 return $row['No_Of_Classes'];
             }
            } else {
-               return  null;
+               return  0;
            }
     }
     public function getUserTrainingCompletionStatus($course, $name)
@@ -128,7 +147,7 @@ class DB
        
             
         } else {
-            return  null;
+            return  0;
         }
     }
     public function getAdminStatus($oracle){
@@ -174,11 +193,11 @@ class DB
             echo "Error:".$sql.' <BR>  '.$this->connectToDB()->error;
         }
     }
-    public function createStudent($oracle_no, $full_name,$image,$email,$password,$designation,$location,$grade){
+    public function createStudent($oracle_no, $full_name,$image,$email,$PN,$designation,$location,$grade){
         $this->connectToDB();
 
     
-        $sql = "INSERT INTO employee(Oracle_no, Name, Image, Email, Password, Designation,Location, grade) VALUES('$oracle_no','$full_name','$image', '$email', '$password', '$designation', '$location','$grade')";
+        $sql = "INSERT INTO employee(Oracle_no, Name, Image, Email, PN, Designation,Location, grade) VALUES('$oracle_no','$full_name','$image', '$email', '$PN', '$designation', '$location','$grade')";
         if ($this->connectToDB()->query($sql)) {
             echo 'New Employee  Created';
         } else {
@@ -220,7 +239,7 @@ class DB
        
             
         } else {
-            return  null;
+            return  [];
         }
     }
    
@@ -246,11 +265,11 @@ class DB
 
     public function getUserPassword($email){
         $this->connectToDB();
-        $sql = "SELECT password FROM employee WHERE email ='$email' ";
+        $sql = "SELECT PN FROM employee WHERE email ='$email' ";
         $result =  $this->connectToDB()->query($sql);
         if ($result->num_rows > 0) {
             while($rows = $result->fetch_assoc()){
-                return $rows['password'];
+                return $rows['PN'];
             }
         } else {
             return 'User Not Found';

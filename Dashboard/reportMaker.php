@@ -15,7 +15,7 @@ if (isset($_POST["generate"])) {
 
     $gen_attendees = 0;
     $gen_absentees = 0;
-    $gen_total_attendees = count($attendees);
+    // $gen_total_attendees = count($attendees);
     $turn_up = 0;
     $turn_down = 0;
     $gen_absentees = $no_of_registered - $total_attendees;
