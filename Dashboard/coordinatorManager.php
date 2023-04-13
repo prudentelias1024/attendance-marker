@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
    
    if ($name['action'] == 'remove') {
     $db->removeCoordinator($name['oracle']);
-    print_r('Coordinator Remove');
+    print_r('Coordinator Removed');
    }
    
    

@@ -46,54 +46,57 @@ INSERT INTO `admin` (`Oracle_no`, `Name`, `Email`) VALUES
 -- Table structure for table `employee`
 --
 
+
 CREATE TABLE `employee` (
-  `Oracle_no` varchar(6) NOT NULL,
+  `Oracle_no` varchar(6) NOT NULL PRIMARY KEY,
   `Name` varchar(75) NOT NULL,
+  `Username` varchar(60) NOT NULL,
   `Image` varchar(50) NOT NULL,
   `Email` varchar(60) NOT NULL,
   `PN` varchar(5) NOT NULL,
   `Designation` varchar(30) NOT NULL,
+  `Position` varchar(30) NOT NULL,
   `Location` text NOT NULL,
+  `Department` varchar(50) NOT NULL,
   `Grade` int(2) NOT NULL,
-  `Role` varchar(15) DEFAULT 'Member',
-  `Training_Code` varchar(7) NOT NULL
+  `Role` varchar(15) DEFAULT 'Member'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
 --
 -- Dumping data for table `employee`
 --
 
-INSERT INTO `employee` (`Oracle_no`, `Name`, `Image`, `Email`, `PN`, `Designation`, `Location`, `Grade`, `Role`, `Training_Code`) VALUES
-('AW1634', 'Olamide Kosoko', './uploads/Olamide Kosoko.jpg', 'work321@yahoo.com', 'AW1634', 'Full-Stack Developer', 'United Kingdom', 10, 'Member', ''),
-('G2742', 'Vhikthors Davidsons', './uploads/Vhikthors Davidsons.jfif', 'qwerty12345@gmail.com', 'G2742', 'Backend Developer', 'Apapa', 10, 'Member', ''),
-('Q1010', 'Oladips Vhikthors', './uploads/Oladips Vhikthors.jpg', 'qwerty@gmail.com', 'Q1010', 'Web Developer', 'Marina ', 1, 'Member', ''),
-('Q1011', 'James Cardiff', './uploads/James Cardiff.jfif', 'qwertu@gmail.com', 'Q1011', 'Web Developer', 'Tincan', 1, 'Coordinator', ''),
-('Z0121', 'Dikko Oladapo Chinedu', './uploads/Dikko Oladapo Chinedu.jfif', 'practice@gmail.com', 'Z0121', 'Web Developer', 'Marina HQ', 10, 'Member', '');
+INSERT INTO `employee` (`Oracle_no`, `Name`, `Username`, `Image`, `Email`, `PN`, `Designation`, `Position`, `Location`, `Department`, `Grade`, `Role`) VALUES
+('AW1634', 'Olamide Kosoko', 'o.kosoko', './uploads/Olamide Kosoko.jpg', 'work321@yahoo.com', 'AW163', 'Full-Stack Developer', 'Senior Manager', 'United Kingdom', 'Performance', 10, 'Member'),
+('G2742', 'Vhikthors Davidsons', 'v.davidsons', './uploads/Vhikthors Davidsons.jfif', 'qwerty12345@gmail.com', 'G2742', 'Backend Developer', 'Principal Manager', 'Apapa', 'Audit', 10, 'Member'),
+('Q1010', 'Oladips Vhikthors', 'o.vhikthors', './uploads/Oladips Vhikthors.jpg', 'qwerty@gmail.com', 'Q1010', 'Web Developer', 'General Manager', 'Marina ', 'ICT', 1, 'Coordinator'),
+('Q1011', 'James Cardiff', 'j.cardiff', './uploads/James Cardiff.jfif', 'qwertu@gmail.com', 'Q1011', 'Web Developer', 'Assistant General Manager', 'Tincan', 'Corporate and Strategic Planning', 1, 'Coordinator'),
+('Z0121', 'Dikko Oladapo Chinedu', 'd.oladdapo', './uploads/Dikko Oladapo Chinedu.jfif', 'practice@gmail.com', 'Z0121', 'Web Developer', 'Senior Manager', 'Marina HQ', 'SA&DM', 10, 'Member');
 
--- --------------------------------------------------------
+--
+-- Dumping data for table `employee`
 
 --
 -- Table structure for table `enrolled`
 --
 
-CREATE TABLE `enrolled` (
-  `enrol_id` int(10) NOT NULL,
+CREATE TABLE `joined` (
+  `enrol_id` int(10) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `Oracle_no` varchar(6) NOT NULL,
   `Name` varchar(60) NOT NULL,
-  `Training_Title` varchar(60) NOT NULL,
-  `Training_Code` varchar(6) NOT NULL,
-  `Training_Cordinator` varchar(50) NOT NULL
+  `Meeting_Title` varchar(60) NOT NULL,
+  `Meeting_Code` varchar(6) NOT NULL,
+  `Meeting_Cordinator` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `enrolled`
 --
 
-INSERT INTO `enrolled` (`enrol_id`, `Oracle_no`, `Name`, `Training_Title`, `Training_Code`, `Training_Cordinator`) VALUES
-(1, 'Q1010', 'Oladips Vhikthors', 'System Maintenance', 'T0002', 'James Cardiff'),
-(3, 'G2742', 'Vhikthors Davidsons', 'System Maintenance', 'T0002', 'James Cardiff'),
-(4, 'Z0121', 'Dikko Oladapo Chinedu', 'System Maintenance', 'T0002', 'James Cardiff'),
-(5, 'AW1634', 'Olamide Kosoko', 'System Maintenance', 'T0002', 'James Cardiff');
+INSERT INTO `joined` (`enrol_id`, `Oracle_no`, `Name`, `Meeting_Title`, `Meeting_Code`, `Meeting_Cordinator`) VALUES
+(1, 'Q1010', 'Oladips Vhikthors', 'Launching of Vector Software', 'M0002', 'James Cardiff'),
+(3, 'G2742', 'Vhikthors Davidsons', 'Launching of Vector Software', 'M0002', 'James Cardiff'),
+(4, 'Z0121', 'Dikko Oladapo Chinedu', 'Launching of Vector Software', 'M0002', 'James Cardiff'),
+(5, 'AW1634', 'Olamide Kosoko', 'Launching of Vector Software', 'M0002', 'James Cardiff');
 
 -- --------------------------------------------------------
 
@@ -101,10 +104,10 @@ INSERT INTO `enrolled` (`enrol_id`, `Oracle_no`, `Name`, `Training_Title`, `Trai
 -- Table structure for table `t0002_01`
 --
 
-CREATE TABLE `t0002_01` (
-  `Course_Coordinator` varchar(60) NOT NULL,
+CREATE TABLE `m0002_01` (
+  `Meeting_Coordinator` varchar(60) NOT NULL,
   `Name` varchar(75) NOT NULL,
-  `Oracle_no` varchar(6) NOT NULL,
+  `Oracle_no` varchar(6) NOT NULL PRIMARY KEY,
   `Attendance_Status` varchar(8) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -112,7 +115,7 @@ CREATE TABLE `t0002_01` (
 -- Dumping data for table `t0002_01`
 --
 
-INSERT INTO `t0002_01` (`Course_Coordinator`, `Name`, `Oracle_no`, `Attendance_Status`) VALUES
+INSERT INTO `m0002_01` (`Meeting_Coordinator`, `Name`, `Oracle_no`, `Attendance_Status`) VALUES
 ('James Cardiff', 'Olamide Kosoko', 'AW1634', 'Present'),
 ('James Cardiff', 'Vhikthors Davidsons', 'G2742', 'Present'),
 ('James Cardiff', 'Oladips Vhikthors', 'Q1010', 'Present'),
@@ -124,86 +127,57 @@ INSERT INTO `t0002_01` (`Course_Coordinator`, `Name`, `Oracle_no`, `Attendance_S
 -- Table structure for table `t0002_02`
 --
 
-CREATE TABLE `t0002_02` (
-  `Course_Coordinator` varchar(60) NOT NULL,
+CREATE TABLE `m0002_02` (
+  `Meeting_Coordinator` varchar(60) NOT NULL,
   `Name` varchar(75) NOT NULL,
-  `Oracle_No` varchar(6) NOT NULL,
+  `Oracle_No` varchar(6) NOT NULL PRIMARY KEY,
   `Attendance_Status` varchar(8) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `trainings`
+-- Table structure for table `Meetings`
 --
 
-CREATE TABLE `trainings` (
-  `Training_Coordinator` varchar(50) NOT NULL,
-  `Training_title` varchar(100) NOT NULL,
-  `Training_Code` varchar(6) NOT NULL,
-  `Training_Location` varchar(50) NOT NULL,
-  `Training_Duration` varchar(10) NOT NULL,
-  `Training_Endtime` varchar(10) NOT NULL,
-  `Training_Time` varchar(25) NOT NULL,
-  `Training_Day` varchar(14) NOT NULL,
-  `Training_Startdate` varchar(60) NOT NULL,
-  `Training_Enddate` varchar(60) NOT NULL,
-  `No_Of_Classes` int(2) NOT NULL,
-  `Class_Taken` int(2) DEFAULT 0,
+CREATE TABLE `meetings` (
+  `Meeting_Coordinator` varchar(50) NOT NULL,
+  `Meeting_title` varchar(100) NOT NULL,
+  `Meeting_Code` varchar(6) NOT NULL PRIMARY KEY,
+  `Meeting_Location` varchar(50) NOT NULL,
+  `Meeting_Duration` varchar(10) NOT NULL,
+  `Meeting_Endtime` varchar(10) NOT NULL,
+  `Meeting_Time` varchar(25) NOT NULL,
+  `Meeting_Day` varchar(14) NOT NULL,
+  `Meeting_Startdate` varchar(60) NOT NULL,
+  `Meeting_Enddate` varchar(60) NOT NULL,
+  `No_Of_Meetings` int(2) NOT NULL,
+  `Meeting_Taken` int(2) DEFAULT 0,
   `Schedule` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `trainings`
+-- Dumping data for table `Meetings`
 --
 
-INSERT INTO `trainings` (`Training_Coordinator`, `Training_title`, `Training_Code`, `Training_Location`, `Training_Duration`, `Training_Endtime`, `Training_Time`, `Training_Day`, `Training_Startdate`, `Training_Enddate`, `No_Of_Classes`, `Class_Taken`, `Schedule`) VALUES
-('James Cardiff', 'System Maintenance', 'T0002', 'Marina', '2 weeks', '18:00:00', '16:00:00', 'Tuesday', '2023-01-10', '2023-01-24', 2, 1, 'Weekly');
+INSERT INTO `Meetings` (`Meeting_Coordinator`, `Meeting_title`, `Meeting_Code`, `Meeting_Location`, `Meeting_Duration`, `Meeting_Endtime`, `Meeting_Time`, `Meeting_Day`, `Meeting_Startdate`, `Meeting_Enddate`, `No_Of_Meetings`, `Meeting_Taken`, `Schedule`) VALUES
+('James Cardiff', 'Launching of Vector Software', 'M0001', 'Marina', '1 week', '18:00:00', '16:00:00', 'Wednesday', '2023-04-10', '2023-04-17', 7, 0, 'Daily');
+
+INSERT INTO `Meetings` (`Meeting_Coordinator`, `Meeting_title`, `Meeting_Code`, `Meeting_Location`, `Meeting_Duration`, `Meeting_Endtime`, `Meeting_Time`, `Meeting_Day`, `Meeting_Startdate`, `Meeting_Enddate`, `No_Of_Meetings`, `Meeting_Taken`, `Schedule`) VALUES
+('Olamide Kosoko', 'Launching of Visitor Management System', 'M0002', 'Marina', '3 weeks', '18:00:00', '16:00:00', 'Tuesday', '2023-04-10', '2023-04-24', 3, 0, 'Weekly');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `employee`
---
-ALTER TABLE `employee`
-  ADD PRIMARY KEY (`Oracle_no`);
-
---
--- Indexes for table `enrolled`
---
-ALTER TABLE `enrolled`
-  ADD PRIMARY KEY (`enrol_id`);
-
---
--- Indexes for table `t0002_01`
---
-ALTER TABLE `t0002_01`
-  ADD PRIMARY KEY (`Oracle_no`);
-
---
--- Indexes for table `t0002_02`
---
-ALTER TABLE `t0002_02`
-  ADD PRIMARY KEY (`Oracle_No`);
-
---
--- Indexes for table `trainings`
---
-ALTER TABLE `trainings`
-  ADD PRIMARY KEY (`Training_title`);
-
---
+-- --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
 -- AUTO_INCREMENT for table `enrolled`
 --
-ALTER TABLE `enrolled`
-  MODIFY `enrol_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

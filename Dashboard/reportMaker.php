@@ -5,12 +5,12 @@ include '../includes/db.php';
 $db = new Db;
 
 if (isset($_POST["generate"])) {
-    $course = $_POST['course'];
+    $meeting = $_POST['meeting'];
     //List of all parameters
-     $no_of_class_taken = $db->getNoOfClassesTaken($course);
-    $participants = $db->getCourseRegistrants($course);
+     $no_of_class_taken = $db->getNoOfMeetingsTaken($meeting);
+    $participants = $db->getMeetingRegistrants($meeting);
     $no_of_registered = count($participants);
-    $courseDetails = $db->getACourse($course);
+    $meetingDetails = $db->getAMeeting($meeting);
     $no_of_participant = count($participants);
 
     $gen_attendees = 0;
@@ -26,42 +26,42 @@ if (isset($_POST["generate"])) {
     $pdf->AddPage();
      $pdf->Image('../npa1.png',6.2,0);
     $pdf->SetFont('Arial','BU',20);
-    $pdf->Cell(null,7,'Training General Summary Report',0,0,'C');  
+    $pdf->Cell(null,7,'Meeting General Summary Report',0,0,'C');  
      
     $pdf->SetFont('Times',null,20);
     $pdf->SetFontSize(15);
     
     $pdf->SetY(0);
-    $pdf->Cell(40,12,'Training Title: '.$courseDetails["Training_title"],0,0,1);  
+    $pdf->Cell(40,12,'Meeting Title: '.$meetingDetails["Meeting_title"],0,0,1);  
    
     $pdf->SetX(12);
-    $pdf->Cell(40,12,'Training Code: '.$courseDetails["Training_Code"],0,0,1);  
+    $pdf->Cell(40,12,'Meeting Code: '.$meetingDetails["Meeting_Code"],0,0,1);  
     
     $pdf->SetY(1);
-    $pdf->Cell(40,12,'Location: '.$courseDetails["Training_Location"],0,0,1);  
+    $pdf->Cell(40,12,'Location: '.$meetingDetails["Meeting_Location"],0,0,1);  
     
     $pdf->SetX(12);
-    $pdf->Cell(40,12,'Schedule: '.$courseDetails["Schedule"],0,0,1);  
+    $pdf->Cell(40,12,'Schedule: '.$meetingDetails["Schedule"],0,0,1);  
     
     
     $pdf->SetY(2);
-    $pdf->Cell(40,12,'No of Classes: '.$courseDetails["No_Of_Classes"],0,0,1);  
+    $pdf->Cell(40,12,'No of Classes: '.$meetingDetails["No_Of_Meetings"],0,0,1);  
     
     $pdf->SetX(12);
-    $pdf->Cell(40,12,'Class Taken: '.$courseDetails["Class_Taken"],0,0,1);  
+    $pdf->Cell(40,12,'Class Taken: '.$meetingDetails["Class_Taken"],0,0,1);  
     
     
     $pdf->SetY(3);
-    $pdf->Cell(40,12,'Held On: '.$courseDetails["Training_Day"],0,0,1);  
+    $pdf->Cell(40,12,'Hold On: '.$meetingDetails["Meeting_Day"],0,0,1);  
     
     $pdf->SetX(12);
-    $pdf->Cell(40,12,'Started On: '.$courseDetails["Training_Startdate"],0,0,1);  
+    $pdf->Cell(40,12,'Started On: '.$meetingDetails["Meeting_Startdate"],0,0,1);  
     
     $pdf->SetY(4);
-    $pdf->Cell(40,12,'Training Duration: '.$courseDetails["Training_Duration"],0,0,1);  
+    $pdf->Cell(40,12,'Meeting Duration: '.$meetingDetails["Meeting_Duration"],0,0,1);  
     
     $pdf->SetX(12);
-    $pdf->Cell(40,12,'Training Coordinator: '.$courseDetails["Training_Coordinator"],0,0,1);  
+    $pdf->Cell(40,12,'Meeting Coordinator: '.$meetingDetails["Meeting_Coordinator"],0,0,1);  
     
     // $pdf->SetY(5);
     // $pdf->Cell(40,12,'Turn-up Percentage: '.$turn_up. '%',0,0,1);  
@@ -84,25 +84,25 @@ if (isset($_POST["generate"])) {
     //Student Summary
     
        
-        $course = $course.'_0'.strval($no_of_class_taken);
-        $attendees = $db->getAllPresentStudent($course);
-        $absentees = $db->getAllAbsentStudent($course);
+        $meeting = $meeting.'_0'.strval($no_of_class_taken);
+        $attendees = $db->getAllPresentStudent($meeting);
+        $absentees = $db->getAllAbsentStudent($meeting);
         $total_attendees = count($attendees);
         $total_absentees = $no_of_registered - $total_attendees;
       
         $pdf->SetFont('Times','b',20);
         $pdf->SetY(7);
         $pdf->SetFontSize(15);
-        if ($courseDetails['Schedule'] == 'Weekly') {
+        if ($meetingDetails['Schedule'] == 'Weekly') {
               $pdf->Cell(40,12,'Week '.strval($no_of_class_taken) ,0,0,1);  
         }
-        if ($courseDetails['Schedule'] == 'Daily') {
+        if ($meetingDetails['Schedule'] == 'Daily') {
               $pdf->Cell(40,12,'Day'.strval($no_of_class_taken) ,0,0,1);  
         }
-        if ($courseDetails['Schedule'] == 'Monthly') {
+        if ($meetingDetails['Schedule'] == 'Monthly') {
               $pdf->Cell(40,12,'Month'.strval($no_of_class_taken) ,0,0,1);  
         }
-        if ($courseDetails['Schedule'] == 'Yearly') {
+        if ($meetingDetails['Schedule'] == 'Yearly') {
               $pdf->Cell(40,12,'Year'.strval($no_of_class_taken) ,0,0,1);  
         }
 
@@ -184,7 +184,7 @@ if (isset($_POST["generate"])) {
 }
    ob_end_clean();
     $pdf->Output();
-    // $pdf->Output('D',''.$course.' Reports.pdf');
+    // $pdf->Output('D',''.$meeting.' Reports.pdf');
 }
 
 

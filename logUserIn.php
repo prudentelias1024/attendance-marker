@@ -1,11 +1,11 @@
 <?php
 if (isset($_POST['login'])) {
     $error_messages = array();
-    $email = $_POST['email'];
+    $username = $_POST['username'];
     $password = $_POST['password'];
     include './includes/db.php';
     $db = new DB;
-   $result = $db->getUserPassword(($email));
+   $result = $db->getUserPassword(($username));
   
   
    if ($result == "User Not Found") {
@@ -13,14 +13,14 @@ if (isset($_POST['login'])) {
    include './login.php';
 } 
 if ($result !=="User Not Found"  && $password == $result ) {
-    $user = $db->getUser($email);
+    $user = $db->getUser($username);
     $admin = $db->getAdminStatus($user[0]);
     session_start();
     $_SESSION['admin'] = $admin;
     $_SESSION["oracle_no"] = $user[0];
     $_SESSION["name"] = $user[1];
     $_SESSION["image"] = $user[2];
-    $_SESSION["email"] = $user[3];
+    $_SESSION["username"] = $user[3];
     $_SESSION["designation"] = $user[4];
     $_SESSION["location"] = $user[5];
     $_SESSION["grade"] = $user[6];

@@ -5,6 +5,6 @@
 </nav>
 
 <p class="font-[Mulish] capitalize text-gray-500 font-extrabold text-md -mt-3">
- <?php echo  $_SESSION['email']; ?></p>
+ <?php echo  $_SESSION['username']; ?></p>
      <p class="font-[Mulish] indent-4 text-gray-500 -mt-3  font-extrabold text-sm">
  <?php echo  $_SESSION['designation']; ?></p>

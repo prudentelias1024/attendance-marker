@@ -24,9 +24,9 @@
     ?>
    
 
-     <div class="email">
-         <label style="font-family: Satisfy; font-size: 1.5em" class="font-" for="Email">Email</label> <br>
-         <input class="w-full h-8 border font-Mulish p-3 rounded-sm"  placeholder="qwerty@gmail.com" type="text" name="email" > <br>
+     <div class="username">
+         <label style="font-family: Satisfy; font-size: 1.5em" class="font-" for="username">Username</label> <br>
+         <input class="w-full h-8 border font-Mulish p-3 rounded-sm"  placeholder="f.cristian" type="text" name="username" > <br>
       
      </div>
    

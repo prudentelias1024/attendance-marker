@@ -1,16 +1,9 @@
 CREATE DATABASE Attendance_Marker;
 
-CREATE TABLE `attendance_marker`.`employee` (`Oracle_no` VARCHAR(6) NOT NULL , `Name` VARCHAR(75) NOT NULL , `Image` VARCHAR(50) NOT NULL , `Email` VARCHAR(60) NOT NULL , `Password` VARCHAR(60) NOT NULL , `Designation` VARCHAR(30) NOT NULL , `Location` TEXT NOT NULL , `Grade` INT(2) NOT NULL , `Training_Code` VARCHAR(7) NOT NULL ) ENGINE = InnoDB;   
+CREATE TABLE `attendance_marker`.`employee` (`Oracle_no` VARCHAR(6) NOT NULL , `Name` VARCHAR(75) NOT NULL , `Image` VARCHAR(50) NOT NULL , `Email` VARCHAR(60) NOT NULL , `Password` VARCHAR(60) NOT NULL , `Designation` VARCHAR(30) NOT NULL , `Location` TEXT NOT NULL , `Grade` INT(2) NOT NULL , `Meeting_Code` VARCHAR(7) NOT NULL ) ENGINE = InnoDB;   
 
-CREATE TABLE `attendance_marker`.`trainings` (`Course_Coordinator` VARCHAR(50) NOT NULL , `Training_Code` VARCHAR(6) NOT NULL , `Training_Location` VARCHAR(50) NOT NULL , `Training_Duration` VARCHAR(10) NOT NULL , `Training_Time` VARCHAR(25) NOT NULL , `Training_Startdate` VARCHAR(25) NOT NULL , `Training_Enddate` VARCHAR(25) NOT NULL ) ENGINE = InnoDB;
-
-ALTER TABLE `employee` ADD `Role` VARCHAR(10) NOT NULL AFTER `Grade`;
-
-CREATE TABLE `attendance_marker`.`enrolled` (`Oracle_no` VARCHAR(6) NOT NULL , `Name` VARCHAR(60) NOT NULL , `Training_Code` VARCHAR(6) NOT NULL , `Training_Cordinator` VARCHAR(50) NOT NULL ) ENGINE = InnoDB;
-ALTER TABLE `employee` CHANGE `Role` `Role` VARCHAR(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'Member';
-ALTER TABLE `trainings` ADD `No_Of_Classes` INT(2) NOT NULL AFTER `Training_Enddate`, ADD `Schedule` VARCHAR(10) NOT NULL DEFAULT 'Weekly' AFTER `No_Of_Classes`;
-INSERT INTO `trainings` (`Course_Coordinator`, `Training_title`, `Training_Code`, `Training_Location`, `Training_Duration`, `Training_Time`, `Training_Startdate`, `Training_Enddate`, `No_Of_Classes`, `Schedule`) VALUES ('James Cardiff', 'System Analysis And Design', 'T0001', 'Marina', '1 Month', '3:00pm', '', '', '4', 'Weekly');
-INSERT INTO `trainings` (`Course_Coordinator`, `Training_title`, `Training_Code`, `Training_Location`, `Training_Duration`, `Training_Time`, `Training_Startdate`, `Training_Enddate`, `No_Of_Classes`, `Schedule`) VALUES ('James Cardiff', 'Data Analysis And Visualization', 'T0002', 'Marina', '1 Month', '7:00pm', '', '', '4', 'Weekly');
-ALTER TABLE `enrolled` ADD `Training_Title` VARCHAR(60) NOT NULL AFTER `Name`;
-ALTER TABLE `enrolled` CHANGE `Training_Cordinator` `Training_Coordinator` VARCHAR(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL;
-INSERT INTO `trainings` (`Training_Coordinator`, `Training_title`, `Training_Code`, `Training_Location`, `Training_Duration`, `Training_Time`, `Training_Day`, `Training_Startdate`, `Training_Enddate`, `No_Of_Classes`, `Class_Taken`, `Schedule`) VALUES ('James Cardiff', 'System Analysis And Design', 'T0001', 'Marina', '1 Month', '3:00pm', 'Tuesday', '2023-01-03', '2023-01-17', '3', '0', 'Weekly');
+-- INSERT INTO `Meetings` (`Meeting_Coordinator`, `Meeting_title`, `Meeting_Code`, `Meeting_Location`, `Meeting_Duration`, `Meeting_Time`, `Meeting_Startdate`, `Meeting_Enddate`, `No_Of_Classes`, `Schedule`) VALUES ('James Cardiff', 'Launching of Vector Software', 'T0001', 'Marina', '1 Month', '3:00pm', '', '', '4', 'Weekly');
+-- INSERT INTO `Meetings` (`Meeting_Coordinator`, `Meeting_title`, `Meeting_Code`, `Meeting_Location`, `Meeting_Duration`, `Meeting_Time`, `Meeting_Startdate`, `Meeting_Enddate`, `No_Of_Classes`, `Schedule`) VALUES ('James Cardiff', 'Launching of Visitor Management System', 'T0002', 'Marina', '1 Month', '7:00pm', '', '', '4', 'Weekly');
+-- ALTER TABLE `enrolled` ADD `Meeting_Title` VARCHAR(60) NOT NULL AFTER `Name`;
+-- ALTER TABLE `enrolled` CHANGE `Meeting_Cordinator` `Meeting_Coordinator` VARCHAR(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL;
+-- INSERT INTO `Meetings` (`Meeting_Coordinator`, `Meeting_title`, `Meeting_Code`, `Meeting_Location`, `Meeting_Duration`, `Meeting_Time`, `Meeting_Day`, `Meeting_Startdate`, `Meeting_Enddate`, `No_Of_Classes`, `Class_Taken`, `Schedule`) VALUES ('James Cardiff', '', 'T0001', 'Marina', '1 Month', '3:00pm', 'Tuesday', '2023-01-03', '2023-01-17', '3', '0', 'Weekly');

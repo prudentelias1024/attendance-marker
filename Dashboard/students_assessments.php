@@ -44,7 +44,7 @@
    include 'dashboardNav.php';
     ?>
   <div class="attendants pt-12">
-    <p class="text-4xl">Registered Students</p>
+    <p class="text-4xl">Registered Staff</p>
     
     <?php
   if (!empty($registrants)) {
@@ -69,7 +69,7 @@
       ';
     }
   } else {
-    echo 'No Registered Student Yet';
+    echo 'No Registered Staff Yet';
   }
   
   ?>
@@ -158,7 +158,7 @@
 
       $.toast({
           heading: 'No Job  ',
-          text: 'No Student Marked',
+          text: 'No Staff Marked',
           showHideTransition: 'slide',
           hideAfter: 1500,
           allowToastClose: false,

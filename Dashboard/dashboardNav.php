@@ -11,9 +11,9 @@
   
 
   <ul class="gap-8 flex flex-col  -ml-24">
-    <a href="courses.php" class="font-[Mulish]  font-extrabold text-xl text-white no-underline text-center place-self-center ml-12">
+    <a href="meetings.php" class="font-[Mulish]  font-extrabold text-xl text-white no-underline text-center place-self-center ml-12">
             <li class="m-auto first-letter:mt-4 block hover:bg-[#623cec] py-4 px-24">
-          <i class="fa-solid fa-book-open"></i> Courses 
+          <i class="fa-solid fa-book-open"></i> Meetings 
         </li>
        </a>
        <a href="./statistics.php" class="font-[Mulish] font-extrabold text-xl text-white no-underline text-center place-self-center ml-12">
@@ -31,9 +31,9 @@
         <?php
           if ($_SESSION['role'] != 'Member') {
 
-                echo '        <a href="course_management.php" class="font-[Mulish] font-extrabold text-xl text-white no-underline text-center place-self-center ml-12">
+                echo '        <a href="meeting_management.php" class="font-[Mulish] font-extrabold text-xl text-white no-underline text-center place-self-center ml-12">
                 <li class="m-auto block hover:bg-[#623cec] py-4 px-28">
-              <i class="fa-solid fa-people-roof"></i> Course Management    
+              <i class="fa-solid fa-people-roof"></i> Meeting Management    
             </li>
             </a>';
           }

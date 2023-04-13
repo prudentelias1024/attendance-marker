@@ -1,11 +1,11 @@
 <?php
 class DB
 {
-    public function getCoursePercentageCompletion($course,$name){
-        $no_of_classes_attended = 0;
-           $no_of_training_sessions = $this->getNoOfClasses($course);
-           for ($i=1; $i < $no_of_training_sessions + 1; $i++) { 
-            $table = $course. '_0'. $i;
+    public function getMeetingPercentageCompletion($meeting,$name){
+        $no_of_meetings_attended = 0;
+           $no_of_meeting_sessions = $this->getNoOfMeetingsTaken($meeting);
+           for ($i=1; $i < $no_of_meeting_sessions + 1; $i++) { 
+            $table = $meeting. '_0'. $i;
             
            $sql = "SELECT Attendance_Status FROM $table WHERE Name='$name'";
            $result = $this->connectToDB()->query($sql);
@@ -13,47 +13,50 @@ class DB
           $status = $row["Attendance_Status"];
          
            if ($status == 'Present') {
-           $no_of_classes_attended++;
+           $no_of_meetings_attended++;
            
            }
 
        }
     }
-     return(($no_of_classes_attended/$no_of_training_sessions)*100);
+    if ($no_of_meeting_sessions == 0) {
+        return 0;
+    }else{
+     return(($no_of_meetings_attended/$no_of_meeting_sessions)*100);}
 }
-    public function getUserOngoingTraining($course, $name)
+    public function getUserOngoingMeeting($meeting, $name)
     {
        
-     $no_of_training_taken =   $this->getNoOfClassesTaken($course);
-     $no_of_training_sessions = $this->getNoOfClasses($course);
-       if($no_of_training_sessions > $no_of_training_taken){
+     $no_of_meeting_taken =   $this->getNoOfMeetingsTaken($meeting);
+     $no_of_meeting_sessions = $this->getNoOfMeetings($meeting);
+       if($no_of_meeting_sessions > $no_of_meeting_taken){
             return 1;
-     } else  if ($no_of_training_sessions == $no_of_training_taken) {
+     } else  if ($no_of_meeting_sessions == $no_of_meeting_taken) {
       return 0;
      }
    
 }
 
 
-    public function getNoOfClasses($course)
+    public function getNoOfMeetings($meeting)
     {
-        $sql = "SELECT No_Of_Classes FROM trainings WHERE  Training_Code='$course'";
+        $sql = "SELECT No_Of_Meetings FROM meetings WHERE  Meeting_Code='$meeting'";
         $result = $this->connectToDB()->query($sql);
         if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()){
-                return $row['No_Of_Classes'];
+                return $row['No_Of_Meetings'];
             }
            } else {
                return  0;
            }
     }
-    public function getUserTrainingCompletionStatus($course, $name)
+    public function getUserMeetingCompletionStatus($meeting, $name)
     {
-        $no_of_classes_attended = 0;
-     $no_of_training_sessions =   $this->getNoOfClassesTaken($course);
-    //  print_r($no_of_training_sessions);
-     for ($i=1; $i < $no_of_training_sessions + 1; $i++) { 
-        $table = $course. '_0'. $i;
+        $no_of_meetings_attended = 0;
+     $no_of_meeting_sessions =   $this->getNoOfMeetingsTaken($meeting);
+    //  prinm_r($no_of_meeting_sessions);
+     for ($i=1; $i < $no_of_meeting_sessions + 1; $i++) { 
+        $table = $meeting. '_0'. $i;
         
        $sql = "SELECT Attendance_Status FROM $table WHERE Name='$name'";
        $result = $this->connectToDB()->query($sql);
@@ -61,12 +64,12 @@ class DB
       $status = $row["Attendance_Status"];
      
        if ($status == 'Present') {
-       $no_of_classes_attended++;
+       $no_of_meetings_attended++;
        
        }
    }
 }
-     if ($no_of_classes_attended == $no_of_training_sessions) {
+     if ($no_of_meetings_attended == $no_of_meeting_sessions) {
         return 1;
      }  else {
         return 0;
@@ -80,7 +83,7 @@ class DB
 
   public function getAllPresentStudent($table){
     $this->connectToDB();
-    $enrolled_courses = array();
+    $joined_meetings = array();
    
     $sql = "SELECT * FROM $table WHERE Attendance_Status='Present'";
     $result = $this->connectToDB()->query($sql);
@@ -97,7 +100,7 @@ class DB
   }
   public function getAllAbsentStudent($table){
     $this->connectToDB();
-    $enrolled_courses = array();
+    $joined_meetings = array();
    
     $sql = "SELECT * FROM $table WHERE Attendance_Status='Absent'";
     $result = $this->connectToDB()->query($sql);
@@ -112,9 +115,9 @@ class DB
         return  null;
     }
   }
-  public function incrementClassTaken($course,$no_of_class){
+  public function incrementMeetingTaken($meeting,$no_of_meeting){
     $this->connectToDB();
-       $sql = " UPDATE TRAININGS SET Class_Taken='$no_of_class' WHERE Training_Code='$course'";
+       $sql = " UPDATE MEETINGS SET Meeting_Taken='$no_of_meeting' WHERE Meeting_Code='$meeting'";
     $this->connectToDB()->query($sql);
   
 }
@@ -135,14 +138,14 @@ class DB
   
 }
 
-    public function getNoOfClassesTaken($course){
+    public function getNoOfMeetingsTaken($meeting){
         $this->connectToDB();
-           $sql = "SELECT Class_Taken FROM trainings WHERE  Training_Code='$course'";
+           $sql = "SELECT Meeting_Taken FROM Meetings WHERE  Meeting_Code='$meeting'";
         $result = $this->connectToDB()->query($sql);
         if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()){
 
-                return $row['Class_Taken'];
+                return $row['Meeting_Taken'];
             }
        
             
@@ -161,10 +164,10 @@ class DB
         }
     }
 
-    public function markAttendantPresentOrAbsent($training_coordinator,$name,$oracle_no,$status,$table){
+    public function markAttendantPresentOrAbsent($meeting_coordinator,$name,$oracle_no,$status,$table){
         $this->connectToDB();
 
-        $sql = "INSERT INTO `$table`(Course_Coordinator, Name, Oracle_no, Attendance_Status) VALUES('$training_coordinator', '$name', '$oracle_no', '$status')";
+        $sql = "INSERT INTO `$table`(Meeting_Coordinator, Name, Oracle_no, Attendance_Status) VALUES('$meeting_coordinator', '$name', '$oracle_no', '$status')";
         if ($this->connectToDB()->query($sql)) {
             return ''.$name.' is Marked '.$status.'.';
         } else {
@@ -186,56 +189,56 @@ class DB
     public function createAttendanceTable($name){
         $this->connectToDB();
 
-        $sql = "CREATE TABLE `$name` (`Course_Coordinator` VARCHAR(60) NOT NULL , `Name` VARCHAR(75) NOT NULL , `Oracle_No` VARCHAR(6) NOT NULL , `Attendance_Status` VARCHAR(8) NOT NULL , PRIMARY KEY (`Oracle_No`))";
+        $sql = "CREATE TABLE `$name` (`Meeting_Coordinator` VARCHAR(60) NOT NULL , `Name` VARCHAR(75) NOT NULL , `Oracle_No` VARCHAR(6) NOT NULL , `Attendance_Status` VARCHAR(8) NOT NULL , PRIMARY KEY (`Oracle_No`))";
         if ($this->connectToDB()->query($sql)) {
             echo ''.$name.'  Created';
         } else {
             echo "Error:".$sql.' <BR>  '.$this->connectToDB()->error;
         }
     }
-    public function createStudent($oracle_no, $full_name,$image,$email,$PN,$designation,$location,$grade){
+    public function createStudent($oracle_no, $full_name,$image,$username,$PN,$designation,$location,$grade){
         $this->connectToDB();
 
     
-        $sql = "INSERT INTO employee(Oracle_no, Name, Image, Email, PN, Designation,Location, grade) VALUES('$oracle_no','$full_name','$image', '$email', '$PN', '$designation', '$location','$grade')";
+        $sql = "INSERT INTO employee(Oracle_no, Name, Image, Username, PN, Designation,Location, grade) VALUES('$oracle_no','$full_name','$image', '$username', '$PN', '$designation', '$location','$grade')";
         if ($this->connectToDB()->query($sql)) {
             echo 'New Employee  Created';
         } else {
             echo "Error:".$sql.' <BR>  '.$this->connectToDB()->error;
         }
     }
-    public function createTraining($training_coordinator,$training_title, $training_code,$training_loc,$training_dur,$training_time,$training_day,$training_startdate,$training_enddate, $no_of_classes,$training_endtime,$training_schedule){
+    public function createMeeting($meeting_coordinator,$meeting_title, $meeting_code,$meeting_loc,$meeting_dur,$meeting_time,$meeting_day,$meeting_startdate,$meeting_enddate, $no_of_meetings,$meeting_endtime,$meeting_schedule){
         $this->connectToDB();
     
-        $sql = "INSERT INTO trainings(Training_Coordinator, Training_title, Training_Code, Training_Location, Training_Duration,Training_Endtime. Training_Time, Training_Day,Training_Startdate,Training_Enddate, No_Of_Classes,Schedule) VALUES('$training_coordinator','$training_title','$training_code','$training_loc', '$training_dur', '$training_endtime','$training_time', '$training_day', '$training_startdate','$training_enddate', $no_of_classes,'$training_schedule')";
+        $sql = "INSERT INTO meetings(Meeting_Coordinator, Meeting_title, Meeting_Code, Meeting_Location, Meeting_Duration,Meeting_Endtime. Meeting_Time, Meeting_Day,Meeting_Startdate,Meeting_Enddate, No_Of_Meetings,Schedule) VALUES('$meeting_coordinator','$meeting_title','$meeting_code','$meeting_loc', '$meeting_dur', '$meeting_endtime','$meeting_time', '$meeting_day', '$meeting_startdate','$meeting_enddate', $no_of_meetings,'$meeting_schedule')";
         if ($this->connectToDB()->query($sql)) {
-            echo 'New Course Created';
+            echo 'New Meeting Created';
         } else {
             echo "Error:".$sql.' <BR>  '.$this->connectToDB()->error;
         }
     }
-    public function enrol($oracle_no, $name, $t_title,$t_code,$t_cord){
+    public function enrol($oracle_no, $name, $m_title,$m_code,$m_cord){
         $this->connectToDB();
 
     
-        $sql = "INSERT INTO enrolled(Oracle_no, Name, Training_Title,Training_Code, Training_Cordinator) VALUES('$oracle_no','$name','$t_title','$t_code', '$t_cord')";
+        $sql = "INSERT INTO joined(Oracle_no, Name, Meeting_Title,Meeting_Code, Meeting_Cordinator) VALUES('$oracle_no','$name','$m_title','$m_code', '$m_cord')";
         if ($this->connectToDB()->query($sql)) {
-            return 'User Successfully Enrolled';
+            return 'User Successfully Joined Meeting List';
         } else {
             return "Error:".$sql.' <BR>  '.$this->connectToDB()->error;
         }
     }
-    public function getEnrolledCourse($oracle_no){
+    public function getJoinedMeeting($oracle_no){
         $this->connectToDB();
-        $enrolled_courses = array();
-        $sql = "SELECT * FROM enrolled WHERE Oracle_no='$oracle_no'";
+        $joined_meetings = array();
+        $sql = "SELECT * FROM joined WHERE Oracle_no='$oracle_no'";
         $result = $this->connectToDB()->query($sql);
         if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()){
             
-                $enrolled_courses[] = $row;
+                $joined_meetings[] = $row;
             }
-            return $enrolled_courses;
+            return $joined_meetings;
        
             
         } else {
@@ -243,10 +246,10 @@ class DB
         }
     }
    
-    public function getCourseRegistrants($code){
+    public function getMeetingRegistrants($code){
         $this->connectToDB();
         $registrant = array();
-        $sql = "SELECT * FROM enrolled WHERE Training_Code='$code'";
+        $sql = "SELECT * FROM joined WHERE Meeting_Code='$code'";
         $result = $this->connectToDB()->query($sql);
         if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()){
@@ -257,15 +260,15 @@ class DB
        
             
         } else {
-            return  null;
+            return  [];
         }
     }
    
 
 
-    public function getUserPassword($email){
+    public function getUserPassword($username){
         $this->connectToDB();
-        $sql = "SELECT PN FROM employee WHERE email ='$email' ";
+        $sql = "SELECT PN FROM employee WHERE username ='$username' ";
         $result =  $this->connectToDB()->query($sql);
         if ($result->num_rows > 0) {
             while($rows = $result->fetch_assoc()){
@@ -292,23 +295,23 @@ class DB
 
     }
     
-    public function getUser($email){
+    public function getUser($username){
         $this->connectToDB();
-        $sql = "SELECT * FROM employee WHERE email ='$email' ";
+        $sql = "SELECT * FROM employee WHERE username ='$username' ";
         $result =  $this->connectToDB()->query($sql);
         if ($result->num_rows > 0) {
             while($rows = $result->fetch_assoc()){
-                return array($rows["Oracle_no"],$rows["Name"],$rows["Image"],$rows["Email"], $rows["Designation"],$rows["Location"], $rows["Grade"], $rows["Role"]);
+                return array($rows["Oracle_no"],$rows["Name"],$rows["Image"],$rows["Username"], $rows["Designation"],$rows["Location"], $rows["Grade"], $rows["Role"]);
             }
         } else {
             return 'User Not Found';
         }
 
     }
-    public function getTrainingParticipants($training_code){
+    public function getMeetingParticipants($meeting_code){
         $participants = array();
         $this->connectToDB();
-        $sql = "SELECT Oracle_no FROM enrolled WHERE Training_Code ='$training_code' ";
+        $sql = "SELECT Oracle_no FROM joined WHERE Meeting_Code ='$meeting_code' ";
         $result =  $this->connectToDB()->query($sql);
         if ($result->num_rows > 0) {
             while($rows = $result->fetch_assoc()){
@@ -332,72 +335,84 @@ class DB
         }
 
     }
-    public function getCourses(){
+
+    public function hasJoined($joined_meeting_code){
         $this->connectToDB();
-        $sql = "SELECT * FROM trainings ORDER BY Training_Code";
+        $sql = "SELECT Meeting_Code FROM joined WHERE Meeting_Code='$joined_meeting_code'";
+        $result = $this->connectToDB()->query($sql);
+        if ($result->num_rows > 0) {
+           return true;
+        }else {
+            return false;
+        }
+
+    }
+    public function getMeetings(){
+        $this->connectToDB();
+        $sql = "SELECT * FROM meetings ORDER BY Meeting_Code";
         $result =  $this->connectToDB()->query($sql);
-        $courses = array();
+        $meetings = array();
         if ($result->num_rows > 0) {
             while($rows = $result->fetch_assoc()){
-               $courses[] = $rows;
+               $meetings[] = $rows;
             }
               
-                return $courses;
+                return $meetings;
         } else {
-            return 'No Training';
+            return 'No Meeting';
         }
 
     }
     
-    public function getACourse($course_code){
+    public function getAMeeting($meeting_code){
         $this->connectToDB();
-        $sql = "SELECT * FROM trainings WHERE Training_Code='$course_code'";
+        $sql = "SELECT * FROM Meetings WHERE Meeting_Code='$meeting_code'";
         $result =  $this->connectToDB()->query($sql);
-        $courses = array();
+        $meetings = array();
         if ($result->num_rows > 0) {
             while($rows = $result->fetch_assoc()){
-                $courses[] = $rows;
+                $meetings[] = $rows;
             }
               
-                return $courses[0];
+                return $meetings[0];
         } else {
-            return 'No Training';
+            return 'No Meeting';
         }
 
     }
     
-    public function getEnrolledCoursesStartTime($t_code){
+    public function getJoinedMeetingsStartTime($m_code){
       
         $this->connectToDB();
-        $sql = "SELECT * FROM trainings WHERE Training_Code ='$t_code' ORDER BY Training_Time, Training_Time";
+        $sql = "SELECT * FROM Meetings WHERE Meeting_Code ='$m_code' ORDER BY Meeting_Time, Meeting_Time";
         $result =  $this->connectToDB()->query($sql);
-        $courses = array();
+        $meetings = array();
         if ($result->num_rows > 0) {
             while($rows = $result->fetch_assoc()){
-                $courses[] = $rows;
+                $meetings[] = $rows;
               
             }
               
-                return $courses;
+                return $meetings;
         } else {
-            return 'No Training';
+            return 'No Meeting';
         }
 
     }
-    public function getCoordinatingCourses($name){
+    public function getCoordinatingMeetings($name){
         $this->connectToDB();
-        $sql = "SELECT * FROM trainings WHERE Training_Coordinator ='$name'";
+        $sql = "SELECT * FROM Meetings WHERE Meeting_Coordinator ='$name'";
         $result =  $this->connectToDB()->query($sql);
-        $courses = array();
+        $meetings = array();
         
         if ($result->num_rows > 0) {
             while($rows = $result->fetch_assoc()){
-               $courses[] = $rows;
+               $meetings[] = $rows;
             }
               
-                return $courses;
+                return $meetings;
         } else {
-            return 'You are coordinating 0 Training';
+            return 'You are coordinating 0 Meeting';
         
 
     } 

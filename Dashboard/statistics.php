@@ -17,7 +17,8 @@
         index.css">
     <script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.min.js"></script>
 <script defer src="../chart.js"></script>
-<script defer src="./timeUpdater.js"></script>
+<script defer src="timeUpdater.js"></script>
+<script defer src="moment.min.js"></script>
 
 </head>
 <body >
@@ -42,20 +43,20 @@ session_start();
     <div class="flex flex-row gap-8 h-fit  text-white bg-purple-600 rounded-lg border px-8 py-4 ">
       <i class="bi bi-card-list text-5xl"></i>
       <div class="flex flex-col ">
-          <p class="font-[Mulish] text-lg mt-2 -mb-1 indent-3">Enrolled Training</p>
+          <p class="font-[Mulish] text-lg mt-2 -mb-1 indent-3">Joined Meeting</p>
           <p class="font-[Montserrat] text-white font-bold text-2xl indent-28  mt-2 -mb-1"><?php
 
           include '../includes/db.php';
           $db = new Db;
-          $no_of_enrolled_training = 0;
-          $enrolledCourses  = $db->getEnrolledCourse($_SESSION['oracle_no']);
-          if (!empty($enrolledCourses)) {
+          $no_of_joined_Meeting = 0;
+          $joinedMeetings  = $db->getJoinedMeeting($_SESSION['oracle_no']);
+          if (!empty($joinedMeetings)) {
             
-            $no_of_enrolled_training = count($enrolledCourses);
+            $no_of_joined_Meeting = count($joinedMeetings);
            
-            echo  $no_of_enrolled_training;
+            echo  $no_of_joined_Meeting;
           } else {
-            echo  $no_of_enrolled_training;
+            echo  $no_of_joined_Meeting;
           }?></p>
           
       </div>
@@ -64,20 +65,20 @@ session_start();
     <div class="flex flex-row h-fit text-white bg-teal-500 rounded-lg border px-4 py-4">
         <i class="bi bi-patch-check-fill text-5xl"></i>
      <div class="flex flex-col">
-        <p class="font-[Mulish] text-lg mt-2 -mb-1 ml-3 indent-2">Completed Training</p>
+        <p class="font-[Mulish] text-lg mt-2 -mb-1 ml-3 indent-2">Completed Meeting</p>
         <p class="font-[Montserrat] text-white font-semibold text-2xl indent-32 lg:indent-40 mt-2 -mb-1">
    <?php
-      $no_of_completed_training = 0;
-      if (!empty($enrolledCourses)) {
+      $no_of_completed_Meeting = 0;
+      if (!empty($joinedMeetings)) {
   
       
-       foreach ($enrolledCourses as $enrolledCourse) {
-        $status=  $db->getUserTrainingCompletionStatus($enrolledCourse['Training_Code'],$_SESSION['name']);
-        $no_of_completed_training += $status;
+       foreach ($joinedMeetings as $joinedMeeting) {
+        $status=  $db->getUserMeetingCompletionStatus($joinedMeeting['Meeting_Code'],$_SESSION['name']);
+        $no_of_completed_Meeting += $status;
       }
-       echo $no_of_completed_training;
+       echo $no_of_completed_Meeting;
     } else {
-      echo $no_of_completed_training;
+      echo $no_of_completed_Meeting;
     }
    ?>
 
@@ -90,19 +91,19 @@ session_start();
     <i class="fa-solid fa-bars-progress  text-5xl"></i>
     
     <div class="flex flex-col">
-        <p class="font-[Mulish] text-lg mt-2 -mb-1 ml-3 indent-2"> Training In Progress</p>
+        <p class="font-[Mulish] text-lg mt-2 -mb-1 ml-3 indent-2"> Meeting In Progress</p>
         <p class="font-[Montserrat] text-white font-semibold text-2xl indent-32 lg:indent-40 mt-2 -mb-1">
         <?php
-      $no_of_ongoing_training = 0;
-      if (!empty($enrolledCourses)) {
-       foreach ($enrolledCourses as $enrolledCourse) {
-        $status =  $db->getUserOngoingTraining($enrolledCourse['Training_Code'],$_SESSION['name']);
-           $no_of_ongoing_training += $status;
+      $no_of_ongoing_Meeting = 0;
+      if (!empty($joinedMeetings)) {
+       foreach ($joinedMeetings as $joinedMeeting) {
+        $status =  $db->getUserOngoingMeeting($joinedMeeting['Meeting_Code'],$_SESSION['name']);
+           $no_of_ongoing_Meeting += $status;
       }
-       echo $no_of_ongoing_training;
+       echo $no_of_ongoing_Meeting;
     } else {
      
-      echo  '<p class="font-[Montserrat]  text-white font-semibold text-2xl indent-32 mt-2 -mb-1">'.$no_of_ongoing_training.'</p>';
+      echo  '<p class="font-[Montserrat]  text-white font-semibold text-2xl indent-32 mt-2 -mb-1">'.$no_of_ongoing_Meeting.'</p>';
     }
    ?>
 
@@ -114,37 +115,37 @@ session_start();
     <i class="bi bi-x-circle-fill  text-5xl"></i>
     
     <div class="flex flex-col">
-        <p class="font-[Mulish] text-lg mt-2 -mb-1 ml-3 indent-8">Training Failed</p>
+        <p class="font-[Mulish] text-lg mt-2 -mb-1 ml-3 indent-8">Meeting Failed</p>
         <p class="font-[Montserrat]  text-white font-semibold text-2xl indent-32 mt-2 -mb-1">0</p>
     </div>
     </div>
 
 </div>
 <?php
-$enrolledCourse  = $db->getEnrolledCourse($_SESSION['oracle_no']);
+$joinedMeeting  = $db->getJoinedMeeting($_SESSION['oracle_no']);
 
-if (!empty($enrolledCourse)) {
+if (!empty($joinedMeeting)) {
  
-  $time = $db->getEnrolledCoursesStartTime($enrolledCourse[0]["Training_Code"]);
-  // $timeToStart = $time[0]['Training_Time'];
-  $t_day = new DateTime($time[0]['Training_Day'].' '.$time[0]['Training_Time']);
-  $t_endtime = new DateTime($time[0]['Training_Day'].' '.$time[0]['Training_Endtime']);
-  $t_enddatetime = new DateTime($time[0]['Training_Enddate'].' '.$time[0]['Training_Endtime']);
+  $time = $db->getJoinedMeetingsStartTime($joinedMeeting[0]["Meeting_Code"]);
+  // $timeToStart = $time[0]['Meeting_Time'];
+  $m_day = new DateTime($time[0]['Meeting_Day'].' '.$time[0]['Meeting_Time']);
+  $m_endtime = new DateTime($time[0]['Meeting_Day'].' '.$time[0]['Meeting_Endtime']);
+  $m_enddatetime = new DateTime($time[0]['Meeting_Enddate'].' '.$time[0]['Meeting_Endtime']);
   $today = new DateTime(date("l jS  F Y h:i:s A"));
    
-   $diff=  date_diff($today,$t_day);
+   $diff=  date_diff($today,$m_day);
    
   
   
-  // print_r($today);  
+  // prinm_r($today);  
   $currentTime = date("l jS  F Y h:i:s A");
-  echo '<p id="date" style="opacity: 0;" >'. date_format($t_day,"Y/m/d H:i:s").'</p>;
-  <p id="enddate" style="opacity: 0;" >'. date_format($t_day,"Y/m/d H:i:s").'</p>
-  <p id="endtime" style="opacity: 0;" >'. date_format($t_endtime,"Y/m/d H:i:s").'</p>
-  <p id="enddatetime" style="opacity: 0;" >'. date_format($t_enddatetime,"Y/m/d H:i:s").'</p>
+  echo '<p id="date" style="opacity: 0;" >'. date_format($m_day,"Y/m/d H:i:s").'</p>;
+  <p id="enddate" style="opacity: 0;" >'. date_format($m_day,"Y/m/d H:i:s").'</p>
+  <p id="endtime" style="opacity: 0;" >'. date_format($m_endtime,"Y/m/d H:i:s").'</p>
+  <p id="enddatetime" style="opacity: 0;" >'. date_format($m_enddatetime,"Y/m/d H:i:s").'</p>
   
   <p  style="opacity: 0;" id="countdown__end__title" class="font-[Mulish] font-semibold text-3xl mt-8 text-[#747474] text-center"></p>
-  <p  id="countdown_title" class="font-[Mulish] font-semibold text-3xl  text-[#747474] text-center">Countdown To '.$enrolledCourse[0]["Training_Title"] .'('. $enrolledCourse[0]["Training_Code"].')</p>
+  <p  id="countdown_title" class="font-[Mulish] font-semibold text-3xl  text-[#747474] text-center">Countdown To '.$joinedMeeting[0]["Meeting_Title"] .'('. $joinedMeeting[0]["Meeting_Code"].')</p>
   
     <div  id="countdown" class="countdown flex flex-row gap-32 m-auto   shadow-md border-1 p-4 
   bg-gradient-to-r from-violet-500 to-fuchsia-500 rounded-lg lg:w-fit  ">
@@ -169,46 +170,55 @@ if (!empty($enrolledCourse)) {
  
   ';
 }
-// print_r($currentTime);
+// prinm_r($currentTime);
 ?>
 <div class="flex flex-col mt-10">
-   <p class="font-[Mulish] font-semibold text-3xl mt-8 ml-36">Courses</p>
-   <div class="courses grid grid-cols-2  ml-36 gap-12">
+   <p class="font-[Mulish] font-semibold text-3xl mt-8 ml-36">Joined Meetings</p>
+   <div class="Meetings grid grid-cols-2  ml-36 gap-12">
  <?php
-    $enrolled_courses = $db->getEnrolledCourse($_SESSION['oracle_no']);
+    $joined_Meetings = $db->getJoinedMeeting($_SESSION['oracle_no']);
     
-   if($enrolled_courses !== null){
-    foreach ($enrolled_courses as $key => $course) {
-      echo '   <div class="course border w-full  px-24 mt-12    py-12 rounded-md ">';
-      if ($db->getCoursePercentageCompletion($course["Training_Code"], $_SESSION['name']) == 100) {
+   if($joined_Meetings !== null){
+    foreach ($joined_Meetings as $key => $Meeting) {
+      echo '   <div class="Meeting border w-full  px-24 mt-12    py-12 rounded-md ">';
+      if ($db->getMeetingPercentageCompletion($Meeting["Meeting_Code"], $_SESSION['name']) == 100) {
         echo ' <p style="top: -2em;
-        left: 17em;" class="bg-teal-500 w-fit rounded-md px-3 py-1 relative  text-white">Completed</p>';
-      } else {
+        left: 15em;" class="bg-teal-500 w-fit rounded-md px-3 py-1 relative  text-white">Completed</p>';
+      } else if($db->getMeetingPercentageCompletion($Meeting["Meeting_Code"], $_SESSION['name']) == 0) {
+        echo '<p style="top: -2em;
+          left: 15em;" class="bg-red-500 w-fit rounded-md px-3 py-1 relative  text-white">Not Started</p>';
+        } else {
       echo '<p style="top: -2em;
-        left: 17em;" class="bg-yellow-500 w-fit rounded-md px-3 py-1 relative  text-white">Not Completed</p>';
+        left: 15em;" class="bg-yellow-500 w-fit rounded-md px-3 py-1 relative  text-white">Not Completed</p>';
       }
-     
+     if($db->getMeetingPercentageCompletion($Meeting["Meeting_Code"], $_SESSION['name']) == 0){
+       echo '';
+     }else {
  echo '
       <div class="progress border w-[130%] -ml-12" style="height: 10px;">
-       <div class="progress-bar bg-info " role="progressbar" style="width: '.$db->getCoursePercentageCompletion($course["Training_Code"], $_SESSION['name']).'%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">'.$db->getCoursePercentageCompletion($course["Training_Code"], $_SESSION['name']).'%</div>
+       <div class="progress-bar bg-info " role="progressbar" style="width: '.$db->getMeetingPercentageCompletion($Meeting["Meeting_Code"], $_SESSION['name']).'%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">'.$db->getMeetingPercentageCompletion($Meeting["Meeting_Code"], $_SESSION['name']).'%</div>
        </div>
+     ';}
+     echo 
+     '
      <div class="flex flex-row mt-6 -ml-12">
   
 
-         <p class="title font-[Montserrat] font-extrabold ml-2 text-2xl">'.$course['Training_Title'].'</p>
+         <p class="title font-[Montserrat] font-extrabold ml-2 text-2xl">'.$Meeting['Meeting_Title'].'</p>
      </div>
   
      <div class="flex flex-row mt-6 -ml-12">   
-     <p class="font-[Mulish]">Training Code:</p> <p class="code font-[Montserrat] font-extrabold ml-2">'.$course['Training_Code'].'</p>
+     <p class="font-[Mulish]">Meeting Code:</p> <p class="code font-[Montserrat] font-extrabold ml-2">'.$Meeting['Meeting_Code'].'</p>
      </div>
      <div class="flex flex-row mt-6 -ml-12">
   
-      <p class="font-[Mulish]">Training Coordinator:</p> <p class="code font-[Montserrat] font-extrabold ml-2">'.$course['Training_Cordinator'].'</p>
+      <p class="font-[Mulish]">Meeting Coordinator:</p> <p class="code font-[Montserrat] font-extrabold ml-2">'.$Meeting['Meeting_Cordinator'].'</p>
      </div> 
      </div>   ';
-    }
+    
+  }
    } else {
-    echo '<p class="font-[Mulish] text-xl text-gray-600 mt-8 ml-3">You haven\'t enrolled for any training yet </p>  ';
+    echo '<p class="font-[Mulish] text-xl text-gray-600 mt-8 ml-3">You haven\'t meetings for any Meeting yet </p>  ';
    }
    
 ?>

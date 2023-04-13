@@ -3,6 +3,7 @@
     "watch": "npx tailwindcss -i ./input.css -o ./index.css --watch"
   },
   "dependencies": {
+    "moment": "^2.29.4",
     "tailwindcss": "^3.2.7"
   }
 }

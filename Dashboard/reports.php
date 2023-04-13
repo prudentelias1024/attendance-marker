@@ -24,22 +24,25 @@
     
     ?>
     <?php
+     echo "<div style='height: 15em; padding-top: 2em; padding-left: 2.5em; margin-right: 1em;' class='reports grid grid-cols-2  gap-12 '>";
     include '../includes/db.php';
     $db = new Db;
-    $courses = $db->getCourses();
-    foreach ($courses as $course) {
-     echo '<div class="courses flex flex-row gap-12 pt-24 pl-32 ">
-     <p class="title font-[Mulish] text-2xl font-extrabold ml-2 ">'.$course['Training_title'].'</p>
-     <p class="title font-[Mulish] text-xl font-extrabold mt-2 ">'.$course['Training_Code'].'</p>
-     <form action="reportMaker.php" method="POST">
-       <input name="course" readonly value="'.$course["Training_Code"].'" style="opacity: 0;">
-       <button type="submit" name="generate"  class=" bg-[#512bd4] mt-[-0.5em] ml-[-11em]  text-white w-fit h-max py-3 px-2 rounded-xl -mb-12">Generate Report</button>  
+    $meetings = $db->getMeetings();
+    foreach ($meetings as $meeting) {
+     echo "<div  style='padding-left: 1em; padding-right: 1em;'  class='meetings px-[1em] flex flex-col gap-10 border rounded-md pt-24 pl-1 h-fit mt-[1em]'>
+     <p class='title font-[Mulish] text-2xl font-extrabold ml-2 '>".$meeting['Meeting_title']."</p>
+     <p class='title font-[Mulish] text-[#f8f8f8] text-lg font-extrabold ml-2 '>".$meeting['Meeting_Code']."</p>
+     <form action='reportMaker.php' method='POST'>
+       <input name='meeting' readonly value='".$meeting['Meeting_Code']."' style='opacity: 0;'>
+       <button type='submit' name='generate' style='margin-bottom: 1em;' class=' bg-[#512bd4] mt-[-3.5em]  text-white w-full h-max py-3 px-2 '>Generate Report</button>  
       
        
      </form>
-   </div>';
+   </div>";
     }
-
+    
+   
+echo '</div>';
     ?>
     
 <body>

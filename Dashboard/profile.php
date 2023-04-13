@@ -47,8 +47,8 @@ session_start();
     <div class="flex flex-col gap-4">
     <i class="fa-solid fa-envelope text-7xl text-[#512bd4]"></i>
       <p class="font-[Mulish]  text-[#512bd4] font-extrabold -indent-12 text-xl -mt-3">
-         <?php echo  $_SESSION['email']; ?></p>
-         <p class="font-[Mulish] font-semibold text-lg text-gray-500 -indent-5 -mt-7 ">Email Address</p>
+         <?php echo  $_SESSION['username']; ?></p>
+         <p class="font-[Mulish] font-semibold text-lg text-gray-500 -indent-5 -mt-7 ">Username </p>
       </div>
     <div class="flex flex-col gap-4">
     <i class="fa-solid fa-stairs text-7xl text-[#512bd4]"></i>

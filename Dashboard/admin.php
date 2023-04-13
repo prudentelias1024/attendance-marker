@@ -23,7 +23,7 @@
     
     ?>
     <div class="employee_list flex flex-col -ml-44 py-32 gap-12">
-    <p class="name text-2xl font-[Mulish] ml-80 font-semibold ">Manage Training Coordinators</p>
+    <p class="name text-2xl font-[Mulish] ml-80 font-semibold ">Manage Meeting Coordinators</p>
     <?php 
       include '../includes/db.php';
       $db = new Db;
@@ -35,7 +35,7 @@
     <p class="name text-2xl font-[Mulish] font-semibold ">'.$employee["Name"].'</p>
     <form class="flex flex-row" method="POST" action="coordinatorManager.php">
     <input  value="'.$employee['Oracle_no'].'" readonly class="absolute opacity-0 oracle_no text-2xl font-[Mulish] font-semibold" />
-    <p class="email text-2xl font-[Mulish]  font-semibold mr-8 ">'.$employee['Oracle_no'].'</p>';
+    <p class=" text-2xl font-[Mulish]  font-semibold mr-8 ">'.$employee['Oracle_no'].'</p>';
     if ($employee['Role'] == 'Member') {
     echo ' <button  type="button" style="width: inherit;" class="addCoordinator bg-green-500 text-white rounded-md h-10 px-4 py-2 text-sm font-[Mulish] -mt-1">Add  </button>
     </div>';
